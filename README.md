@@ -18,21 +18,21 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 
 
 <!-- PROJECT LOGO -->
-<br />
+<!-- <br />
 <div align="center">
   <a href="https://github.com/ontological-behavior-modeling/tester">
     <img src="images/OBM.png" alt="Logo" width="80" height="80" style="background-color:white;">
-  </a>
+  </a> -->
 
 <h3 align="center">Tester Repo</h3>
 
@@ -248,8 +248,8 @@ Project Link: [https://github.com/ontological-behavior-modeling/tester](https://
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ontological-behavior-modeling/tester.svg?style=for-the-badge
-[contributors-url]: https://github.com/ontological-behavior-modeling/tester/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/jdoerr3/tester.svg?style=for-the-badge
+[contributors-url]: https://github.com/jdoerr3/tester/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ontological-behavior-modeling/tester.svg?style=for-the-badge
 [forks-url]: https://github.com/ontological-behavior-modeling/tester/network/members
 [stars-shield]: https://img.shields.io/github/stars/ontological-behavior-modeling/tester.svg?style=for-the-badge
@@ -257,7 +257,7 @@ Project Link: [https://github.com/ontological-behavior-modeling/tester](https://
 [issues-shield]: https://img.shields.io/github/issues/ontological-behavior-modeling/tester.svg?style=for-the-badge
 [issues-url]: https://github.com/ontological-behavior-modeling/tester/issues
 [license-shield]: https://img.shields.io/github/license/ontological-behavior-modeling/tester.svg?style=for-the-badge
-[license-url]: https://github.com/ontological-behavior-modeling/tester/blob/master/LICENSE.txt
+[license-url]: https://github.com/ontological-behavior-modeling/tester/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [eclipse-url]: https://eclipseide.org/
