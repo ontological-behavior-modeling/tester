@@ -17,8 +17,10 @@ how it should do the update. As far as I know, messages for merging pull request
 
 # Example
 
+Example commit message.
 ![image](https://github.com/ontological-behavior-modeling/tester/assets/22268862/1ac403c8-b81f-4d07-8fa5-d727e839d4a3)
 
+Example build release.
 ![image](https://github.com/ontological-behavior-modeling/tester/assets/22268862/186b418c-8232-487a-8f7a-65d5f018d8d2)
 
 # How to transfer build_release script to another project
