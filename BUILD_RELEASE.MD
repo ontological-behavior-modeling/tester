@@ -5,7 +5,7 @@ build_release.yml increments the project's version and creates a release automat
 Include a PAT token with permission to write to repo in the project's "Actions secrets and variables" settings with the name "PAT_TOKEN".
 ![image](https://github.com/ontological-behavior-modeling/tester/assets/22268862/7fe2a1de-dc7d-4e19-b153-0428f2634aa2)
 
-Go to Settings > Actions > General, scroll down to "Workflow permissions", then make sure the GITHUB_TOKEN has read and write permissions.
+Go to Settings > Actions > General, scroll down to "Workflow permissions", then make sure the GITHUB_TOKEN has read and write permissions. We need to do this so that the semantic-versioning-maven has permission to write to the pom.xml.
 ![image](https://github.com/ontological-behavior-modeling/tester/assets/22268862/e23839e6-cc62-49bf-9c93-de04f39d3444)
 
 
