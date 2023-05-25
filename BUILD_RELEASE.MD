@@ -23,6 +23,10 @@ Example commit message.
 Example build release.
 ![image](https://github.com/ontological-behavior-modeling/tester/assets/22268862/186b418c-8232-487a-8f7a-65d5f018d8d2)
 
+# Limitation
+
+The version number in the pom.xml cannot include -SNAPSHOT at the end or else the semantic-versioning-maven Action will get confused and stop working.
+
 # How to transfer build_release script to another project
 
 Copy paste the build_release.yml from this project to the other project. Then, do the two prerequisite steps mentioned above and everything should be setup.
