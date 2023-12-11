@@ -4,13 +4,13 @@
 
   <groupId>edu.gatech.gtri.obm</groupId>
   <artifactId>tester</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.3</version>
 
   <scm>
     <connection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</connection>
     <developerConnection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</developerConnection>
     <url>https://github.com/ontological-behavior-modeling/tester</url>
-    <tag>HEAD</tag>
+    <tag>v0.0.3</tag>
   </scm>
 
   <distributionManagement>
