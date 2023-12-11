@@ -34,13 +34,13 @@ jobs:
        
       - name: Prepare Maven Release
         run: |
-          mvn release:clean release:prepare -B
+          mvn release:clean release:prepare -B -DdryRun
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Perform Maven Release
         run: |
-          mvn release:perform -B
+          mvn release:perform -B -DdryRun
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
