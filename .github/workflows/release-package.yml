@@ -6,7 +6,7 @@ on:
       - main
       
 permissions:
-  actions: write
+  contents: write
   packages: write
   
 jobs:
