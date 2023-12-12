@@ -35,6 +35,8 @@
       <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
+<!-- https://github.com/AlloyTools/org.alloytools.alloy/tree/v5.1.0 -->
+<!-- snapshots published at https://oss.sonatype.org/content/repositories/snapshots/org/alloytools/ -->
     <dependency>
       <groupId>org.alloytools</groupId>
       <artifactId>org.alloytools.alloy.application</artifactId>
@@ -62,6 +64,18 @@
   </reporting>
   
   <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+        <checksumPolicy>ignore</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>oss-sonatype</id>
+      <name>oss-sonatype</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
 	<repository>
       <releases>
         <enabled>true</enabled>
