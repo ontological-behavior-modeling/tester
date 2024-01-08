@@ -40,6 +40,8 @@
       <groupId>org.alloytools</groupId>
       <artifactId>org.alloytools.alloy.application</artifactId>
       <version>5.1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/org.alloytools.alloy.dist.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>edu.umd</groupId>
