@@ -36,13 +36,13 @@ jobs:
         run: |
           mvn release:clean release:prepare -B -DdryRun
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
       - name: Perform Maven Release
         run: |
           mvn release:perform -B -DdryRun
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
       - name: Read Current Maven Version
         id: mvn_version
