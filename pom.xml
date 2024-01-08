@@ -21,7 +21,6 @@
   </distributionManagement>
 
   <properties>
-	<alloy.version>5.1.0</alloy.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <lombok.version>1.18.26</lombok.version>
