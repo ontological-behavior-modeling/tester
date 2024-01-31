@@ -6,39 +6,22 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Update Javdocs Branch
+name: Deploy Javadoc
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
-
+  publish:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Create Javdocs
-      run: mvn javadoc:javadoc
-      
-    - name: copy
-      env:
-        SRC_FOLDER_PATH: 'docs'
-        TARGET_BRANCH: 'javadocs'
-      run: |
-        files=$(find $SRC_FOLDER_PATH -type f) # get the file list
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'action@github.com'
-        git fetch                         # fetch branches
-        git checkout $TARGET_BRANCH       # checkout to your branch
-        git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
-        git add -A
-        git diff-index --quiet HEAD ||  git commit -am "deploy files"  # commit to the repository (ignore if no modification)
-        git push origin $TARGET_BRANCH # push to remote branch
+      - name: Deploy JavaDoc 🚀
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+          javadoc-branch: javadoc
+          java-version: 11
+          target-folder: docs # url will be https://<username>.github.io/<repo>/javadoc, This can be left as nothing to generate javadocs in the root folder.
+          project: maven # or gradle
