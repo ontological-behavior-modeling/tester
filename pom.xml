@@ -4,13 +4,13 @@
 
   <groupId>edu.gatech.gtri.obm</groupId>
   <artifactId>tester</artifactId>
-  <version>0.0.8-SNAPSHOT</version>
+  <version>0.0.8</version>
 
   <scm>
     <connection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</connection>
     <developerConnection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</developerConnection>
+    <tag>v0.0.8</tag>
     <url>https://github.com/ontological-behavior-modeling/tester</url>
-    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
@@ -37,7 +37,7 @@
   </properties>
 
   <dependencies>
-<dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit-jupiter-engine.version}</version>
@@ -99,8 +99,8 @@
       <version>${commons-io.version}</version>
     </dependency>
   </dependencies>
-  
- <!-- <reporting>
+
+  <!-- <reporting>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -114,7 +114,7 @@
     </plugins>
   </reporting>
  -->
- 
+
   <repositories>
     <repository>
       <releases>
