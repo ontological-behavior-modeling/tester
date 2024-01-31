@@ -21,7 +21,6 @@
   </distributionManagement>
 
   <properties>
-    <alloy.version>5.1.0-SNAPSHOT</alloy.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <pomsort.version>3.2.1</pomsort.version>
@@ -63,7 +62,9 @@
     <dependency>
       <groupId>org.alloytools</groupId>
       <artifactId>org.alloytools.alloy.application</artifactId>
-      <version>${alloy.version}</version>
+      <version>5.1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/org.alloytools.alloy.dist.jar</systemPath>
     </dependency>
     <!-- see for documentation and configuration information: https://github.com/Ekryd/sortpom -->
     <dependency>
