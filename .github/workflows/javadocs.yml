@@ -28,7 +28,9 @@ jobs:
           java-version: '11'
 
       - name: Build Maven
-        run: mvn clean package javadoc:javadoc
+        env:
+          MAVEN_OPTS: "Dmaven.wagon.http.ssl.insure=true -Dmaven.wagon.http.ssl.allowall=true"
+        run: mvn clean package javadoc:javadoc -Dmaven.repo.local-./.m2.respoitory -Dgithub_token=${{ secrets_JN.TOKEN }}
 
       - name: Deploy Javadocs
         uses: peaceiris/actions-gh-pages@v3
