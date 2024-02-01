@@ -33,7 +33,7 @@ jobs:
       - name: Build Maven
         run: mvn clean package javadoc:javadoc
         env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy Javadocs
         uses: peaceiris/actions-gh-pages@v3
