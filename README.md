@@ -41,7 +41,7 @@
 
 NOTE: This README is under construction 
     <br />
-    <a href="https://ontological-behavior-modeling.github.io/tester/"><strong>Explore the docs »</strong></a>
+    <a href="https://ontological-behavior-modeling.github.io/tester/"><strong>Explore the Javadocs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/ontological-behavior-modeling/tester">View Demo</a>
