@@ -249,7 +249,7 @@
           <links>
             <link>https://javadoc.io/doc/org.graphstream/gs-core/latest/index.html</link>
             <link>https://javadoc.io/doc/org.graphstream/gs-ui-swing/latest/index.html</link>
-            <link>https://commons.apache.org/proper/commons-io/apidocs/org/apache/commons/io/FileUtils.html</link>
+            <link>https://commons.apache.org/proper/commons-io/apidocs/index.html</link>
           </links>
         </configuration>
       </plugin>
