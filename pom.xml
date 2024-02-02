@@ -245,20 +245,13 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.6.3</version>
         <configuration>
-          <show>public</show>
-          <nohelp>true</nohelp>
-          <links>
-            <link>https://javadoc.io/doc/org.graphstream/gs-core/latest/index.html</link>
-          </links>
+			<detectLinks>true</detectLinks>
+	        <links>
+				<link>https://javadoc.io/doc/org.graphstream/gs-core/latest/index.html</link>
+				<link>https://javadoc.io/doc/org.graphstream/gs-ui-swing/latest/index.html</link>
+				<link>https://commons.apache.org/proper/commons-io/apidocs/org/apache/commons/io/FileUtils.html</link>
+			</links>
         </configuration>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
