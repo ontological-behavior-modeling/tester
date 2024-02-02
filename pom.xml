@@ -247,6 +247,9 @@
         <configuration>
           <show>public</show>
           <nohelp>true</nohelp>
+          <links>
+			  <link>https://javadoc.io/doc/org.graphstream/gs-core/latest/index.html</link>
+		  </links>
         </configuration>
         <executions>
           <execution>
