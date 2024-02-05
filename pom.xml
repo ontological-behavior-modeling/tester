@@ -245,6 +245,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.6.3</version>
         <configuration>
+			<show>private</show>
 			<additionalDependencies>
               <additionalDependency>
 			      <groupId>org.graphstream</groupId>

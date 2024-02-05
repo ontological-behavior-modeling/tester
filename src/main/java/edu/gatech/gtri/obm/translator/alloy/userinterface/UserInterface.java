@@ -134,8 +134,6 @@ public class UserInterface {
 
   /**
    * A callable method to conglomerate all the class elements within the xmi file.
-   *
-   * @return classNames A string array of the xmi file class elements
    */
   private Callable<String[]> findXmiClasses =
       () -> {

@@ -330,8 +330,8 @@ public class Alloy {
 
   /**
    * support when Expr original is ExprBinary(ie., p1 + p2) to add ExprVar s in both so returns s.p1
-   * and s.p2. if original is like "BuffetService <: (FoodService <: eat)" -> ((ExprBinary)
-   * original).op = "<:", in this case just return s.join(original) =
+   * and s.p2. if original is like "BuffetService : (FoodService : eat)" - ((ExprBinary)
+   * original).op = ":", in this case just return s.join(original) =
    *
    * @param s the s
    * @param original the original

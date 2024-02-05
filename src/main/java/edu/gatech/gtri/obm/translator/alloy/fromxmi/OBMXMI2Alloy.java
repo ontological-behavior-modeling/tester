@@ -125,7 +125,6 @@ public class OBMXMI2Alloy {
    * @param xmiFile the xmi file
    * @param _className QualifiedName of Class containing activities
    * @return boolean true if success otherwise false
-   * @xmiFile xmi file containing activity
    */
   private boolean loadOBMAndCreateAlloy(File xmiFile, String _className) {
 
@@ -235,7 +234,7 @@ public class OBMXMI2Alloy {
    * Process sig.
    *
    * @param ne Class that map to Sig
-   * @param propertiesByType - Map<Type, List<Property>> map of properties by type
+   * @param propertiesByType - map of properties by type
    * @return Set of String - field names in this sig which are having Step or Paticipant stereotypes
    */
   private Set<String> processSig(
