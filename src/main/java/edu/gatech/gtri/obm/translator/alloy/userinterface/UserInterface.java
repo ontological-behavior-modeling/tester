@@ -132,9 +132,7 @@ public class UserInterface {
   /** The executor to run the translator functions in the background. */
   private ExecutorService executor = Executors.newFixedThreadPool(10);
 
-  /**
-   * A callable method to conglomerate all the class elements within the xmi file.
-   */
+  /** A callable method to conglomerate all the class elements within the xmi file. */
   private Callable<String[]> findXmiClasses =
       () -> {
         ResourceSet rs = null;
