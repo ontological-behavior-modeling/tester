@@ -245,6 +245,18 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.6.3</version>
         <configuration>
+			<additionalDependencies>
+              <additionalDependency>
+			      <groupId>org.graphstream</groupId>
+			      <artifactId>gs-ui-swing</artifactId>
+			      <version>${gs-ui-swing.version}</version>
+              </additionalDependency>
+              <additionalDependency>
+			      <groupId>org.graphstream</groupId>
+			      <artifactId>gs-core</artifactId>
+			      <version>${gs-core.version}</version>			  
+			  </additionalDependency>
+          </additionalDependencies>
           <detectLinks>true</detectLinks>
           <links>
             <link>https://javadoc.io/doc/org.graphstream/gs-core/latest/index.html</link>
