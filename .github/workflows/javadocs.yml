@@ -14,31 +14,37 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    
+  test:
+    name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      
+    - name: Setup Graphviz
+      uses: ts-graphviz/setup-graphviz@v2
 
-      - name: Steup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '11'
+    - name: Setup JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '11'
 
-      - name: Copy settings.xml
-        run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
+    - name: Copy settings.xml
+      run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
         
-      - name: Build Maven
-        run: mvn clean package javadoc:javadoc
-        env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+    - name: Build Maven
+      run: mvn clean package javadoc:javadoc
+      env:
+        GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
-      - name: Deploy Javadocs
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.JN_TOKEN }}
-          publish_dir: ./target/site/apidocs
+    - name: Deploy Javadocs
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+         github_token: ${{ secrets.JN_TOKEN }}
+         publish_dir: ./target/site/apidocs
 
           
