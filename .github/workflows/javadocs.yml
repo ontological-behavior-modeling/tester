@@ -9,9 +9,7 @@
 name: Deploy Javadoc
 
 on:
-  push:
-    branches:
-      - main
+  release:
 
 jobs:
   test:
