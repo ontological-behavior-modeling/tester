@@ -10,7 +10,7 @@ name: Deploy Javadoc
 
 on:
   release:
-    types: [published]
+    types: [released]
 
 jobs:
   test:
