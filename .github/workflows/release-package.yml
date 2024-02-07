@@ -45,6 +45,11 @@ jobs:
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
 
+      - name: Generate Javadocs
+        run: mvn javadoc:javadoc
+        env:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
       - name: Deploy Javadocs to Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
