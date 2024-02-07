@@ -35,12 +35,9 @@ jobs:
 
       - name: Copy settings.xml
         run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
-       
-      - name: Prepare Maven Release
-        run: |
-          mvn release:clean release:prepare -B
-        env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
+      - name: Prepare Version
+        run: mvn versions:set -DremoveSnapshot
 
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
@@ -55,6 +52,12 @@ jobs:
         with:
            github_token: ${{ secrets.JN_TOKEN }}
            publish_dir: ./target/site/apidocs
+       
+      - name: Prepare Maven Release
+        run: |
+          mvn release:clean release:prepare -B
+        env:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
       - name: Perform Maven Release
         run: |
