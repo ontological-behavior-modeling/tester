@@ -10,8 +10,12 @@ permissions:
   packages: write
   
 jobs:
-  release:
-    runs-on: ubuntu-latest
+  test:
+    name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
 
     steps:        
       - name: Set up JDK
@@ -43,6 +47,15 @@ jobs:
           mvn release:perform -B
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v2
+
+      - name: Deploy Javadocs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+           github_token: ${{ secrets.JN_TOKEN }}
+           publish_dir: ./target/site/apidocs
 
       - name: Read Current Maven Version
         id: mvn_version
