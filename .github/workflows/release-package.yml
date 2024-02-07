@@ -1,4 +1,4 @@
-name: Publish package to GitHub Packages
+name: Release New Version
 
 on:
   push:
