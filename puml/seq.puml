@@ -1,0 +1,13 @@
+@startuml
+participant UserInterface [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/userinterface/UserInterface.html]]
+UserInterface -> OBMXMI2Alloy: new OBMXMI2Alloy(working_dir)
+OBMXMI2Alloy -> ToAlloy: new ToAlloy(working_dir)
+ToAlloy -> Alloy: new Alloy(working_dir)
+Alloy --> ToAlloy
+ToAlloy --> OBMXMI2Alloy
+OBMXMI2Alloy --> UserInterface
+
+UserInterface -> OBMXMI2Alloy: createAlloyFile(xmiFile, mainClass, outputFile)
+OBMXMI2Alloy -> LocalDirectory: outputFile
+OBMXMI2Alloy --> UserInterface
+@enduml
