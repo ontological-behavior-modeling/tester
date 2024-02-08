@@ -10,4 +10,5 @@ OBMXMI2Alloy --> UserInterface
 UserInterface -> OBMXMI2Alloy: createAlloyFile(xmiFile, mainClass, outputFile)
 OBMXMI2Alloy -> LocalDirectory: outputFile
 OBMXMI2Alloy --> UserInterface
+note right [[http://plantuml.com/start]] : another note
 @enduml
