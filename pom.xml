@@ -246,6 +246,9 @@
         <version>3.6.3</version>
         <configuration>
           <show>public</show>
+          <additionalparam>-Xdoclint:none</additionalparam>
+          <doclint>none</doclint>
+          <javadocDirectory>${basedir}/src/main/javadoc</javadocDirectory>
           <nohelp>true</nohelp>
           <doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
           <docletArtifact>
