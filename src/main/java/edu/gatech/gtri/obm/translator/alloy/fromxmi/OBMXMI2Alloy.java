@@ -41,8 +41,7 @@ import org.eclipse.uml2.uml.ValueSpecification;
 import org.eclipse.uml2.uml.internal.impl.OpaqueExpressionImpl;
 
 // TODO: Auto-generated Javadoc
-/** The Class OBMXMI2Alloy.
- */
+/** The Class OBMXMI2Alloy. */
 public class OBMXMI2Alloy {
 
   /** The to alloy. */
