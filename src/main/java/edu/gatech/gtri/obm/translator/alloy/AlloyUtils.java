@@ -24,7 +24,8 @@ import java.util.Set;
 public class AlloyUtils {
 
   /**
-   * Import alloy module.
+   * Import alloy module.<br>
+   * <img src="doc-files/importAlloyModulef.svg"/>
    *
    * @param f the f
    * @return the comp module
@@ -34,7 +35,8 @@ public class AlloyUtils {
   }
 
   /**
-   * Import alloy module.
+   * Import alloy module.<br>
+   * <img src="doc-files/importAlloyModules.svg"/>
    *
    * @param absoluteFileName the absolute file name
    * @return the comp module
