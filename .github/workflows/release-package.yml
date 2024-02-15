@@ -80,9 +80,4 @@ jobs:
           tag_name: ${{ steps.mvn_version.outputs.tag }}
           body: |
             Release ${{ steps.mvn_release.output.tag }}
-            
- on-failure:
-     runs-on: ubuntu-latest
-     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-     steps:
-       - run: echo "First workflow was a failure"
+
