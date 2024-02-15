@@ -1,21 +1,21 @@
 name: Release New Version
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+   workflows: ["Generate PlantUML Images"]
+   types: [completed]
       
 permissions:
   contents: write
   packages: write
   
 jobs:
-  test:
-    name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
+ on-success:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest]
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:        
       - name: Set up JDK
@@ -80,3 +80,9 @@ jobs:
           tag_name: ${{ steps.mvn_version.outputs.tag }}
           body: |
             Release ${{ steps.mvn_release.output.tag }}
+            
+ on-failure:
+     runs-on: ubuntu-latest
+     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+     steps:
+       - run: echo "First workflow was a failure"
