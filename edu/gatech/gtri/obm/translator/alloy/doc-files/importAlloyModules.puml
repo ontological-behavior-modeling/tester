@@ -1,0 +1,6 @@
+@startuml
+start
+->File Name: String;
+:Parse Everything from File;
+stop
+@enduml
