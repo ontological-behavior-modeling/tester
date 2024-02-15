@@ -50,6 +50,7 @@ public class ToAlloy {
 
   /**
    * Creates the alloy sig.
+   * <img src="doc-files/createAlloySig3.svg"/>
    *
    * @param name of sig
    * @param parentSig PrimSig or null (if null, Occurrence will be the parentSig)
@@ -72,6 +73,7 @@ public class ToAlloy {
 
   /**
    * Creates the alloy sig.
+   * <img src="doc-files/createAlloySig2.svg"/>
    *
    * @param name the name
    * @param parentName the parent name
@@ -95,6 +97,7 @@ public class ToAlloy {
 
   /**
    * Adds the alloy transfer field.
+   * <img src="doc-files/addAlloyTrasnferField.svg"/>
    *
    * @param fieldName the field name
    * @param ownerSig the owner sig

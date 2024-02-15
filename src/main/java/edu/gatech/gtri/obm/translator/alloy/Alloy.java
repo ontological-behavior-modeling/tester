@@ -114,7 +114,8 @@ public class Alloy {
       "open Transfer[Occurrence] as o \n" + "abstract sig Occurrence{}";
 
   /**
-   * Instantiates a new alloy.
+   * Instantiates a new alloy.<br>
+   * <img src="doc-files/Alloy.svg"/>
    *
    * @param working_dir where required alloy library defined in templateString is locating.
    */
