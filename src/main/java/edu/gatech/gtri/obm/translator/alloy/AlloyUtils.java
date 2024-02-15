@@ -46,7 +46,8 @@ public class AlloyUtils {
   }
 
   /**
-   * Removes the slash.
+   * Removes the slash.<br>
+   * <img src="doc-files/removeSlash.svg>
    *
    * @param sig the sig
    * @return the string
