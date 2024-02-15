@@ -41,7 +41,8 @@ import org.eclipse.uml2.uml.ValueSpecification;
 import org.eclipse.uml2.uml.internal.impl.OpaqueExpressionImpl;
 
 // TODO: Auto-generated Javadoc
-/** The Class OBMXMI2Alloy. */
+/** The Class OBMXMI2Alloy.
+ */
 public class OBMXMI2Alloy {
 
   /** The to alloy. */
@@ -83,7 +84,8 @@ public class OBMXMI2Alloy {
   }
 
   /**
-   * Instantiates a new OBMXMI 2 alloy.
+   * Instantiates a new OBMXMI2alloy. <br>
+   * <img src="doc-files/OBMXMI2Alloy.svg" alt="Example of the application sequence"/>
    *
    * @param working_dir where required alloy library (Transfer) is locating
    * @throws FileNotFoundException the file not found exception
@@ -94,7 +96,8 @@ public class OBMXMI2Alloy {
   }
 
   /**
-   * Creates the alloy file.
+   * Creates the alloy file. <br>
+   * <img src="doc-files/createAlloyFile.svg" alt="Creating Alloy File"/>
    *
    * @param xmiFile the xmi file
    * @param className the class name
