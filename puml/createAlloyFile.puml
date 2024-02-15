@@ -1,0 +1,20 @@
+@startuml
+start
+title createAlloyFile
+if (file !exists and !readable?) then (yes)
+ :Error;
+ :return false;
+ stop
+else (no)
+ if (loadOBMandCreateAlloy?) then (yes)
+  :ToAlloy.createAlloyFile(outputFile,\nparameterFields);
+  :Print;
+  :return true;
+  stop
+ else(no)
+  : Error;
+  :return false;
+  stop
+ endif
+endif
+@enduml

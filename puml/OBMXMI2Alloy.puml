@@ -1,0 +1,6 @@
+@startuml
+start
+ -> File Path: String ;
+ :Construct ToAlloy Class;
+stop
+@enduml
