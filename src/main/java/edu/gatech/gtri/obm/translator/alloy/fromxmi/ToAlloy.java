@@ -145,8 +145,6 @@ public class ToAlloy {
   /**
    * Creates the bijection filtered happens before and add to overall fact.
    *
-   * @see edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig, Expr,
-   *     Expr, edu.mit.csail.sdg.ast.Func)
    * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig, Expr,
    *     Expr, edu.mit.csail.sdg.ast.Func)}
    * @param ownerSig the owner sig
