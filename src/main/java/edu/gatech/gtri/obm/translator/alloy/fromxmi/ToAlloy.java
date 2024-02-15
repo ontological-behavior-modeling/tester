@@ -29,7 +29,8 @@ public class ToAlloy {
   private String moduleName;
 
   /**
-   * Instantiates a new to alloy.
+   * Instantiates a new to alloy.<br>
+   * <img src="doc-files/ToAlloy.svg"/>
    *
    * @param working_dir where required alloy library (Transfer) is locating
    */
@@ -49,7 +50,7 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the alloy sig.
+   * Creates the alloy sig.<br>
    * <img src="doc-files/createAlloySig3.svg"/>
    *
    * @param name of sig
@@ -72,7 +73,7 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the alloy sig.
+   * Creates the alloy sig.<br>
    * <img src="doc-files/createAlloySig2.svg"/>
    *
    * @param name the name
@@ -96,8 +97,8 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the alloy transfer field.
-   * <img src="doc-files/addAlloyTrasnferField.svg"/>
+   * Adds the alloy transfer field. <br>
+   * <img src="doc-files/addAlloyTransferField.svg"/>
    *
    * @param fieldName the field name
    * @param ownerSig the owner sig
@@ -116,7 +117,8 @@ public class ToAlloy {
   // }
 
   /**
-   * Adds the disj alloy fields.
+   * Adds the disj alloy fields.<br>
+   * <img src="doc-files/addDisjAlloyFields.svg"/>
    *
    * @param fieldNamesListWithSameType the field names list with same type
    * @param typeSigName the type sig name
@@ -142,6 +144,7 @@ public class ToAlloy {
 
   /**
    * Creates the bijection filtered happens before and add to overall fact.
+   * @see edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig, Expr, Expr, edu.mit.csail.sdg.ast.Func)
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -154,6 +157,7 @@ public class ToAlloy {
 
   /**
    * Creates the bijection filtered happens during and add to overall fact.
+   * @see edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig, Expr, Expr, edu.mit.csail.sdg.ast.Func)
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -166,6 +170,7 @@ public class ToAlloy {
 
   /**
    * Creates the function filtered happens before and add to overall fact.
+   * @see edu.gatech.gtri.obm.translator.alloy.Alloy#createFunctionFilteredHappensBeforeAndAddToOverallFact(Sig, Expr, Expr)
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -178,6 +183,7 @@ public class ToAlloy {
 
   /**
    * Creates the inverse function filtered happens before and add to overall fact.
+   * @see edu.gatech.gtri.obm.translator.alloy.Alloy#createInverseFunctionFilteredHappensBeforeAndAddToOverallFact(Sig, Expr, Expr)
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -190,6 +196,7 @@ public class ToAlloy {
 
   /**
    * Adds the cardinality equal constraint to field.
+   * @see edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityEqualConstraintToField(Sig, Field, int)
    *
    * @param field the field
    * @param ownerSig the owner sig
