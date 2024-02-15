@@ -1,6 +1,6 @@
 @startuml
 start
--> File Path: String;
+-> File Path: Strong;
 :Construct Alloy Class;
 :Create HashMap sigByName;
 stop
