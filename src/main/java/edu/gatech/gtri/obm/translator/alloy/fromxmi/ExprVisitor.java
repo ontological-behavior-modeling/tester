@@ -51,7 +51,8 @@ public class ExprVisitor extends VisitQuery<String> {
   private final Set<Sig.Field> parameterFields;
 
   /**
-   * Instantiates a new expr visitor.
+   * Instantiates a new expr visitor.<br>
+   * <img src="doc-files/ExprVisitor.svg"/>
    *
    * @param ignoredExprs the ignored exprs
    * @param pf the pf

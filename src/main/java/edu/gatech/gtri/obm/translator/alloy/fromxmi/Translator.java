@@ -27,7 +27,7 @@ public class Translator {
 
   /**
    * Instantiates a new translator. <br>
-   * <img src="doc-files/Translator3.svg" alt="Translator Constructor"/>
+   * <img src="doc-files/Translator3.svg"/>
    *
    * @param ignoredExprs the ignored exprs
    * @param ignoredFuncs the ignored funcs
@@ -39,7 +39,7 @@ public class Translator {
 
   /**
    * Instantiates a new translator. <br>
-   * <img src="doc-files/Translator4.svg" alt="Translator Constructor"/>
+   * <img src="doc-files/Translator4.svg"/>
    *
    * @param ignoredExprs the ignored exprs
    * @param ignoredFuncs the ignored funcs
@@ -58,7 +58,7 @@ public class Translator {
 
   /**
    * Generate als file contents. <br>
-   * <img src="doc-files/generateAlsFileContents.svg" alt="Writing File Content to String"/>
+   * <img src="doc-files/generateAlsFileContents.svg"/>
    *
    * @param alloyModule the alloy module
    * @param outFilename the out filename
