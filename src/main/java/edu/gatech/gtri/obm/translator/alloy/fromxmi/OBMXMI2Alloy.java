@@ -96,7 +96,7 @@ public class OBMXMI2Alloy {
 
   /**
    * Creates the alloy file. <br>
-   * <img src="doc-files/createAlloyFile.svg"/>
+   * <img src="doc-files/OBMXMI2Alloy_createAlloyFile.svg"/>
    *
    * @param xmiFile the xmi file
    * @param className the class name

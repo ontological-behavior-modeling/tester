@@ -58,7 +58,7 @@ public class Translator {
 
   /**
    * Generate als file contents. <br>
-   * <img src="doc-files/generateAlsFileContents.svg"/>
+   * <img src="doc-files/Translator_generateAlsFileContents.svg"/>
    *
    * @param alloyModule the alloy module
    * @param outFilename the out filename
