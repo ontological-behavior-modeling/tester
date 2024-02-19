@@ -51,7 +51,7 @@ public class ToAlloy {
 
   /**
    * Creates the alloy sig.<br>
-   * <img src="doc-files/createAlloySig3.svg"/>
+   * <img src="doc-files/ToAlloy/createAlloySig3.svg"/>
    *
    * @param name of sig
    * @param parentSig PrimSig or null (if null, Occurrence will be the parentSig)
@@ -74,7 +74,7 @@ public class ToAlloy {
 
   /**
    * Creates the alloy sig.<br>
-   * <img src="doc-files/createAlloySig2.svg"/>
+   * <img src="doc-files/ToAlloy/createAlloySig2.svg"/>
    *
    * @param name the name
    * @param parentName the parent name
@@ -98,7 +98,7 @@ public class ToAlloy {
 
   /**
    * Adds the alloy transfer field. <br>
-   * <img src="doc-files/addAlloyTransferField.svg"/>
+   * <img src="doc-files/ToAlloy/addAlloyTransferField.svg"/>
    *
    * @param fieldName the field name
    * @param ownerSig the owner sig
@@ -145,8 +145,9 @@ public class ToAlloy {
   /**
    * Creates the bijection filtered happens before and add to overall fact.
    *
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig, Expr,
-   *     Expr, edu.mit.csail.sdg.ast.Func)}
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
+   *
    * @param ownerSig the owner sig
    * @param from the from
    * @param to the to
