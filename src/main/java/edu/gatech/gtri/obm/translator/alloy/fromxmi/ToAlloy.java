@@ -30,7 +30,7 @@ public class ToAlloy {
 
   /**
    * Instantiates a new to alloy.<br>
-   * <img src="doc-files/ToAlloy.svg"/>
+   * <img src="ToAlloy/ToAlloy.svg"/>
    *
    * @param working_dir where required alloy library (Transfer) is locating
    */
@@ -51,7 +51,7 @@ public class ToAlloy {
 
   /**
    * Creates the alloy sig.<br>
-   * <img src="doc-files/createAlloySig3.svg"/>
+   * <img src="ToAlloy/createAlloySig3.svg"/>
    *
    * @param name of sig
    * @param parentSig PrimSig or null (if null, Occurrence will be the parentSig)
@@ -74,7 +74,7 @@ public class ToAlloy {
 
   /**
    * Creates the alloy sig.<br>
-   * <img src="doc-files/createAlloySig2.svg"/>
+   * <img src="ToAlloy/createAlloySig2.svg"/>
    *
    * @param name the name
    * @param parentName the parent name
@@ -98,7 +98,7 @@ public class ToAlloy {
 
   /**
    * Adds the alloy transfer field. <br>
-   * <img src="doc-files/addAlloyTransferField.svg"/>
+   * <img src="ToAlloy/addAlloyTransferField.svg"/>
    *
    * @param fieldName the field name
    * @param ownerSig the owner sig
@@ -118,7 +118,7 @@ public class ToAlloy {
 
   /**
    * Adds the disj alloy fields.<br>
-   * <img src="doc-files/addDisjAlloyFields.svg"/>
+   * <img src="ToAlloy/addDisjAlloyFields.svg"/>
    *
    * @param fieldNamesListWithSameType the field names list with same type
    * @param typeSigName the type sig name
