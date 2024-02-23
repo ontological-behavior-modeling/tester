@@ -24,8 +24,7 @@ import java.util.Set;
 public class AlloyUtils {
 
   /**
-   * Import alloy module.<br>
-   * <img src="doc-files/AlloyUtils_importAlloyModulef.svg"/>
+   * Import alloy module. <img src="doc-files/AlloyUtils_importAlloyModulef.svg"/>
    *
    * @param f the f
    * @return the comp module
@@ -35,8 +34,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Import alloy module.<br>
-   * <img src="doc-files/AlloyUtils_importAlloyModules.svg"/>
+   * Import alloy module. <img src="doc-files/AlloyUtils_importAlloyModules.svg"/>
    *
    * @param absoluteFileName the absolute file name
    * @return the comp module
@@ -46,8 +44,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Removes the slash.<br>
-   * <img src="doc-files/AlloyUtils_removeSlash.svg>
+   * Removes the slash. <img src="doc-files/AlloyUtils_removeSlash.svg>
    *
    * @param sig the sig
    * @return the string
@@ -62,8 +59,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Valid parent.<br>
-   * <img src="doc-files/AlloyUtils_validParent.svg>
+   * Valid parent. <img src="doc-files/AlloyUtils_validParent.svg>
    *
    * @param parentName the parent name
    * @return true, if successful
@@ -78,8 +74,7 @@ public class AlloyUtils {
 
   /**
    * Find Field from sig by fieldName. If not find in the sig, try to find in its parent
-   * recursively.<br>
-   * <img src="doc-files/AlloyUtils_getFieldFromSig.svg>
+   * recursively. <img src="doc-files/AlloyUtils_getFieldFromSig.svg>
    *
    * @param fieldName field's name looking for
    * @param sig PrimSig sig supposed to having the field
@@ -103,8 +98,8 @@ public class AlloyUtils {
 
   // Assume only one field with the same type
   /**
-   * Gets the field from sig by field type.<br>
-   * <img src="doc-files/AlloyUtils_getFieldFromSigByFieldType.svg>
+   * Gets the field from sig by field type. <img
+   * src="doc-files/AlloyUtils_getFieldFromSigByFieldType.svg>
    *
    * @param fieldTypeName the field type name
    * @param sig the sig
@@ -126,8 +121,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the all func.<br>
-   * <img src="doc-files/AlloyUtils_printAllFunc.svg>
+   * Prints the all func. <img src="doc-files/AlloyUtils_printAllFunc.svg>
    *
    * @param m the m
    */
@@ -139,8 +133,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints all the facts in the Module, m.<br>
-   * <img src="doc-files/AlloyUtils_printAllFact.svg>
+   * Prints all the facts in the Module, m. <img src="doc-files/AlloyUtils_printAllFact.svg>
    *
    * @param m = the module you want to print facts from
    */
@@ -153,8 +146,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Gets the all commands.<br>
-   * <img src="doc-files/AlloyUtils_getAllCommands.svg>
+   * Gets the all commands. <img src="doc-files/AlloyUtils_getAllCommands.svg>
    *
    * @param m the m
    */
@@ -198,8 +190,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the expr.<br>
-   * <img src="doc-files/AlloyUtils_printExpr.svg>
+   * Prints the expr. <img src="doc-files/AlloyUtils_printExpr.svg>
    *
    * @param expr the expr
    * @param tab the tab
@@ -219,8 +210,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the only this fn.<br>
-   * <img src="doc-files/AlloyUtils_printOnlyThisFn.svg>
+   * Prints the only this fn. <img src="doc-files/AlloyUtils_printOnlyThisFn.svg>
    *
    * @param expr the expr
    */
@@ -250,8 +240,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the only this sigs.<br>
-   * <img src="doc-files/AlloyUtils_printOnlyThisSigs.svg>
+   * Prints the only this sigs. <img src="doc-files/AlloyUtils_printOnlyThisSigs.svg>
    *
    * @param allSigs the all sigs
    */
@@ -269,8 +258,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the sigs.<br>
-   * <img src="doc-files/AlloyUtils_printSigs.svg>
+   * Prints the sigs. <img src="doc-files/AlloyUtils_printSigs.svg>
    *
    * @param allSigs the all sigs
    */
@@ -312,8 +300,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Adds the all reachable sig.<br>
-   * <img src="doc-files/AlloyUtils_addAllReachableSig.svg>
+   * Adds the all reachable sig. <img src="doc-files/AlloyUtils_addAllReachableSig.svg>
    *
    * @param m the m
    * @param allSigs the all sigs
@@ -325,8 +312,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Gets the reachable sig field.<br>
-   * <img src="doc-files/AlloyUtils_getReachableSigField.svg>
+   * Gets the reachable sig field. <img src="doc-files/AlloyUtils_getReachableSigField.svg>
    *
    * @param m the m
    * @param sig the sig
@@ -345,8 +331,8 @@ public class AlloyUtils {
   }
 
   /**
-   * Gets a Signature lookingFor, in the Module m if it exists.<br>
-   * <img src="doc-files/AlloyUtils_getReachableSig.svg>
+   * Gets a Signature lookingFor, in the Module m if it exists. <img
+   * src="doc-files/AlloyUtils_getReachableSig.svg>
    *
    * @param m = the module
    * @param lookingFor = the name of the Signature
@@ -360,8 +346,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the reachable sigs.<br>
-   * <img src="doc-files/AlloyUtils_printReachableSigs.svg>
+   * Prints the reachable sigs. <img src="doc-files/AlloyUtils_printReachableSigs.svg>
    *
    * @param m the m
    */
@@ -373,8 +358,8 @@ public class AlloyUtils {
   }
 
   /**
-   * Adds the all reachable user defined sigs.<br>
-   * <img src="doc-files/AlloyUtils_addAllReachableUserDefinedSigs.svg>
+   * Adds the all reachable user defined sigs. <img
+   * src="doc-files/AlloyUtils_addAllReachableUserDefinedSigs.svg>
    *
    * @param m the m
    * @param sigs the sigs
@@ -386,8 +371,8 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the all reachable user defined sigs.<br>
-   * <img src="doc-files/AlloyUtils_printAllReachableUserDefinedSigs.svg>
+   * Prints the all reachable user defined sigs. <img
+   * src="doc-files/AlloyUtils_printAllReachableUserDefinedSigs.svg>
    *
    * @param m the m
    */
@@ -423,8 +408,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the reachable modules.<br>
-   * <img src="doc-files/AlloyUtils_printReachableModules.svg>
+   * Prints the reachable modules. <img src="doc-files/AlloyUtils_printReachableModules.svg>
    *
    * @param module the module
    */
@@ -441,8 +425,8 @@ public class AlloyUtils {
   }
 
   /**
-   * Gets the all reachable module by name.<br>
-   * <img src="doc-files/AlloyUtils_getAllReachableModuleByName.svg>
+   * Gets the all reachable module by name. <img
+   * src="doc-files/AlloyUtils_getAllReachableModuleByName.svg>
    *
    * @param module the module
    * @param lookingForModuleName the looking for module name
@@ -457,8 +441,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Gets the function.<br>
-   * <img src="doc-files/AlloyUtils_getFunction.svg>
+   * Gets the function. <img src="doc-files/AlloyUtils_getFunction.svg>
    *
    * @param module the module
    * @param lookingForFunctionLabel the looking for function label
@@ -473,8 +456,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the all fuctions.<br>
-   * <img src="doc-files/AlloyUtils_printAllFunctions.svg>
+   * Prints the all fuctions. <img src="doc-files/AlloyUtils_printAllFunctions.svg>
    *
    * @param module the module
    */
@@ -486,8 +468,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the all reachable facts.<br>
-   * <img src="doc-files/AlloyUtils_printAllReachableFacts.svg>
+   * Prints the all reachable facts. <img src="doc-files/AlloyUtils_printAllReachableFacts.svg>
    *
    * @param module the module
    */
@@ -502,8 +483,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the expr and its functions.<br>
-   * <img src="doc-files/AlloyUtils_printExprAndItsFunctiond.svg>
+   * Prints the expr and its functions. <img src="doc-files/AlloyUtils_printExprAndItsFunctiond.svg>
    *
    * @param expr the expr
    */
@@ -522,8 +502,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Prints the sub node.<br>
-   * <img src="doc-files/AlloyUtils_printSubNode.svg>
+   * Prints the sub node. <img src="doc-files/AlloyUtils_printSubNode.svg>
    *
    * @param browsable the browsable
    * @param tab the tab
