@@ -503,7 +503,7 @@ public class AlloyUtils {
 
   /**
    * Prints the expr and its functions. <br>
-   * <img src="doc-files/AlloyUtils_printExprAndItsFunctiond.svg"/>
+   * <img src="doc-files/AlloyUtils_printExprAndItsFunctions.svg"/>
    *
    * @param expr the expr
    */
