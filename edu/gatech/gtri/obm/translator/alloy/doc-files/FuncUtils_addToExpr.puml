@@ -2,6 +2,6 @@
 start
 :Add original and toAdd 
 using AND Operator;
-Return Expression;
+:Return Expression;
 stop
 @enduml
