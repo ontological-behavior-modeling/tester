@@ -3,7 +3,7 @@ start
 :Make ExprVar;
 :Create new Declaration;
 :Call isAfterSource;
-Add isAfterSource to Overall Fact;
+:Add isAfterSource to Overall Fact;
 :Call isBeforeTarget;
 :Add isBeforeTarget to Overall Fact;
 stop
