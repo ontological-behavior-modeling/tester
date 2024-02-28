@@ -272,8 +272,7 @@ public class Alloy {
   /**
    * Creates the sig as child of occ sig and add to all sigs.<br>
    * <img src="doc-files/Alloy_createSigAsChildOfOccSigAndAddToAllSigs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSigAllAddToAllSigs(String label,
-   * PrimSig parent))}
+   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSigAndAddToAllSigs(String, PrimSig)}
    *
    * @param label the label
    * @return the prim sig
@@ -284,7 +283,8 @@ public class Alloy {
 
   /**
    * Creates the sig as child of parent sig add to all sigs.<br>
-   * <img src="doc-files/Alloy_createSigAsChildOfParentSigAddToAllSigs.svg"/>
+   * <img src="doc-files/Alloy_createSigAsChildOfParentSigAddToAllSigs.svg"/><br>
+   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSigAndAddToAllSigs(String, PrimSig)}
    *
    * @param label the label
    * @param parentSig the parent sig
