@@ -1,9 +1,6 @@
 @startuml
 start
- -> Ignored Expressions :Set<Expr>
- Ignored Functions :Set<Func>
- Ignored Signatures : Set<Sig>;
- :Construct Translator with
- new HashSet<Sig.Field>;
+:Construct Translator with
+new HashSet<Sig.Field>;
 stop
 @enduml

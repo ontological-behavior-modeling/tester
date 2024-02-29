@@ -1,6 +1,5 @@
 @startuml
 start
- -> File Path: String ;
- :Construct ToAlloy Class;
+:Construct ToAlloy Class;
 stop
 @enduml
