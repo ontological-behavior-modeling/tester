@@ -69,7 +69,7 @@ public class VisualizerHelper {
   private static VizGUI viz;
 
   /**
-   * Update updated.<br>
+   * Update updated.<p>
    * <img src="doc-files/VisualizerHelper_updateUpdated.svg"/>
    *
    * @param flag the flag
@@ -79,7 +79,7 @@ public class VisualizerHelper {
   }
 
   /**
-   * Checks for updated.<br>
+   * Checks for updated.<p>
    * <img src="doc-files/VisualizerHelper_updateUpdated.svg"/>
    *
    * @return true, if successful
@@ -92,7 +92,7 @@ public class VisualizerHelper {
   private static A4Solution previousAns;
 
   /**
-   * Generate visualizer with next capability.<br>
+   * Generate visualizer with next capability.<p>
    * <img src="doc-files/VisualizerHelper_generateVisualizerWithNextCapability.svg"/>
    *
    * @param sigs the sigs
@@ -153,7 +153,7 @@ public class VisualizerHelper {
   }
 
   /**
-   * Update vis. <br>
+   * Update vis. <p>
    * <img src="doc-files/VisualizerHelper_updateVis.svg"/>
    */
   public static void updateVis() {
@@ -416,7 +416,7 @@ public class VisualizerHelper {
   //  }
 
   /**
-   * Generate visualizer X.<br>
+   * Generate visualizer X.<p>
    * <img src="doc-files/VisualizerHelper_generateVisualizerX.svg"/>
    *
    * @param sigs the sigs
@@ -519,7 +519,7 @@ public class VisualizerHelper {
   }
 
   /**
-   * Generate visualizer.<br>
+   * Generate visualizer.<p>
    * <img src="doc-files/VisualizerHelper_generateVisualizer2.svg"/>
    *
    * @param sigs the sigs
@@ -816,7 +816,7 @@ public class VisualizerHelper {
   }
 
   /**
-   * Generate visualizer.<br>
+   * Generate visualizer.<p>
    * <img src="doc-files/VisualizerHelper_generateVisualizer1.svg"/>
    *
    * @param world the world

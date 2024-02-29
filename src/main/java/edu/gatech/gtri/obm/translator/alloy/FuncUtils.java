@@ -14,7 +14,7 @@ import java.util.List;
 public class FuncUtils {
 
   /**
-   * Gets the during example expr.<br>
+   * Gets the during example expr.<p>
    * <img src="doc-files/FuncUtils_getDuringExampleExpr.svg"/>
    *
    * @param label the label
@@ -28,7 +28,7 @@ public class FuncUtils {
   }
 
   /**
-   * Expr to fun to expr.<br>
+   * Expr to fun to expr.<p>
    * <img src="doc-files/FuncUtils_exprToFunToExpr.svg"/>
    *
    * @param label the label
@@ -40,7 +40,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds a field to a Signature with the format: sig ${sig} { ${label}: set ${sigType} }.<br>
+   * Adds a field to a Signature with the format: sig ${sig} { ${label}: set ${sigType} }.<p>
    * <img src="doc-files/FuncUtils_addField.svg"/>
    *
    * @param label = the name of the field
@@ -53,7 +53,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the one field.<br>
+   * Adds the one field.<p>
    * <img src="doc-files/FuncUtils_addOneField.svg"/>
    *
    * @param label the label
@@ -67,7 +67,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the tricky field.<br>
+   * Adds the tricky field.<p>
    * <img src="doc-files/FuncUtils_addTrickyField.svg"/>
    *
    * @param labels the labels
@@ -82,7 +82,7 @@ public class FuncUtils {
   }
 
   /**
-   * Creates the expr equal to number.<br>
+   * Creates the expr equal to number.<p>
    * <img src="doc-files/FuncUtils_createExprEqualToNumber.svg"/>
    *
    * @param expr the expr
@@ -94,7 +94,7 @@ public class FuncUtils {
   }
 
   /**
-   * Creates the expr greater than equal to number.<br>
+   * Creates the expr greater than equal to number.<p>
    * <img src="doc-files/FuncUtils_createExprGreaterThanEqualToNumber.svg"/>
    *
    * @param expr the expr
@@ -106,7 +106,7 @@ public class FuncUtils {
   }
 
   /**
-   * Creates the expr greater to number.<br>
+   * Creates the expr greater to number.<p>
    * <img src="doc-files/FuncUtils_createExprGreaterToNumber.svg"/>
    *
    * @param expr the expr
@@ -118,7 +118,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the bijection filtered expr happens before.<br>
+   * Adds the bijection filtered expr happens before.<p>
    * <img src="doc-files/FuncUtils_addBijectionFilteredExprHappensBefore.svg"/>
    *
    * @param transferModule the transfer module
@@ -137,7 +137,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the function filtered expr happens before.<br>
+   * Adds the function filtered expr happens before.<p>
    * <img src="doc-files/FuncUtils_addFunctionFilteredExprHappensBefore.svg"/>
    *
    * @param transferModule the transfer module
@@ -156,7 +156,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the inverse function filtered expr happens before.<br>
+   * Adds the inverse function filtered expr happens before.<p>
    * <img src="doc-files/FuncUtils_addInverseFunctionFilteredExprHappensBefore.svg"/>
    *
    * @param transferModule the transfer module
@@ -175,7 +175,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the exprs.<br>
+   * Adds the exprs.<p>
    * <img src="doc-files/FuncUtils_addExprs.svg"/>
    *
    * @param exprs the exprs
@@ -191,7 +191,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the to expr.<br>
+   * Adds the to expr.<p>
    * <img src="doc-files/FuncUtils_addToExpr.svg"/>
    *
    * @param original the original
@@ -204,7 +204,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the non zero duration only.<br>
+   * Adds the non zero duration only.<p>
    * <img src="doc-files/FuncUtils_addNonZeroDurationOnly.svg"/>
    *
    * @param transferModule the transfer module
@@ -220,7 +220,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the suppress transfers expr.<br>
+   * Adds the suppress transfers expr.<p>
    * <img src="doc-files/FuncUtils_addSuppressTransfersExpr.svg"/>
    *
    * @param transferModule the transfer module
@@ -236,7 +236,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the suppress IO expr.<br>
+   * Adds the suppress IO expr.<p>
    * <img src="doc-files/FuncUtils_addSuppressIOExpr.svg"/>
    *
    * @param transferModule the transfer module
@@ -254,8 +254,8 @@ public class FuncUtils {
 
   // pred onlySimpleSequence {#SimpleSequence = 1}
   /**
-   * Only one sig expr.<br>
-   * <img src="doc-files/FuncUtils_onlyOneSigExpr.svg"/><br>
+   * Only one sig expr.<p>
+   * <img src="doc-files/FuncUtils_onlyOneSigExpr.svg"/><p>
    * {@link edu.gatech.gtri.obm.translator.alloy.FuncUtils#createExprEqualToNumber(Expr, int)}
    *
    * @param label the label
@@ -269,10 +269,10 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the step.<br>
-   * <img src="doc-files/FuncUtils_addStep.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.FuncUtils#addFieldsInStep(Module, List, Sig)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.FuncUtils#addStepsInFields(Module, List, Sig)}<br>
+   * Adds the step.<p>
+   * <img src="doc-files/FuncUtils_addStep.svg"/><p>
+   * {@link edu.gatech.gtri.obm.translator.alloy.FuncUtils#addFieldsInStep(Module, List, Sig)}<p>
+   * {@link edu.gatech.gtri.obm.translator.alloy.FuncUtils#addStepsInFields(Module, List, Sig)}<p>
    * {@link edu.gatech.gtri.obm.translator.alloy.FuncUtils#addToExpr(Expr, Expr)}
    *
    * @param transferModule the transfer module
@@ -287,7 +287,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the fields in step.<br>
+   * Adds the fields in step.<p>
    * <img src="doc-files/FuncUtils_addFieldsInStep.svg"/>
    *
    * @param transferModule the transfer module
@@ -308,7 +308,7 @@ public class FuncUtils {
   }
 
   /**
-   * Adds the steps in fields.<br>
+   * Adds the steps in fields.<p>
    * <img src="doc-files/FuncUtils_addStepsInFields.svg"/>
    *
    * @param transferModule the transfer module
@@ -329,7 +329,7 @@ public class FuncUtils {
   }
 
   /**
-   * Creates the constraint expr.<br>
+   * Creates the constraint expr.<p>
    * <img src="doc-files/FuncUtils_createConstraintExpr.svg"/>
    *
    * @param transferModule the transfer module
@@ -371,7 +371,7 @@ public class FuncUtils {
   }
 
   /**
-   * Fork happens before.<br>
+   * Fork happens before.<p>
    * <img src="doc-files/FuncUtils_forkHappensBefore.svg"/>
    *
    * @param _transferModule the transfer module
@@ -393,7 +393,7 @@ public class FuncUtils {
   }
 
   /**
-   * Decision happens before.<br>
+   * Decision happens before.<p>
    * <img src="doc-files/FuncUtils_decisionHappensBefore.svg"/>
    *
    * @param _transferModule the transfer module
@@ -416,7 +416,7 @@ public class FuncUtils {
   }
 
   /**
-   * Loop happens before.<br>
+   * Loop happens before.<p>
    * <img src="doc-files/FuncUtils_loopHappensBefore.svg"/>
    *
    * @param _transferModule the transfer module

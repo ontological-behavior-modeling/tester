@@ -12,7 +12,7 @@ public class MDUtils {
 
   /**
    * Get class in hierarchy order in list but not include "BehaviorOccurence" or "Occurrence".
-   * Smaller the index, more ancestor<br>
+   * Smaller the index, more ancestor<p>
    * <img src="doc-files/MDUtils_getClassInHierarchy.svg"/>
    *
    * @param mainClass the main class
