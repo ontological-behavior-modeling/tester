@@ -5,7 +5,7 @@ start
 :Print Expression String;
 :Print Title expr.findAllFunctions;
 while(For All Functions in Expression)
-:Print Function
+:Print Function;
 endwhile
 :Print Title expr.getSubnodes;
 :Print Expression Sub Nodes;

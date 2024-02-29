@@ -4,8 +4,6 @@ import edu.mit.csail.sdg.ast.Command;
 import edu.mit.csail.sdg.ast.CommandScope;
 import edu.mit.csail.sdg.ast.Expr;
 import edu.mit.csail.sdg.ast.Sig;
-import edu.mit.csail.sdg.ast.Sig.PrimSig;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +14,8 @@ public class AlloyRunUtils {
   /**
    * Run.<br>
    * <img src="doc-files/AlloyRunUtils_run.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable, Command)}
+   * {@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable,
+   * Command)}
    *
    * @param _mainSig the main sig
    * @param _overallScope the overall scope
@@ -56,7 +55,8 @@ public class AlloyRunUtils {
   /**
    * Run X.<br>
    * <img src="doc-files/AlloyRunUtils_runXcom.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable, Command)}
+   * {@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable,
+   * Command)}
    *
    * @param _mainSig the main sig
    * @param _allSigs the all sigs

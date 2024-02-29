@@ -1,5 +1,4 @@
 @startuml
-title Remove Slash
 start
 if (Signature Contains a Slash) then (yes)
   :Find Index of Slash;

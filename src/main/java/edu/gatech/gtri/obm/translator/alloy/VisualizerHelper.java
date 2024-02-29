@@ -69,7 +69,8 @@ public class VisualizerHelper {
   private static VizGUI viz;
 
   /**
-   * Update updated.
+   * Update updated.<br>
+   * <img src="doc-files/VisualizerHelper_updateUpdated.svg"/>
    *
    * @param flag the flag
    */
@@ -78,7 +79,8 @@ public class VisualizerHelper {
   }
 
   /**
-   * Checks for updated.
+   * Checks for updated.<br>
+   * <img src="doc-files/VisualizerHelper_updateUpdated.svg"/>
    *
    * @return true, if successful
    */
@@ -90,7 +92,8 @@ public class VisualizerHelper {
   private static A4Solution previousAns;
 
   /**
-   * Generate visualizer with next capability.
+   * Generate visualizer with next capability.<br>
+   * <img src="doc-files/VisualizerHelper_generateVisualizerWithNextCapability.svg"/>
    *
    * @param sigs the sigs
    * @param command the command
@@ -149,7 +152,10 @@ public class VisualizerHelper {
     }
   }
 
-  /** Update vis. */
+  /**
+   * Update vis. <br>
+   * <img src="doc-files/VisualizerHelper_updateVis.svg"/>
+   */
   public static void updateVis() {
     A4Solution ans = previousAns.next();
     ++solutionCounter;
@@ -410,7 +416,8 @@ public class VisualizerHelper {
   //  }
 
   /**
-   * Generate visualizer X.
+   * Generate visualizer X.<br>
+   * <img src="doc-files/VisualizerHelper_generateVisualizerX.svg"/>
    *
    * @param sigs the sigs
    * @param cmd the cmd
@@ -512,7 +519,8 @@ public class VisualizerHelper {
   }
 
   /**
-   * Generate visualizer.
+   * Generate visualizer.<br>
+   * <img src="doc-files/VisualizerHelper_generateVisualizer2.svg"/>
    *
    * @param sigs the sigs
    * @param cmd the cmd
@@ -808,7 +816,8 @@ public class VisualizerHelper {
   }
 
   /**
-   * Generate visualizer.
+   * Generate visualizer.<br>
+   * <img src="doc-files/VisualizerHelper_generateVisualizer1.svg"/>
    *
    * @param world the world
    * @throws Err the err

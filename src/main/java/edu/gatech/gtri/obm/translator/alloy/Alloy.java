@@ -114,8 +114,9 @@ public class Alloy {
       "open Transfer[Occurrence] as o \n" + "abstract sig Occurrence{}";
 
   /**
-   * Instantiates a new alloy.<br>
-   * <img src="doc-files/Alloy.svg"/>
+   * Instantiates a new alloy.
+   *
+   * <p><img src="doc-files/Alloy.svg"/>
    *
    * @param working_dir where required alloy library defined in templateString is locating.
    */
@@ -255,8 +256,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the sig and add to all sigs.<br>
-   * <img src="doc-files/Alloy_createSigAndAddToAllSigs.svg"/>
+   * Creates the sig and add to all sigs.
+   *
+   * <p><img src="doc-files/Alloy_createSigAndAddToAllSigs.svg"/>
    *
    * @param label the label
    * @param parent the parent
@@ -270,9 +272,11 @@ public class Alloy {
   }
 
   /**
-   * Creates the sig as child of occ sig and add to all sigs.<br>
-   * <img src="doc-files/Alloy_createSigAsChildOfOccSigAndAddToAllSigs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSigAndAddToAllSigs(String, PrimSig)}
+   * Creates the sig as child of occ sig and add to all sigs.
+   *
+   * <p><img src="doc-files/Alloy_createSigAsChildOfOccSigAndAddToAllSigs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSigAndAddToAllSigs(String, PrimSig)}
    *
    * @param label the label
    * @return the prim sig
@@ -282,9 +286,11 @@ public class Alloy {
   }
 
   /**
-   * Creates the sig as child of parent sig add to all sigs.<br>
-   * <img src="doc-files/Alloy_createSigAsChildOfParentSigAddToAllSigs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSigAndAddToAllSigs(String, PrimSig)}
+   * Creates the sig as child of parent sig add to all sigs.
+   *
+   * <p><img src="doc-files/Alloy_createSigAsChildOfParentSigAddToAllSigs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSigAndAddToAllSigs(String, PrimSig)}
    *
    * @param label the label
    * @param parentSig the parent sig
@@ -295,8 +301,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the to overall fact.<br>
-   * <img src="doc-files/Alloy_addToOverallFact.svg"/>
+   * Adds the to overall fact.
+   *
+   * <p><img src="doc-files/Alloy_addToOverallFact.svg"/>
    *
    * @param expr the expr
    */
@@ -338,8 +345,9 @@ public class Alloy {
   /**
    * support when Expr original is ExprBinary(ie., p1 + p2) to add ExprVar s in both so returns s.p1
    * and s.p2. if original is like "BuffetService : (FoodService : eat)" - ((ExprBinary)
-   * original).op = ":", in this case just return s.join(original) =<br>
-   * <img src="doc-files/Alloy_addExprVarToExpr.svg"/>
+   * original).op = ":", in this case just return s.join(original) =
+   *
+   * <p><img src="doc-files/Alloy_addExprVarToExpr.svg"/>
    *
    * @param s the s
    * @param original the original
@@ -359,8 +367,10 @@ public class Alloy {
   }
 
   /**
-   * Creates the inverse function filtered happens before and add to overall fact.<br>
-   * <img src="doc-files/Alloy_createInverseFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   * Creates the inverse function filtered happens before and add to overall fact.
+   *
+   * <p><img
+   * src="doc-files/Alloy_createInverseFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -383,8 +393,9 @@ public class Alloy {
    * sign. fact f3 {all s: Loop | functionFiltered[happensBefore, s.p2, s.p2 + s.p3]} ownerSig=Loop;
    * from={p2}; to={p2, p3}
    *
-   * <p>In this example, "to" has a + sign.<br>
-   * <img
+   * <p>In this example, "to" has a + sign.
+   *
+   * <p><img
    * src="doc-files/Alloy_createInverseFunctionFilteredHappensBeforeAndAddToOverallFactList.svg"/>
    *
    * @param ownerSig the owner sig
@@ -425,8 +436,8 @@ public class Alloy {
    *
    * <p>I wrote another function below to handle this case with + sign.
    * createFunctionFilteredHappensBeforeAndAllToOverAllFact( Sig ownerSig, Expr[] from, Expr[] to)
-   * <br>
-   * <img src="doc-files/Alloy_createFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p><img src="doc-files/Alloy_createFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -449,8 +460,9 @@ public class Alloy {
    * f3 {all s: Loop | functionFiltered[happensBefore, s.p2, s.p2 + s.p3]} ownerSig=Loop; from={p2};
    * to={p2, p3}
    *
-   * <p>In this example, "to" has a + sign.<br>
-   * <img src="doc-files/Alloy_createFunctionFilteredHappensBeforeAndAddToOverallFactList.svg"/>
+   * <p>In this example, "to" has a + sign.
+   *
+   * <p><img src="doc-files/Alloy_createFunctionFilteredHappensBeforeAndAddToOverallFactList.svg"/>
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -479,8 +491,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the bijection filtered happens before and add to overall fact.<br>
-   * <img src="doc-files/Alloy_createBijectionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   * Creates the bijection filtered happens before and add to overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createBijectionFilteredHappensBeforeAndAddToOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -500,8 +513,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the sub setting item rule overall fact.<br>
-   * <img src="doc-files/Alloy_createSubSettingItemRuleOverallFact.svg"/>
+   * Creates the sub setting item rule overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createSubSettingItemRuleOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param transfer the transfer
@@ -515,8 +529,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the is after source is before target overall fact.<br>
-   * <img src="doc-files/Alloy_createIsAfterSourceIsBeforeTargetOverallFact.svg"/>
+   * Creates the is after source is before target overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createIsAfterSourceIsBeforeTargetOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param transfer the transfer
@@ -529,8 +544,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the is after source overall fact.<br>
-   * <img src="doc-files/Alloy_createIsAfterSourceOverallFact.svg"/>
+   * Creates the is after source overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createIsAfterSourceOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param transfer the transfer
@@ -542,8 +558,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the is before target overall fact.<br>
-   * <img src="doc-files/Alloy_createIsBeforeTargetOverallFact.svg"/>
+   * Creates the is before target overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createIsBeforeTargetOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param transfer the transfer
@@ -555,8 +572,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the inverse function filtered and add to overall fact.<br>
-   * <img src="doc-files/Alloy_createInverseFunctionFilteredAndAddToOverallFact.svg"/>
+   * Creates the inverse function filtered and add to overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createInverseFunctionFilteredAndAddToOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -576,8 +594,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the function filtered and add to overall fact.<br>
-   * <img src="doc-files/Alloy_createFunctionFilteredAndAddToOverallFact.svg"/>
+   * Creates the function filtered and add to overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createFunctionFilteredAndAddToOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -600,8 +619,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the bijection filtered to overall fact.<br>
-   * <img src="doc-files/Alloy_createBijectionFilteredToOverallFact.svg"/>
+   * Creates the bijection filtered to overall fact.
+   *
+   * <p><img src="doc-files/Alloy_createBijectionFilteredToOverallFact.svg"/>
    *
    * @param ownerSig the owner sig
    * @param from the from
@@ -644,8 +664,9 @@ public class Alloy {
   }
 
   /**
-   * Example: all s: FoodService | bijectionFiltered[happensBefore, s.order, s.serve]<br>
-   * <img src="doc-files/Alloy_createBijectionFilteredHappensBeforeAndAddToOverallFact4.svg"/>
+   * Example: all s: FoodService | bijectionFiltered[happensBefore, s.order, s.serve]
+   *
+   * <p><img src="doc-files/Alloy_createBijectionFilteredHappensBeforeAndAddToOverallFact4.svg"/>
    *
    * @param var = s
    * @param ownerSig = FoodService
@@ -663,8 +684,9 @@ public class Alloy {
   }
 
   /**
-   * Returns nonZeroDurationOnly and suppressTransfers and suppressIO.<br>
-   * <img src="doc-files/Alloy_getCommonCmdExprs.svg"/>
+   * Returns nonZeroDurationOnly and suppressTransfers and suppressIO.
+   *
+   * <p><img src="doc-files/Alloy_getCommonCmdExprs.svg"/>
    *
    * @return nonZeroDurationOnly and suppressTransfers and suppressIO
    */
@@ -694,8 +716,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the to name expr.<br>
-   * <img src="doc-files/Alloy_addToNameExpr.svg"/>
+   * Adds the to name expr.
+   *
+   * <p><img src="doc-files/Alloy_addToNameExpr.svg"/>
    *
    * @param expr the expr
    */
@@ -704,8 +727,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the cardinality equal constraint to field.<br>
-   * <img src="doc-files/Alloy_addCardinalityEqualConstraintToField.svg"/>
+   * Adds the cardinality equal constraint to field.
+   *
+   * <p><img src="doc-files/Alloy_addCardinalityEqualConstraintToField.svg"/>
    *
    * @param ownerSig the owner sig
    * @param field the field
@@ -720,8 +744,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the cardinality greater than equal constraint to field.<br>
-   * <img src="doc-files/Alloy_addCardinalityGreaterThanEqualConstraintToField.svg"/>
+   * Adds the cardinality greater than equal constraint to field.
+   *
+   * <p><img src="doc-files/Alloy_addCardinalityGreaterThanEqualConstraintToField.svg"/>
    *
    * @param ownerSig the owner sig
    * @param field the field
@@ -737,8 +762,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the equal.<br>
-   * <img src="doc-files/Alloy_addEqual.svg"/>
+   * Adds the equal.
+   *
+   * <p><img src="doc-files/Alloy_addEqual.svg"/>
    *
    * @param ownerSig the owner sig
    * @param field1 the field 1
@@ -753,8 +779,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the one constraint to field.<br>
-   * <img src="doc-files/Alloy_addOneConstraintToField.svg"/>
+   * Adds the one constraint to field.
+   *
+   * <p><img src="doc-files/Alloy_addOneConstraintToField.svg"/>
    *
    * @param var the var
    * @param ownerSig the owner sig
@@ -767,8 +794,9 @@ public class Alloy {
   }
 
   /**
-   * No inputs.<br>
-   * <img src="doc-files/Alloy_noInputs.svg"/>
+   * No inputs.
+   *
+   * <p><img src="doc-files/Alloy_noInputs.svg"/>
    *
    * @param sig the sig
    */
@@ -779,8 +807,9 @@ public class Alloy {
   }
 
   /**
-   * No outputs.<br>
-   * <img src="doc-files/Alloy_noOutputs.svg"/>
+   * No outputs.
+   *
+   * <p><img src="doc-files/Alloy_noOutputs.svg"/>
    *
    * @param sig the sig
    */
@@ -791,8 +820,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the inputs.<br>
-   * <img src="doc-files/Alloy_addInputs.svg"/>
+   * Adds the inputs.
+   *
+   * <p><img src="doc-files/Alloy_addInputs.svg"/>
    *
    * @param var the var
    * @param ownerSig the owner sig
@@ -809,8 +839,9 @@ public class Alloy {
   }
 
   /**
-   * Adds the outputs.<br>
-   * <img src="doc-files/Alloy_addOutputs.svg"/>
+   * Adds the outputs.
+   *
+   * <p><img src="doc-files/Alloy_addOutputs.svg"/>
    *
    * @param var the var
    * @param ownerSig the owner sig
@@ -883,8 +914,9 @@ public class Alloy {
   // }
 
   /**
-   * Adds the steps.<br>
-   * <img src="doc-files/Alloy_addSteps.svg"/>
+   * Adds the steps.
+   *
+   * <p><img src="doc-files/Alloy_addSteps.svg"/>
    *
    * @param sig the sig
    * @param stepFields the step fields
@@ -913,8 +945,9 @@ public class Alloy {
   }
 
   /**
-   * Creates the command.<br>
-   * <img src="doc-files/Alloy_createCommand.svg"/>
+   * Creates the command.
+   *
+   * <p><img src="doc-files/Alloy_createCommand.svg"/>
    *
    * @param label the label
    * @param __overall the overall

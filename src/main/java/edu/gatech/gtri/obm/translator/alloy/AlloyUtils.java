@@ -25,7 +25,8 @@ public class AlloyUtils {
 
   /**
    * Import alloy module. <br>
-   * <img src="doc-files/AlloyUtils_importAlloyModulef.svg"/>
+   * <img src="doc-files/AlloyUtils_importAlloyModulef.svg"/><br>
+   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#importAlloyModule(String)}
    *
    * @param f the f
    * @return the comp module
