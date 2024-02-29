@@ -1,8 +1,5 @@
 @startuml
-title Construct Translator(Set<Expr>, Set<Func>, Set<Sig>, Set<Sig.Field>)
 start
- -> Ignored Expressions: Set<Expr>
- Parameter Fields: Set<Sig.Field>;
  :Construct ExprVisitor;
  :Set ignoredFuncs Parameter;
  :Set ignoredSigs Parameter;
