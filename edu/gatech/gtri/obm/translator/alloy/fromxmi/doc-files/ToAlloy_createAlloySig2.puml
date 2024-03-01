@@ -1,5 +1,4 @@
 @startuml
-title Create Alloy Sig
 start
 if(Signature Exists) then (yes)
 :Return Signature from List;

@@ -1,5 +1,4 @@
 @startuml
-title Create Alloy Signature
 start
  if (Sig Does Not Exist) then (yes)
  :Create PrimSig;
