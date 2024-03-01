@@ -14,7 +14,6 @@ import edu.mit.csail.sdg.ast.ExprUnary;
 import edu.mit.csail.sdg.ast.ExprVar;
 import edu.mit.csail.sdg.ast.Sig;
 import edu.mit.csail.sdg.ast.Sig.Field;
-import edu.mit.csail.sdg.ast.Sig.PrimSig;
 import edu.mit.csail.sdg.ast.VisitQuery;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,8 +51,9 @@ public class ExprVisitor extends VisitQuery<String> {
   private final Set<Sig.Field> parameterFields;
 
   /**
-   * Instantiates a new expr visitor.<p>
-   * <img src="doc-files/ExprVisitor.svg"/>
+   * Instantiates a new expr visitor.
+   *
+   * <p><img src="doc-files/ExprVisitor.svg"/>
    *
    * @param ignoredExprs the ignored exprs
    * @param pf the pf
@@ -64,8 +64,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitExprBinary.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitExprBinary.svg"/>
    *
    * @param x the x
    * @return the string
@@ -108,8 +109,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitExprCall.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitExprCall.svg"/>
    *
    * @param x the x
    * @return the string
@@ -142,8 +144,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitExprConstant.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitExprConstant.svg"/>
    *
    * @param x the x
    * @return the string
@@ -162,8 +165,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitExprList.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitExprList.svg"/>
    *
    * @param x the x
    * @return the string
@@ -214,8 +218,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitExprQt.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitExprQt.svg"/>
    *
    * @param x the x
    * @return the string
@@ -253,8 +258,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitExprUnary.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitExprUnary.svg"/>
    *
    * @param x the x
    * @return the string
@@ -300,8 +306,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitExprVar.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitExprVar.svg"/>
    *
    * @param x the x
    * @return the string
@@ -314,8 +321,10 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitSig.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitSig.svg"/>
+   *
    * <p>{@link edu.gatech.gtri.obm.translator.alloy.fromxmi.ExprVisitor#sortFields(Field, Map)}
    *
    * @param x the x
@@ -459,8 +468,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Sort fields.<p>
-   * <img src="doc-files/ExprVisitor_sortFields.svg"/>
+   * Sort fields.
+   *
+   * <p><img src="doc-files/ExprVisitor_sortFields.svg"/>
    *
    * @param x the x
    * @param map the map
@@ -490,8 +500,9 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.<p>
-   * <img src="doc-files/ExprVisitor_visitField.svg"/>
+   * Visit.
+   *
+   * <p><img src="doc-files/ExprVisitor_visitField.svg"/>
    *
    * @param x the x
    * @return the string

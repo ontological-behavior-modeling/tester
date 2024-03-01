@@ -26,8 +26,9 @@ public class Translator {
   private final Set<Sig> ignoredSigs;
 
   /**
-   * Instantiates a new translator. <br>
-   * <img src="doc-files/Translator3.svg"/>
+   * Instantiates a new translator.
+   *
+   * <p><img src="doc-files/Translator3.svg"/>
    *
    * @param ignoredExprs the ignored exprs
    * @param ignoredFuncs the ignored funcs
@@ -38,8 +39,11 @@ public class Translator {
   }
 
   /**
-   * Instantiates a new translator. <br>
-   * <img src="doc-files/Translator4.svg"/>
+   * Instantiates a new translator.
+   *
+   * <p><img src="doc-files/Translator4.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.fromxmi.ExprVisitor#ExprVisitor(Set, Set)}
    *
    * @param ignoredExprs the ignored exprs
    * @param ignoredFuncs the ignored funcs
@@ -57,8 +61,9 @@ public class Translator {
   }
 
   /**
-   * Generate als file contents. <br>
-   * <img src="doc-files/Translator_generateAlsFileContents.svg"/>
+   * Generate als file contents.
+   *
+   * <p><img src="doc-files/Translator_generateAlsFileContents.svg"/>
    *
    * @param alloyModule the alloy module
    * @param outFilename the out filename

@@ -12,9 +12,11 @@ import java.util.List;
 public class AlloyRunUtils {
 
   /**
-   * Run.<p>
-   * <img src="doc-files/AlloyRunUtils_run.svg"/><p>
-   * {@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable,
+   * Run.
+   *
+   * <p><img src="doc-files/AlloyRunUtils_run.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable,
    * Command)}
    *
    * @param _mainSig the main sig
@@ -53,9 +55,11 @@ public class AlloyRunUtils {
   }
 
   /**
-   * Run X.<p>
-   * <img src="doc-files/AlloyRunUtils_runXcom.svg"/><p>
-   * {@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable,
+   * Run X.
+   *
+   * <p><img src="doc-files/AlloyRunUtils_runXcom.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.VisualizerHelper#generateVisualizer(Iterable,
    * Command)}
    *
    * @param _mainSig the main sig
@@ -69,9 +73,11 @@ public class AlloyRunUtils {
   }
 
   /**
-   * Run X.<p>
-   * <img src="doc-files/AlloyRunUtils_runXint.svg"/><p>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyRunUtils#runX(Sig, List, Expr, Command)}
+   * Run X.
+   *
+   * <p><img src="doc-files/AlloyRunUtils_runXint.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyRunUtils#runX(Sig, List, Expr, Command)}
    *
    * @param _mainSig the main sig
    * @param _overallScope the overall scope

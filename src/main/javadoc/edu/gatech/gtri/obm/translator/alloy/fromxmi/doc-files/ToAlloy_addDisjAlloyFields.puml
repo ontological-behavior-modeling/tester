@@ -1,5 +1,4 @@
 @startuml
-title Add Disj Alloy Fields
 start
 :Create fieldNames String Array;
 :Convert fieldNamesList to Array;

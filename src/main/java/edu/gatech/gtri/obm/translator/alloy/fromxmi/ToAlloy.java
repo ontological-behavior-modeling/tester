@@ -29,8 +29,9 @@ public class ToAlloy {
   private String moduleName;
 
   /**
-   * Instantiates a new to alloy.<br>
-   * <img src="doc-files/ToAlloy.svg"/>
+   * Instantiates a new to alloy.
+   *
+   * <p><img src="doc-files/ToAlloy.svg"/>
    *
    * @param working_dir where required alloy library (Transfer) is locating
    */
@@ -50,8 +51,9 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the alloy sig.<br>
-   * <img src="doc-files/ToAlloy_createAlloySig3.svg"/>
+   * Creates the alloy sig.
+   *
+   * <p><img src="doc-files/ToAlloy_createAlloySig3.svg"/>
    *
    * @param name of sig
    * @param parentSig PrimSig or null (if null, Occurrence will be the parentSig)
@@ -73,8 +75,9 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the alloy sig.<br>
-   * <img src="doc-files/ToAlloy_createAlloySig2.svg"/>
+   * Creates the alloy sig.
+   *
+   * <p><img src="doc-files/ToAlloy_createAlloySig2.svg"/>
    *
    * @param name the name
    * @param parentName the parent name
@@ -97,8 +100,9 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the alloy transfer field. <br>
-   * <img src="doc-files/ToAlloy_addAlloyTransferField.svg"/>
+   * Adds the alloy transfer field.
+   *
+   * <p><img src="doc-files/ToAlloy_addAlloyTransferField.svg"/>
    *
    * @param fieldName the field name
    * @param ownerSig the owner sig
@@ -117,8 +121,9 @@ public class ToAlloy {
   // }
 
   /**
-   * Adds the disj alloy fields.<br>
-   * <img src="doc-files/ToAlloy_addDisjAlloyFields.svg"/>
+   * Adds the disj alloy fields.
+   *
+   * <p><img src="doc-files/ToAlloy_addDisjAlloyFields.svg"/>
    *
    * @param fieldNamesListWithSameType the field names list with same type
    * @param typeSigName the type sig name
@@ -143,9 +148,11 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the bijection filtered happens before and add to overall fact.<br>
-   * <img src="doc-files/ToAlloy_createBijectionFilteredHappensBeforeAndAddToOverallFact.svg"/> <br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Creates the bijection filtered happens before and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createBijectionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
    * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
    *
    * @param ownerSig the owner sig
@@ -158,9 +165,11 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the bijection filtered happens during and add to overall fact.<br>
-   * <img src="doc-files/ToAlloy_createBijectionFilteredHappensDuringAndAddToOverallFact.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Creates the bijection filtered happens during and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createBijectionFilteredHappensDuringAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
    * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
    *
    * @param ownerSig the owner sig
@@ -173,9 +182,11 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the function filtered happens before and add to overall fact.<br>
-   * <img src="doc-files/ToAlloy_createFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/><br>
-   * {@link
+   * Creates the function filtered happens before and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link
    * edu.gatech.gtri.obm.translator.alloy.Alloy#createFunctionFilteredHappensBeforeAndAddToOverallFact(Sig,
    * Expr, Expr)}
    *
@@ -189,10 +200,12 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the inverse function filtered happens before and add to overall fact.<br>
-   * <img
-   * src="doc-files/ToAlloy_createInverseFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/><br>
-   * {@link
+   * Creates the inverse function filtered happens before and add to overall fact.
+   *
+   * <p><img
+   * src="doc-files/ToAlloy_createInverseFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link
    * edu.gatech.gtri.obm.translator.alloy.Alloy#createInverseFunctionFilteredHappensBeforeAndAddToOverallFact(Sig,
    * Expr, Expr)}
    *
@@ -206,9 +219,11 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the cardinality equal constraint to field.<br>
-   * <img src="doc-files/ToAlloy_addCardinalityEqualConstraintToField.svg"/><br>
-   * {@linke edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityEqualConstraintToField(Sig,
+   * Adds the cardinality equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityEqualConstraintToField.svg"/>
+   *
+   * <p>{@linke edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityEqualConstraintToField(Sig,
    * Field, int)}
    *
    * @param field the field
@@ -220,11 +235,14 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the cardinality equal constraint to field.<br>
-   * <img src="doc-files/ToAlloy_addCardinalityEqualConstraintToFieldStr.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityEqualConstraintToField(Sig,
-   * Field, int)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   * Adds the cardinality equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityEqualConstraintToFieldStr.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityEqualConstraintToField(Sig,
+   * Field, int)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
    *
    * @param fieldName the field name
    * @param ownerSig the owner sig
@@ -241,9 +259,11 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the cardinality greater than equal constraint to field.<br>
-   * <img src="doc-files/ToAlloy_addCardinalityGreaterThanEqualConstraintToField.svg"/><br>
-   * {@link
+   * Adds the cardinality greater than equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityGreaterThanEqualConstraintToField.svg"/>
+   *
+   * <p>{@link
    * edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityGreaterThanEqualConstraintToField(Sig,
    * Field, int)}
    *
@@ -257,12 +277,15 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the cardinality greater than equal constraint to field.<br>
-   * <img src="doc-files/ToAlloy_addCardinalityGreaterThanEqualConstraintToFieldStr.svg"/><br>
-   * {@link
+   * Adds the cardinality greater than equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityGreaterThanEqualConstraintToFieldStr.svg"/>
+   *
+   * <p>{@link
    * edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityGreaterThanEqualConstraintToField(Sig,
-   * Field, int)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   * Field, int)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
    *
    * @param fieldName the field name
    * @param ownerSig the owner sig
@@ -278,13 +301,17 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the fn for transfer and add to overall fact.<br>
-   * <img src="doc-files/ToAlloy_createFnForTransferAndAddToOverallFact.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSigByFieldType(String,
-   * PrimSig)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
-   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSubSettingItemRuleOverallFact(Sig,
+   * Creates the fn for transfer and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createFnForTransferAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSigByFieldType(String,
+   * PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSubSettingItemRuleOverallFact(Sig,
    * Expr)}
    *
    * @param ownerSig the owner sig
@@ -317,15 +344,20 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the fn for transfer before and add to overall fact.<br>
-   * <img src="doc-files/ToAlloy_createFnForTransferBeforeAndAddToOverallFact.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSigByFieldType(String,
-   * PrimSig)}<br>
-   * {@linke edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
-   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSubSettingItemRuleOverallFact(Sig,
-   * Expr)}<br>
-   * {@link
+   * Creates the fn for transfer before and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createFnForTransferBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSigByFieldType(String,
+   * PrimSig)}
+   *
+   * <p>{@linke edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSubSettingItemRuleOverallFact(Sig,
+   * Expr)}
+   *
+   * <p>{@link
    * edu.gatech.gtri.obm.translator.alloy.Alloy#createIsAfterSourceIsBeforeTargetOverallFact(Sig,
    * Expr)}
    *
@@ -357,10 +389,13 @@ public class ToAlloy {
   }
 
   /**
-   * No inputs outputs.<br>
-   * <img src="doc-files/ToAlloy_noInputsOutputs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#noInputs(Sig)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#noOutputs(Sig)}
+   * No inputs outputs.
+   *
+   * <p><img src="doc-files/ToAlloy_noInputsOutputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noInputs(Sig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noOutputs(Sig)}
    *
    * @param sig the sig
    */
@@ -370,9 +405,11 @@ public class ToAlloy {
   }
 
   /**
-   * No inputs.<br>
-   * <img src="doc-files/ToAlloy_noInputs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#noInputs(Sig)}
+   * No inputs.
+   *
+   * <p><img src="doc-files/ToAlloy_noInputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noInputs(Sig)}
    *
    * @param sigName the sig name
    */
@@ -382,9 +419,11 @@ public class ToAlloy {
   }
 
   /**
-   * No outputs.<br>
-   * <img src="doc-files/ToAlloy_noOutputs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#noOutputs(Sig)}
+   * No outputs.
+   *
+   * <p><img src="doc-files/ToAlloy_noOutputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noOutputs(Sig)}
    *
    * @param sigName the sig name
    */
@@ -394,10 +433,13 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the inputs.<br>
-   * <img src="doc-files/ToAlloy_addInputs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#addInputs(ExprVar, Sig, Field)}
+   * Adds the inputs.
+   *
+   * <p><img src="doc-files/ToAlloy_addInputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addInputs(ExprVar, Sig, Field)}
    *
    * @param sigName the sig name
    * @param fieldName the field name
@@ -411,10 +453,13 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the outputs.<br>
-   * <img src="doc-files/ToAlloy_addOutputs.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#addInputs(ExprVar, Sig, Field)}
+   * Adds the outputs.
+   *
+   * <p><img src="doc-files/ToAlloy_addOutputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addInputs(ExprVar, Sig, Field)}
    *
    * @param sigName the sig name
    * @param fieldName the field name
@@ -428,9 +473,11 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the steps.<br>
-   * <img src="doc-files/ToAlloy_addSteps.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#addSteps(Sig, Set)}
+   * Adds the steps.
+   *
+   * <p><img src="doc-files/ToAlloy_addSteps.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addSteps(Sig, Set)}
    *
    * @param stepPropertiesBySig the step properties by sig
    */
@@ -442,10 +489,13 @@ public class ToAlloy {
   }
 
   /**
-   * Adds the equal.<br>
-   * <img src="doc-files/ToAlloy_addEqual.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.Alloy#addEqual(Sig, Field, Field)}
+   * Adds the equal.
+   *
+   * <p><img src="doc-files/ToAlloy_addEqual.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addEqual(Sig, Field, Field)}
    *
    * @param ownerSig the owner sig
    * @param fieldName1 the field name 1
@@ -461,13 +511,17 @@ public class ToAlloy {
   }
 
   /**
-   * Creates the alloy file.<br>
-   * <img src="doc-files/ToAlloy_createAlloyFile.svg"/><br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.tofile.AlloyModule#AlloyModule(String, List, Expr,
-   * Command[])}<br>
-   * {@link edu.gatech.gtri.obm.translator.alloy.fromxmi.Translator#Translator(Set, Set, Set, Set)}
-   * <br>
-   * {@link
+   * Creates the alloy file.
+   *
+   * <p><img src="doc-files/ToAlloy_createAlloyFile.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.tofile.AlloyModule#AlloyModule(String, List,
+   * Expr, Command[])}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.fromxmi.Translator#Translator(Set, Set, Set,
+   * Set)}
+   *
+   * <p>{@link
    * edu.gatech.gtri.obm.translator.alloy.fromxmi.Translator#generateAlsFileContents(AlloyModule,
    * String)}
    *

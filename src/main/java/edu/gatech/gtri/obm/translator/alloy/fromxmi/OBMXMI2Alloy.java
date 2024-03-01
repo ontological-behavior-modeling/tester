@@ -83,8 +83,9 @@ public class OBMXMI2Alloy {
   }
 
   /**
-   * Instantiates a new OBMXMI2alloy. <br>
-   * <img src="doc-files/OBMXMI2Alloy.svg"/>
+   * Instantiates a new OBMXMI2alloy.
+   *
+   * <p><img src="doc-files/OBMXMI2Alloy.svg"/>
    *
    * @param working_dir where required alloy library (Transfer) is locating
    * @throws FileNotFoundException the file not found exception
@@ -95,8 +96,11 @@ public class OBMXMI2Alloy {
   }
 
   /**
-   * Creates the alloy file. <br>
-   * <img src="doc-files/OBMXMI2Alloy_createAlloyFile.svg"/>
+   * Creates the alloy file.
+   *
+   * <p><img src="doc-files/OBMXMI2Alloy_createAlloyFile.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.fromxmi.ToAlloy#createAlloyFile(File, Set)}
    *
    * @param xmiFile the xmi file
    * @param className the class name

@@ -7,13 +7,13 @@ if (file !exists and !readable?) then (yes)
  stop
 else (no)
  if (loadOBMandCreateAlloy?) then (yes)
-  :ToAlloy.createAlloyFile(outputFile,\nparameterFields);
-  :Print;
-  :return true;
+  :Create Alloy File;
+  :Print Filename;
+  :Return true;
   stop
  else(no)
-  : Error;
-  :return false;
+  :Error;
+  :Return false;
   stop
  endif
 endif
