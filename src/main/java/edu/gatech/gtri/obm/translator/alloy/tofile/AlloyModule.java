@@ -24,8 +24,9 @@ public class AlloyModule {
   private final Command[] commands;
 
   /**
-   * Instantiates a new alloy module.<br>
-   * <img src="doc-files/AlloyModule.svg"/>
+   * Instantiates a new alloy module.
+   *
+   * <p><img src="doc-files/AlloyModule.svg"/>
    *
    * @param moduleName the module name
    * @param signatures the signatures

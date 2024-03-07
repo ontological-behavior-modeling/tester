@@ -25,6 +25,8 @@ public class Graph2AlloyExpr {
   /**
    * Creates the graph.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_createGraph.svg"/>
+   *
    * @return the graph
    */
   public static Graph createGraph() {
@@ -38,6 +40,8 @@ public class Graph2AlloyExpr {
 
   /**
    * The main method.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_main.svg"/>
    *
    * @param args the arguments
    */
@@ -66,13 +70,23 @@ public class Graph2AlloyExpr {
     print(hbinv);
   }
 
-  /** Instantiates a new graph 2 alloy expr. */
+  /**
+   * Instantiates a new graph 2 alloy expr.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.Graph2AlloyExpr#createGraph()}
+   */
   public Graph2AlloyExpr() {
     this.graph = createGraph();
   }
 
   /**
    * Gets the graph.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_getGraph.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.Graph2AlloyExpr#createGraph()}
    *
    * @return the graph
    */
@@ -84,6 +98,10 @@ public class Graph2AlloyExpr {
   /**
    * Adds the node.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_addNode.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createNode(Graph, String)}
+   *
    * @param _name the name
    */
   public void addNode(String _name) {
@@ -92,6 +110,8 @@ public class Graph2AlloyExpr {
 
   /**
    * Adds the edge.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_addEdge.svg"/>
    *
    * @param _name the name
    * @param _sourceName the source name
@@ -106,13 +126,19 @@ public class Graph2AlloyExpr {
         true);
   }
 
-  /** Display. */
+  /**
+   * Display.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_display.svg"/>
+   */
   public void display() {
     graph.display();
   }
 
   /**
    * Gets the happens before function.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_getHappensBeforeFunction.svg"/>
    *
    * @return the happens before function
    */
@@ -132,6 +158,8 @@ public class Graph2AlloyExpr {
   /**
    * Gets the happens before inv function.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_getHappensBeforeInvFunction.svg"/>
+   *
    * @return the happens before inv function
    */
   public Map<IObject, IObject> getHappensBeforeInvFunction() {
@@ -149,6 +177,8 @@ public class Graph2AlloyExpr {
 
   /**
    * Function HB fn.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_functionHBFn.svg"/>
    *
    * @param hb the hb
    * @param source the source
@@ -223,6 +253,8 @@ public class Graph2AlloyExpr {
   /**
    * Function HB inv fn.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_functionHBInvFn.svg"/>
+   *
    * @param hb the hb
    * @param inode the inode
    * @param _visited the visited
@@ -294,6 +326,8 @@ public class Graph2AlloyExpr {
   /**
    * Gets the out degree minus self loop.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_getOutDegreeMinusSelfLoop.svg"/>
+   *
    * @param node the node
    * @return the out degree minus self loop
    */
@@ -308,6 +342,8 @@ public class Graph2AlloyExpr {
 
   /**
    * {p1=p3, p0=[p1, p2], p2=p3}.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_getFnString.svg"/>
    *
    * @param _map the map
    * @return 0: p1, p3 1: p0, p1 2: p0, p2 3: p2, p3
@@ -328,6 +364,10 @@ public class Graph2AlloyExpr {
   /**
    * Prints the.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_print.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.Graph2AlloyExpr#getFnString(Map)}
+   *
    * @param _map the map
    */
   public static void print(Map<IObject, IObject> _map) {
@@ -340,6 +380,8 @@ public class Graph2AlloyExpr {
 
   /**
    * Happens before.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_happensBefore.svg"/>
    *
    * @param source the source
    * @param leavingEdgeOneOf the leaving edge one of
@@ -387,6 +429,8 @@ public class Graph2AlloyExpr {
   /**
    * Gets the.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_get.svg"/>
+   *
    * @param target the target
    * @param oneof the oneof
    * @return the i object
@@ -429,6 +473,8 @@ public class Graph2AlloyExpr {
   /**
    * Checks if is one of.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_isOneOf.svg"/>
+   *
    * @param edge the edge
    * @return true, if is one of
    */
@@ -439,6 +485,8 @@ public class Graph2AlloyExpr {
 
   /**
    * Gets the node by name.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_getNodeByName.svg"/>
    *
    * @param graph the graph
    * @param _nodeName the node name
@@ -463,6 +511,10 @@ public class Graph2AlloyExpr {
   /**
    * Display.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_display1.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.Graph2AlloyExpr#display()}
+   *
    * @param graph the graph
    */
   public static void display(Graph graph) {
@@ -478,6 +530,8 @@ public class Graph2AlloyExpr {
 
   /**
    * Explore.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_.svg"/>
    *
    * @param source the source
    */
@@ -508,6 +562,10 @@ public class Graph2AlloyExpr {
   /**
    * Exolore depth first.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_exoloreDepthFirst.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.Graph2AlloyExpr#sleep()}
+   *
    * @param source the source
    */
   public static void exoloreDepthFirst(Node source) {
@@ -524,6 +582,10 @@ public class Graph2AlloyExpr {
   /**
    * Explore breath first.
    *
+   * <p><img src="doc-files/Graph2AlloyExpr_exploreBreathFirst.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.Graph2AlloyExpr#sleep()}
+   *
    * @param source the source
    */
   public static void exploreBreathFirst(Node source) {
@@ -538,7 +600,11 @@ public class Graph2AlloyExpr {
     }
   }
 
-  /** Sleep. */
+  /**
+   * Sleep.
+   *
+   * <p><img src="doc-files/Graph2AlloyExpr_sleep.svg"/>
+   */
   public static void sleep() {
     try {
       Thread.sleep(1000);

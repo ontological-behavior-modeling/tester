@@ -14,6 +14,10 @@ public class GraphUtil {
   /**
    * Simplesequence.
    *
+   * <p><img src="doc-files/GraphUtil_simplesequence.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createNode(Graph, String)}
+   *
    * @param graph the graph
    * @return the node
    */
@@ -28,6 +32,10 @@ public class GraphUtil {
 
   /**
    * Fork.
+   *
+   * <p><img src="doc-files/GraphUtil_fork.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createNode(Graph, String)}
    *
    * @param graph the graph
    * @return the node
@@ -46,6 +54,10 @@ public class GraphUtil {
 
   /**
    * Decision.
+   *
+   * <p><img src="doc-files/GraphUtil_decision.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createNode(Graph, String)}
    *
    * @param graph the graph
    * @return the node
@@ -66,6 +78,10 @@ public class GraphUtil {
   /**
    * Forkjoin.
    *
+   * <p><img src="doc-files/GraphUtil_forkjoin.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createNode(Graph, String)}
+   *
    * @param graph the graph
    * @return the node
    */
@@ -85,6 +101,8 @@ public class GraphUtil {
 
   /**
    * Decisionmerge.
+   *
+   * <p><img src="doc-files/GraphUtil_decisionmerge.svg"/>
    *
    * @param graph the graph
    * @return the node
@@ -109,6 +127,8 @@ public class GraphUtil {
 
   /**
    * Allcontrol.
+   *
+   * <p><img src="doc-files/GraphUtil_allcontrol.svg"/>
    *
    * @param graph the graph
    * @return the node
@@ -144,6 +164,10 @@ public class GraphUtil {
   /**
    * Loop.
    *
+   * <p><img src="doc-files/GraphUtil_loop.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createNode(Graph, String)}
+   *
    * @param graph the graph
    * @return the node
    */
@@ -166,6 +190,10 @@ public class GraphUtil {
 
   /**
    * Ex 1.
+   *
+   * <p><img src="doc-files/GraphUtil_ex1.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createNode(Graph, String)}
    *
    * @param graph the graph
    * @return the node
@@ -262,6 +290,10 @@ public class GraphUtil {
   /**
    * Creates the node.
    *
+   * <p><img src="doc-files/GraphUtil_createNode2.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createID()}
+   *
    * @param graph the graph
    * @param name the name
    * @return the node
@@ -276,6 +308,10 @@ public class GraphUtil {
 
   /**
    * Creates the node.
+   *
+   * <p><img src="doc-files/GraphUtil_createNode3.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.GraphUtil#createID()}
    *
    * @param graph the graph
    * @param name the name
@@ -292,6 +328,8 @@ public class GraphUtil {
 
   /**
    * Creates the ID.
+   *
+   * <p><img src="doc-files/GraphUtil_createID.svg"/>
    *
    * @return the string
    */

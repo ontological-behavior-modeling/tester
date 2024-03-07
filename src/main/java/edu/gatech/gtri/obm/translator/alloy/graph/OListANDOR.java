@@ -13,13 +13,19 @@ public abstract class OListANDOR implements IObject {
   /** The list. */
   List<IObject> list;
 
-  /** Instantiates a new o list ANDOR. */
+  /**
+   * Instantiates a new o list ANDOR.
+   *
+   * <p><img src="doc-files/OListANDOR.svg"/>
+   */
   public OListANDOR() {
     list = new ArrayList<>();
   }
 
   /**
    * Instantiates a new o list ANDOR.
+   *
+   * <p><img src="doc-files/OListANDOR1.svg"/>
    *
    * @param o the o
    */
@@ -31,6 +37,8 @@ public abstract class OListANDOR implements IObject {
   /**
    * Size.
    *
+   * <p><img src="doc-files/OListANDOR_size.svg"/>
+   *
    * @return the int
    */
   public int size() {
@@ -40,6 +48,8 @@ public abstract class OListANDOR implements IObject {
   /**
    * Adds the.
    *
+   * <p><img src="doc-files/OListANDOR_add.svg"/>
+   *
    * @param _o the o
    */
   public void add(IObject _o) {
@@ -48,6 +58,8 @@ public abstract class OListANDOR implements IObject {
 
   /**
    * Gets the.
+   *
+   * <p><img src="doc-files/OListANDOR_get.svg"/>
    *
    * @param _index the index
    * @return the i object
@@ -70,7 +82,11 @@ public abstract class OListANDOR implements IObject {
    */
   public abstract List<String> toStringAlloy();
 
-  /** Sort. */
+  /**
+   * Sort.
+   *
+   * <p><img src="doc-files/OListANDOR_sort.svg"/>
+   */
   public void sort() {
     Map<String, IObject> map = new HashMap<>();
     List<String> names = new ArrayList<>();

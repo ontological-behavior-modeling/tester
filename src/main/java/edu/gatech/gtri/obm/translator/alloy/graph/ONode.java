@@ -23,6 +23,8 @@ public class ONode implements IObject {
   /**
    * Instantiates a new o node.
    *
+   * <p><img src="doc-files/ONode2.svg"/>
+   *
    * @param _n the n
    * @param oneof the oneof
    */
@@ -43,6 +45,8 @@ public class ONode implements IObject {
   /**
    * Instantiates a new o node.
    *
+   * <p><img src="doc-files/ONode1.svg"/>
+   *
    * @param _n the n
    */
   public ONode(Node _n) {
@@ -51,6 +55,8 @@ public class ONode implements IObject {
 
   /**
    * Minus one of.
+   *
+   * <p><img src="doc-files/ONode_minusOneOf.svg"/>
    *
    * @return the int
    */
@@ -62,6 +68,8 @@ public class ONode implements IObject {
   /**
    * Plus one of.
    *
+   * <p><img src="doc-files/ONode_plusOneOf.svg"/>
+   *
    * @return the int
    */
   public int plusOneOf() {
@@ -72,6 +80,10 @@ public class ONode implements IObject {
   /**
    * To string.
    *
+   * <p><img src="doc-files/ONode_toString.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.graph.ONode#getName()}
+   *
    * @return the string
    */
   public String toString() {
@@ -80,6 +92,8 @@ public class ONode implements IObject {
 
   /**
    * Gets the name.
+   *
+   * <p><img src="doc-files/ONode_getName.svg"/>
    *
    * @return the name
    */
@@ -90,6 +104,8 @@ public class ONode implements IObject {
   /**
    * Gets the type.
    *
+   * <p><img src="doc-files/ONode_getType.svg"/>
+   *
    * @return the type
    */
   public String getType() {
@@ -99,6 +115,8 @@ public class ONode implements IObject {
   /**
    * Gets the node.
    *
+   * <p><img src="doc-files/ONode_getNode.svg"/>
+   *
    * @return the node
    */
   public Node getNode() {
@@ -107,6 +125,8 @@ public class ONode implements IObject {
 
   /**
    * To string alloy.
+   *
+   * <p><img src="doc-files/ONode_toStringAlloy.svg"/>
    *
    * @return the list
    */

@@ -10,6 +10,8 @@ public class OListAND extends OListANDOR {
   /**
    * To string alloy.
    *
+   * <p><img src="doc-files/OListAND_toStringAlloy.svg"/>
+   *
    * @return the list
    */
   public List<String> toStringAlloy() {
@@ -23,6 +25,8 @@ public class OListAND extends OListANDOR {
 
   /**
    * To string.
+   *
+   * <p><img src="doc-files/OListAND_toString.svg"/>
    *
    * @return the string
    */

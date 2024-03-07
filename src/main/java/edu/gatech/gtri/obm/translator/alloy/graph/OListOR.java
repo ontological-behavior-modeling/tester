@@ -10,6 +10,8 @@ public class OListOR extends OListANDOR {
   /**
    * To string.
    *
+   * <p><img src="doc-files/OListOR_toString.svg"/>
+   *
    * @return the string
    */
   public String toString() {
@@ -22,6 +24,8 @@ public class OListOR extends OListANDOR {
 
   /**
    * To string alloy.
+   *
+   * <p><img src="doc-files/OListOR_toStringAlloy.svg"/>
    *
    * @return the list
    */
