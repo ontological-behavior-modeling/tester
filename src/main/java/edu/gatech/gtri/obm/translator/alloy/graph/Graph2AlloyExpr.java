@@ -531,8 +531,6 @@ public class Graph2AlloyExpr {
   /**
    * Explore.
    *
-   * <p><img src="doc-files/Graph2AlloyExpr_.svg"/>
-   *
    * @param source the source
    */
   public static void explore(Node source) {
