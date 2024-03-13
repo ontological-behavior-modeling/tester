@@ -4,12 +4,12 @@
 
   <groupId>edu.gatech.gtri.obm</groupId>
   <artifactId>tester</artifactId>
-  <version>0.0.76-SNAPSHOT</version>
+  <version>0.0.76</version>
 
   <scm>
     <connection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</connection>
     <developerConnection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v0.0.76</tag>
     <url>https://github.com/ontological-behavior-modeling/tester</url>
   </scm>
 
@@ -21,7 +21,7 @@
   </distributionManagement>
 
   <properties>
-	<alloy.version>5.1.0-SNAPSHOT</alloy.version>
+    <alloy.version>5.1.0-SNAPSHOT</alloy.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <pomsort.version>3.2.1</pomsort.version>
@@ -182,7 +182,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>3.0.1</version>
         <configuration>
-		  <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+          <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
           <tagNameFormat>v@{project.version}</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <checkModificationExcludes>
