@@ -1,0 +1,557 @@
+package edu.gatech.gtri.obm.translator.alloy.fromxmi;
+
+import edu.gatech.gtri.obm.translator.alloy.Alloy;
+import edu.gatech.gtri.obm.translator.alloy.AlloyUtils;
+import edu.gatech.gtri.obm.translator.alloy.FuncUtils;
+import edu.gatech.gtri.obm.translator.alloy.tofile.AlloyModule;
+import edu.mit.csail.sdg.ast.Command;
+import edu.mit.csail.sdg.ast.Expr;
+import edu.mit.csail.sdg.ast.ExprVar;
+import edu.mit.csail.sdg.ast.Sig;
+import edu.mit.csail.sdg.ast.Sig.Field;
+import edu.mit.csail.sdg.ast.Sig.PrimSig;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+// TODO: Auto-generated Javadoc
+/** The Class ToAlloy. */
+public class ToAlloy {
+
+  /** The alloy. */
+  private Alloy alloy;
+
+  /** store map key = sig name, value = sig. */
+  private Map<String, PrimSig> sigByName;
+  /** Main Sig name used as module name when write it out as an alloy file. */
+  private String moduleName;
+
+  /**
+   * Instantiates a new to alloy.
+   *
+   * <p><img src="doc-files/ToAlloy.svg"/>
+   *
+   * @param working_dir where required alloy library (Transfer) is locating
+   */
+  public ToAlloy(String working_dir) {
+    alloy = new Alloy(working_dir);
+    sigByName = new HashMap<>();
+  }
+
+  /**
+   * Gets the sig.
+   *
+   * @param name the name
+   * @return the sig
+   */
+  public PrimSig getSig(String name) {
+    return sigByName.get(name);
+  }
+
+  /**
+   * Creates the alloy sig.
+   *
+   * <p><img src="doc-files/ToAlloy_createAlloySig3.svg"/>
+   *
+   * @param name of sig
+   * @param parentSig PrimSig or null (if null, Occurrence will be the parentSig)
+   * @param isMainSig mainSig or not
+   * @return the prim sig
+   */
+  public PrimSig createAlloySig(String name, PrimSig parentSig, boolean isMainSig) {
+
+    if (!sigByName.containsKey(name)) {
+      PrimSig s = null;
+      if (parentSig == null)
+        s = alloy.createSigAsChildOfOccSigAndAddToAllSigs(name); // "Occurrence" as the parent
+      else s = alloy.createSigAsChildOfParentSigAddToAllSigs(name, parentSig);
+      sigByName.put(name, s);
+      if (isMainSig) moduleName = s.label.startsWith("this") ? s.label.substring(5) : s.label;
+
+      return s;
+    } else return sigByName.get(name);
+  }
+
+  /**
+   * Creates the alloy sig.
+   *
+   * <p><img src="doc-files/ToAlloy_createAlloySig2.svg"/>
+   *
+   * @param name the name
+   * @param parentName the parent name
+   * @return the prim sig
+   */
+  public PrimSig createAlloySig(String name, String parentName) {
+
+    if (sigByName.containsKey(name)) return sigByName.get(name);
+    else {
+      PrimSig s = null;
+      if (!AlloyUtils.validParent(parentName))
+        s = alloy.createSigAsChildOfOccSigAndAddToAllSigs(name);
+      else {
+        PrimSig parentSig = (PrimSig) sigByName.get(parentName);
+        s = alloy.createSigAsChildOfParentSigAddToAllSigs(name, parentSig);
+      }
+      sigByName.put(name, s);
+      return s;
+    }
+  }
+
+  /**
+   * Adds the alloy transfer field.
+   *
+   * <p><img src="doc-files/ToAlloy_addAlloyTransferField.svg"/>
+   *
+   * @param fieldName the field name
+   * @param ownerSig the owner sig
+   * @return the field
+   */
+  // create field with Transfer type
+  public Field addAlloyTransferField(String fieldName, Sig ownerSig) {
+    // Sig transferSig = alloy.getTransferSig();
+    return FuncUtils.addField(fieldName, ownerSig, Alloy.transferSig);
+  }
+
+  // create field with TransferBefore type
+  // public Field addAlloyTransferBeforeField(String fieldName, Sig ownerSig) {
+  // // Sig transferBeforeSig = alloy.getTransferBeforeSig();
+  // return FuncUtils.addField(fieldName, ownerSig, Alloy.transferBeforeSig);
+  // }
+
+  /**
+   * Adds the disj alloy fields.
+   *
+   * <p><img src="doc-files/ToAlloy_addDisjAlloyFields.svg"/>
+   *
+   * @param fieldNamesListWithSameType the field names list with same type
+   * @param typeSigName the type sig name
+   * @param ownerSig the owner sig
+   * @return the sig. field[]
+   */
+  public Sig.Field[] addDisjAlloyFields(
+      List<String> fieldNamesListWithSameType, String typeSigName, PrimSig ownerSig) {
+
+    String[] fieldNames = new String[fieldNamesListWithSameType.size()];
+    fieldNamesListWithSameType.toArray(fieldNames);
+
+    Sig.Field[] ps = null;
+    Sig sigType = sigByName.get(typeSigName);
+    if (sigType != null) {
+      ps = FuncUtils.addTrickyField(fieldNames, ownerSig, sigType);
+      if (ps.length != fieldNames.length) {
+        return null; // this should not happens
+      }
+    } else return null; // this should not happens
+    return ps;
+  }
+
+  /**
+   * Creates the bijection filtered happens before and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createBijectionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
+   *
+   * @param ownerSig the owner sig
+   * @param from the from
+   * @param to the to
+   */
+  public void createBijectionFilteredHappensBeforeAndAddToOverallFact(
+      Sig ownerSig, Expr from, Expr to) {
+    alloy.createBijectionFilteredToOverallFact(ownerSig, from, to, Alloy.happensBefore);
+  }
+
+  /**
+   * Creates the bijection filtered happens during and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createBijectionFilteredHappensDuringAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
+   *
+   * @param ownerSig the owner sig
+   * @param from the from
+   * @param to the to
+   */
+  public void createBijectionFilteredHappensDuringAndAddToOverallFact(
+      Sig ownerSig, Expr from, Expr to) {
+    alloy.createBijectionFilteredToOverallFact(ownerSig, from, to, Alloy.happensDuring);
+  }
+
+  /**
+   * Creates the function filtered happens before and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link
+   * edu.gatech.gtri.obm.translator.alloy.Alloy#createFunctionFilteredHappensBeforeAndAddToOverallFact(Sig,
+   * Expr, Expr)}
+   *
+   * @param ownerSig the owner sig
+   * @param from the from
+   * @param to the to
+   */
+  public void createFunctionFilteredHappensBeforeAndAddToOverallFact(
+      Sig ownerSig, Expr from, Expr to) {
+    alloy.createFunctionFilteredHappensBeforeAndAddToOverallFact(ownerSig, from, to);
+  }
+
+  /**
+   * Creates the inverse function filtered happens before and add to overall fact.
+   *
+   * <p><img
+   * src="doc-files/ToAlloy_createInverseFunctionFilteredHappensBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link
+   * edu.gatech.gtri.obm.translator.alloy.Alloy#createInverseFunctionFilteredHappensBeforeAndAddToOverallFact(Sig,
+   * Expr, Expr)}
+   *
+   * @param ownerSig the owner sig
+   * @param from the from
+   * @param to the to
+   */
+  public void createInverseFunctionFilteredHappensBeforeAndAddToOverallFact(
+      Sig ownerSig, Expr from, Expr to) {
+    alloy.createInverseFunctionFilteredHappensBeforeAndAddToOverallFact(ownerSig, from, to);
+  }
+
+  /**
+   * Adds the cardinality equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityEqualConstraintToField.svg"/>
+   *
+   * <p>{@linke edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityEqualConstraintToField(Sig,
+   * Field, int)}
+   *
+   * @param field the field
+   * @param ownerSig the owner sig
+   * @param num the num
+   */
+  public void addCardinalityEqualConstraintToField(Sig.Field field, PrimSig ownerSig, int num) {
+    alloy.addCardinalityEqualConstraintToField(ownerSig, field, num);
+  }
+
+  /**
+   * Adds the cardinality equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityEqualConstraintToFieldStr.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityEqualConstraintToField(Sig,
+   * Field, int)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * @param fieldName the field name
+   * @param ownerSig the owner sig
+   * @param num the num
+   */
+  public void addCardinalityEqualConstraintToField(String fieldName, PrimSig ownerSig, int num) {
+    Sig.Field field = AlloyUtils.getFieldFromSig(fieldName, ownerSig); // FoodService <: order,
+    // ownerSig
+    // is SignleFoolService
+    if (field != null) alloy.addCardinalityEqualConstraintToField(ownerSig, field, num);
+    else
+      System.err.println(
+          "A field \"" + fieldName + "\" not found in Sig \"" + ownerSig.label + "\".");
+  }
+
+  /**
+   * Adds the cardinality greater than equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityGreaterThanEqualConstraintToField.svg"/>
+   *
+   * <p>{@link
+   * edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityGreaterThanEqualConstraintToField(Sig,
+   * Field, int)}
+   *
+   * @param field the field
+   * @param ownerSig the owner sig
+   * @param num the num
+   */
+  public void addCardinalityGreaterThanEqualConstraintToField(
+      Sig.Field field, PrimSig ownerSig, int num) {
+    alloy.addCardinalityGreaterThanEqualConstraintToField(ownerSig, field, num);
+  }
+
+  /**
+   * Adds the cardinality greater than equal constraint to field.
+   *
+   * <p><img src="doc-files/ToAlloy_addCardinalityGreaterThanEqualConstraintToFieldStr.svg"/>
+   *
+   * <p>{@link
+   * edu.gatech.gtri.obm.translator.alloy.Alloy#addCardinalityGreaterThanEqualConstraintToField(Sig,
+   * Field, int)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * @param fieldName the field name
+   * @param ownerSig the owner sig
+   * @param num the num
+   */
+  public void addCardinalityGreaterThanEqualConstraintToField(
+      String fieldName, PrimSig ownerSig, int num) {
+    Sig.Field field = AlloyUtils.getFieldFromSig(fieldName, ownerSig);
+    if (field != null) alloy.addCardinalityGreaterThanEqualConstraintToField(ownerSig, field, num);
+    else
+      System.err.println(
+          "A field \"" + fieldName + "\" not found in Sig \"" + ownerSig.label + "\".");
+  }
+
+  /**
+   * Creates the fn for transfer and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createFnForTransferAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSigByFieldType(String,
+   * PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSubSettingItemRuleOverallFact(Sig,
+   * Expr)}
+   *
+   * @param ownerSig the owner sig
+   * @param transfer the transfer
+   * @param sourceTypeName the source type name
+   * @param targetTypeName the target type name
+   */
+  public void createFnForTransferAndAddToOverallFact(
+      PrimSig ownerSig, Expr transfer, String sourceTypeName, String targetTypeName) {
+
+    // for 4.1.4 Transfers and Parameters1 - TransferProduct_modified
+    // sig ParticipantTransfer
+    // sourceTypeName Supplier -> Field supplier
+    // targetTypeName Customer -> Field customer
+
+    // assume only one field has the same type
+    Field sourceTypeField = AlloyUtils.getFieldFromSigByFieldType(sourceTypeName, ownerSig);
+    Field targetTypeField = AlloyUtils.getFieldFromSigByFieldType(targetTypeName, ownerSig);
+
+    // fact {all x: ParticipantTransfer | bijectionFiltered[sources, x.transferSupplierCustomer,
+    // x.supplier]}
+    // fact {all x: ParticipantTransfer | bijectionFiltered[targets, x.transferSupplierCustomer,
+    // x.customer]}
+    // fact {all x: ParticipantTransfer | subsettingItemRuleForSources[x.transferSupplierCustomer]}
+    // fact {all x: ParticipantTransfer | subsettingItemRuleForTargets[x.transferSupplierCustomer]}
+
+    alloy.createBijectionFilteredToOverallFact(ownerSig, transfer, sourceTypeField, Alloy.sources);
+    alloy.createBijectionFilteredToOverallFact(ownerSig, transfer, targetTypeField, Alloy.targets);
+    alloy.createSubSettingItemRuleOverallFact(ownerSig, transfer);
+  }
+
+  /**
+   * Creates the fn for transfer before and add to overall fact.
+   *
+   * <p><img src="doc-files/ToAlloy_createFnForTransferBeforeAndAddToOverallFact.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSigByFieldType(String,
+   * PrimSig)}
+   *
+   * <p>{@linke edu.gatech.gtri.obm.translator.alloy.Alloy#createBijectionFilteredToOverallFact(Sig,
+   * Expr, Expr, edu.mit.csail.sdg.ast.Func)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#createSubSettingItemRuleOverallFact(Sig,
+   * Expr)}
+   *
+   * <p>{@link
+   * edu.gatech.gtri.obm.translator.alloy.Alloy#createIsAfterSourceIsBeforeTargetOverallFact(Sig,
+   * Expr)}
+   *
+   * @param ownerSig the owner sig
+   * @param transfer ie., transferbeforeAB
+   * @param sourceTypeName the source type name
+   * @param targetTypeName the target type name
+   */
+  public void createFnForTransferBeforeAndAddToOverallFact(
+      PrimSig ownerSig, Expr transfer, String sourceTypeName, String targetTypeName) {
+
+    Field sourceTypeField = AlloyUtils.getFieldFromSigByFieldType(sourceTypeName, ownerSig);
+    Field targetTypeField = AlloyUtils.getFieldFromSigByFieldType(targetTypeName, ownerSig);
+
+    // fact {all x: ParticipantTransfer | bijectionFiltered[sources, x.transferSupplierCustomer,
+    // x.supplier]}
+    // fact {all x: ParticipantTransfer | bijectionFiltered[targets, x.transferSupplierCustomer,
+    // x.customer]}
+    // fact {all x: ParticipantTransfer | subsettingItemRuleForSources[x.transferSupplierCustomer]}
+    // fact {all x: ParticipantTransfer | subsettingItemRuleForTargets[x.transferSupplierCustomer]}
+
+    alloy.createBijectionFilteredToOverallFact(ownerSig, transfer, sourceTypeField, Alloy.sources);
+    alloy.createBijectionFilteredToOverallFact(ownerSig, transfer, targetTypeField, Alloy.targets);
+    alloy.createSubSettingItemRuleOverallFact(ownerSig, transfer);
+    alloy.createIsAfterSourceIsBeforeTargetOverallFact(ownerSig, transfer);
+
+    // fact {all x: ParameterBehavior | isAfterSource[x.transferbeforeAB]}//missing
+    // fact {all x: ParameterBehavior | isBeforeTarget[x.transferbeforeAB]}//missing
+  }
+
+  /**
+   * No inputs outputs.
+   *
+   * <p><img src="doc-files/ToAlloy_noInputsOutputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noInputs(Sig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noOutputs(Sig)}
+   *
+   * @param sig the sig
+   */
+  public void noInputsOutputs(Sig sig) {
+    alloy.noInputs(sig);
+    alloy.noOutputs(sig);
+  }
+
+  /**
+   * No inputs.
+   *
+   * <p><img src="doc-files/ToAlloy_noInputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noInputs(Sig)}
+   *
+   * @param sigName the sig name
+   */
+  public void noInputs(String sigName) {
+    Sig sig = sigByName.get(sigName);
+    alloy.noInputs(sig);
+  }
+
+  /**
+   * No outputs.
+   *
+   * <p><img src="doc-files/ToAlloy_noOutputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#noOutputs(Sig)}
+   *
+   * @param sigName the sig name
+   */
+  public void noOutputs(String sigName) {
+    Sig sig = sigByName.get(sigName);
+    alloy.noOutputs(sig);
+  }
+
+  /**
+   * Adds the inputs.
+   *
+   * <p><img src="doc-files/ToAlloy_addInputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addInputs(ExprVar, Sig, Field)}
+   *
+   * @param sigName the sig name
+   * @param fieldName the field name
+   */
+  public void addInputs(String sigName, String fieldName) {
+    PrimSig sig = sigByName.get(sigName);
+    ExprVar s = ExprVar.make(null, "x", sig.type());
+    Field f = AlloyUtils.getFieldFromSig(fieldName, sig);
+    if (f != null) alloy.addInputs(s, sig, f);
+    else System.err.println("No field \"" + fieldName + "\" in sig \"" + sigName + "\"");
+  }
+
+  /**
+   * Adds the outputs.
+   *
+   * <p><img src="doc-files/ToAlloy_addOutputs.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addInputs(ExprVar, Sig, Field)}
+   *
+   * @param sigName the sig name
+   * @param fieldName the field name
+   */
+  public void addOutputs(String sigName, String fieldName) {
+    PrimSig sig = sigByName.get(sigName);
+    ExprVar s = ExprVar.make(null, "x", sig.type());
+    Field f = AlloyUtils.getFieldFromSig(fieldName, sig);
+    if (f != null) alloy.addOutputs(s, sig, f);
+    else System.err.println("No field \"" + fieldName + "\" in sig \"" + sigName + "\"");
+  }
+
+  /**
+   * Adds the steps.
+   *
+   * <p><img src="doc-files/ToAlloy_addSteps.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addSteps(Sig, Set)}
+   *
+   * @param stepPropertiesBySig the step properties by sig
+   */
+  public void addSteps(Map<String, Set<String>> stepPropertiesBySig) {
+    for (String sigName : stepPropertiesBySig.keySet()) {
+      Sig sig = sigByName.get(sigName);
+      alloy.addSteps(sig, stepPropertiesBySig.get(sigName));
+    }
+  }
+
+  /**
+   * Adds the equal.
+   *
+   * <p><img src="doc-files/ToAlloy_addEqual.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.AlloyUtils#getFieldFromSig(String, PrimSig)}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.Alloy#addEqual(Sig, Field, Field)}
+   *
+   * @param ownerSig the owner sig
+   * @param fieldName1 the field name 1
+   * @param fieldName2 the field name 2
+   */
+  // fact {all x: B1 | x.vin=x.vout}
+  public void addEqual(PrimSig ownerSig, String fieldName1, String fieldName2) {
+    Field f1 = AlloyUtils.getFieldFromSig(fieldName1, ownerSig);
+    Field f2 = AlloyUtils.getFieldFromSig(fieldName2, ownerSig);
+    if (f1 != null && f2 != null) {
+      alloy.addEqual(ownerSig, f1, f2);
+    }
+  }
+
+  /**
+   * Creates the alloy file.
+   *
+   * <p><img src="doc-files/ToAlloy_createAlloyFile.svg"/>
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.tofile.AlloyModule#AlloyModule(String, List,
+   * Expr, Command[])}
+   *
+   * <p>{@link edu.gatech.gtri.obm.translator.alloy.fromxmi.Translator#Translator(Set, Set, Set,
+   * Set)}
+   *
+   * <p>{@link
+   * edu.gatech.gtri.obm.translator.alloy.fromxmi.Translator#generateAlsFileContents(AlloyModule,
+   * String)}
+   *
+   * @param outputFile the output file
+   * @param parameterFields the parameter fields
+   * @return the string
+   */
+  public String createAlloyFile(File outputFile, Set<Field> parameterFields) {
+
+    // Run commands
+    Command command = alloy.createCommand(moduleName, 10);
+    Command[] commands = {command};
+
+    AlloyModule alloyModule =
+        new AlloyModule(moduleName, alloy.getAllSigs(), alloy.getOverAllFact(), commands);
+
+    Translator translator =
+        new Translator(
+            alloy.getIgnoredExprs(),
+            alloy.getIgnoredFuncs(),
+            alloy.getIgnoredSigs(),
+            parameterFields);
+
+    if (outputFile != null) {
+      String outputFileName = outputFile.getAbsolutePath();
+      translator.generateAlsFileContents(alloyModule, outputFileName);
+      return outputFileName;
+    }
+    // Utils.runX(mainSig, alloy.getAllSigs(), alloy.getOverAllFact(), command);
+
+    return "No outputfile ";
+  }
+}
