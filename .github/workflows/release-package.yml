@@ -10,14 +10,13 @@ permissions:
   packages: write
   
 jobs:
- on-success:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+ build:
+  runs-on: ${{ matrix.os }}
+  strategy:
+    matrix:
+      os: [ubuntu-latest]
 
-    steps:        
+  steps:        
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
