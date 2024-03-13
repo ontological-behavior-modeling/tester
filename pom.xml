@@ -182,7 +182,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>3.0.1</version>
         <configuration>
-		  <allowTimestampedSnapshots>false</allowTimestampedSnapshots>
+		  <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
           <tagNameFormat>v@{project.version}</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <checkModificationExcludes>
