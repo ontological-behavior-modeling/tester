@@ -164,6 +164,7 @@ public class UserInterface {
 
   /**
    * Launch the application.
+   *
    * <p><img src="doc-files/UserInterface_main.svg"/>
    *
    * @param args the arguments
@@ -192,9 +193,10 @@ public class UserInterface {
         });
   }
 
-  /** Create the User Interface application. 
+  /**
+   * Create the User Interface application.
+   *
    * <p><img src="doc-files/UserInterface.svg"/>
-   * 
    */
   public UserInterface() {
     try {
@@ -504,6 +506,7 @@ public class UserInterface {
 
   /**
    * Gets the image for use in a .jar.
+   *
    * <p><img src="doc-files/UserInterface_getImage.svg"/>
    *
    * @param pathAndFileName the path and file name

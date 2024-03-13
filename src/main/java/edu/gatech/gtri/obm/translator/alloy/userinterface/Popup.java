@@ -26,6 +26,7 @@ public class Popup {
 
   /**
    * Constructor for the Pop-up.
+   *
    * <p><img src="doc-files/Popup.svg"/>
    *
    * @param phrase - The phrase that appears on the dialog popup
