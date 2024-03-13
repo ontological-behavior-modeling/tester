@@ -1,5 +1,5 @@
 @startuml
 start
-:Initialize Pop-up Dialog;
+:Initialize Popup Dialog;
 stop
 @enduml
