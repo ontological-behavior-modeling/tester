@@ -10,9 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
-    steps:
-      - run: echo "This PR was approved"
-          
+    steps:          
       - name: Checkout Code
         uses: actions/checkout@v4
     
@@ -24,8 +22,5 @@ jobs:
 
       - name: Generate PlantUML
         uses: grassedge/generate-plantuml-action@v1.5
-        with:
-           path: .
-           message: "Render PlantUML files"
         env:
            GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
