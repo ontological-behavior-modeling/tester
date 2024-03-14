@@ -1,5 +1,5 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+# This workflow will generate .svg files for every .puml file in the repo. Image .svg files are only generated when there is a 
+# change to a .puml file.
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -9,31 +9,31 @@
 name: Generate PlantUML Images
 
 on:
-  pull_request_review:
-    types: [submitted]
+  pull_request:
+    types:
+      - closed
 
 jobs:
-  approved:
-    if: github.event.review.state == 'APPROVED'
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This PR was approved"
+    - run: |
+        echo The PR was merged
 
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
     
-      - name: Set up JDK 11
-        uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-
-      - name: Generate PlantUML
-        uses: grassedge/generate-plantuml-action@v1.5
-        with:
-           path: .
-           message: "Render PlantUML files"
-        env:
-           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
-
-
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Generate PlantUML
+      uses: grassedge/generate-plantuml-action@v1.5
+      with:
+        path: .
+        message: "Render PlantUML files"
+      env:
+        GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
