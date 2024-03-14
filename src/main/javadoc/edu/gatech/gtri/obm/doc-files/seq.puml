@@ -10,7 +10,6 @@ ToAlloy -> Alloy [[https://ontological-behavior-modeling.github.io/tester/edu/ga
 Alloy --> ToAlloy
 ToAlloy --> OBMXMI2Alloy
 OBMXMI2Alloy --> UserInterface
-
 UserInterface -> OBMXMI2Alloy [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/fromxmi/OBMXMI2Alloy.html#createAlloyFile(java.io.File,java.lang.String,java.io.File)]]: Create Alloy File
 OBMXMI2Alloy -> ToAlloy [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/fromxmi/ToAlloy.html#createAlloyFile(java.io.File,java.util.Set)]]: Create File Content
 ToAlloy -> Translator [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/fromxmi/Translator.html#generateAlsFileContents(edu.gatech.gtri.obm.translator.alloy.tofile.AlloyModule,java.lang.String)]]: Write Content to File
