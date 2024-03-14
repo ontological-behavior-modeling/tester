@@ -26,4 +26,4 @@ jobs:
           path: "."
           message: "Render PlantUML files"
         env:
-           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.GITHUB.TOKEN }}
