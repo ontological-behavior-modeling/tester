@@ -1,13 +1,9 @@
 name: Release New Version
 
-#on:
-  #workflow_run:
-   #workflows: ["Generate PlantUML Images"]
-   #types: [completed]
 on:
-  push:
-    branches:
-     'main'
+  workflow_run:
+   workflows: ["Generate PlantUML Images"]
+   types: [completed]
       
 permissions:
   contents: write
