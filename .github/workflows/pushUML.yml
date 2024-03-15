@@ -23,7 +23,7 @@ jobs:
       - name: Generate PlantUML
         uses: grassedge/generate-plantuml-action@v1.5
         with:
-          path: "."
+          path: .
           message: "Render PlantUML files"
         env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB.TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
