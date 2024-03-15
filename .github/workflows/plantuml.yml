@@ -9,18 +9,14 @@
 name: Generate PlantUML Images
 
 on:
-  pull_request:
-    types:
-      - closed
+  workflow_run:
+   workflows: ["Start Workflows"]
+   types: [completed]
 
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
+  build:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo The PR was merged
-
     - name: Checkout Code
       uses: actions/checkout@v4
     
@@ -33,4 +29,4 @@ jobs:
     - name: Generate PlantUML
       uses: grassedge/generate-plantuml-action@v1.5
       env:
-        GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
