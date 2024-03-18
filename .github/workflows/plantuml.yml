@@ -10,8 +10,8 @@ name: Generate PlantUML Images
 
 on:
   push:
-    paths:
-      - '**.puml'
+    branches:
+      - 'main'
 
 jobs:
   generate-plantuml:
