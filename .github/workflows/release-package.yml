@@ -1,9 +1,9 @@
 name: Release New Version
 
 on:
-  pull_request:
-    types:
-      - closed
+  workflow_run:
+   workflows: ["Generate PlantUML Images"]
+   types: [completed]
       
 permissions:
   contents: write
