@@ -36,7 +36,7 @@ public class Popup {
   }
 
   /**
-   * Initialize the contents of the Pop-up dialog.
+   * Initialize the contents of the Pop-up dialog .
    *
    * @param phrase - The phrase that appears on the dialog popup
    */
