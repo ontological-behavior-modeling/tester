@@ -12,3 +12,7 @@ jobs:
     steps:
     - run: |
         echo The PR was merged
+        
+    - name: Sleep for 45 seconds
+      run: Start-Sleep -s 45
+      shell: pwsh
