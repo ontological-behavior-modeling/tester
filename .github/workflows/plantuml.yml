@@ -9,9 +9,9 @@
 name: Generate PlantUML Images
 
 on:
-  workflow_run:
-   workflows: ["Start Workflows"]
-   types: [completed]
+  push:
+    paths:
+      - '**.puml'
 
 jobs:
   generate-plantuml:
