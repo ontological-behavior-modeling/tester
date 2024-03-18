@@ -14,8 +14,8 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:    
-      - name: Sleep for 30 seconds
-        run: Start-Sleep -s 30
+      - name: Sleep for 60 seconds
+        run: Start-Sleep -s 60
         shell: pwsh
         
       - name: Set up JDK
