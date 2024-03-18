@@ -6,46 +6,58 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Deploy Javadoc
+name: Deploy Javadocs
 
 on:
   workflow_run:
-    workflows: [Publish package to Github Packages]
-    types:
-      - completed
-
-jobs:
-  test:
-    name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+   workflows: ["Release New Version"]
+   types: [completed]
       
-    - name: Setup Graphviz
-      uses: ts-graphviz/setup-graphviz@v2
+permissions:
+  contents: write
+  packages: write
+  
+jobs:
+  deploy-javadoc:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo The New Version has been Released
+    
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
 
-    - name: Setup JDK
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '11'
-
-    - name: Copy settings.xml
-      run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
+      - name: Checkout Code
+        uses: actions/checkout@v4
         
-    - name: Build Maven
-      run: mvn clean package javadoc:javadoc
-      env:
-        GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+      - name: Configure Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "Github Actions"
+          # git config --global url.https://${{ secrets.GITHUB_TOKEN }}@github.com/.insteadOf https://github.com/ # Use this line in private repo
 
-    - name: Deploy Javadocs
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-         github_token: ${{ secrets.JN_TOKEN }}
-         publish_dir: ./target/site/apidocs
+      - name: Copy settings.xml
+        run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
 
-          
+      - name: Prepare Version
+        run: mvn versions:set -DremoveSnapshot
+
+      - name: Setup Graphviz for UML in Javadocs
+        uses: ts-graphviz/setup-graphviz@v2
+
+      - name: Generate Javadocs
+        run: mvn javadoc:javadoc
+        env:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
+      - name: Deploy Javadocs to Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./target/site/apidocs
+
+      - name: Prepare Version
+        run: mvn versions:revert
