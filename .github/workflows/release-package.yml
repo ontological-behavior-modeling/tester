@@ -13,11 +13,7 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    steps:    
-      - name: Sleep for 60 seconds
-        run: Start-Sleep -s 60
-        shell: pwsh
-        
+    steps:        
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
