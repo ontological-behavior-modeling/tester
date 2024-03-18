@@ -13,8 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:    
-      - name: Sleep for 60 seconds
+      - name: Sleep for 30 seconds
         run: Start-Sleep -s 30
+        shell: pwsh
         
       - name: Set up JDK
         uses: actions/setup-java@v4
