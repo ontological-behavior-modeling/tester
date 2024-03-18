@@ -10,13 +10,9 @@ permissions:
   packages: write
   
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo The PR was merged
-    
+    steps:    
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
