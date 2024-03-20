@@ -6,7 +6,7 @@ start
 while(//op// Has a Value)
 :Search //graph// for Happens 
 Before Inverse Function;
-:Set //op// to visited //graph// nodes;
+:Set //op// to Visited //graph// Nodes;
 endwhile
 :Return //fn//;
 stop
