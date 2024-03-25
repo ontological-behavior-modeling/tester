@@ -32,23 +32,6 @@ jobs:
         run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
 
       - name: Prepare Version
-        run: mvn versions:set -DremoveSnapshot
-
-      - name: Setup Graphviz for UML in Javadocs
-        uses: ts-graphviz/setup-graphviz@v2
-
-      - name: Generate Javadocs
-        run: mvn javadoc:javadoc
-        env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
-
-      - name: Deploy Javadocs to Branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
-           publish_dir: ./target/site/apidocs
-
-      - name: Prepare Version
         run: mvn versions:revert
 
       - name: Prepare Maven Release
@@ -75,3 +58,20 @@ jobs:
           tag_name: ${{ steps.mvn_version.outputs.tag }}
           body: |
             Release ${{ steps.mvn_release.output.tag }}
+
+      - name: Prepare Version
+        run: mvn versions:set -DremoveSnapshot
+
+      - name: Setup Graphviz for UML in Javadocs
+        uses: ts-graphviz/setup-graphviz@v2
+
+      - name: Generate Javadocs
+        run: mvn javadoc:javadoc
+        env:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
+      - name: Deploy Javadocs to Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./target/site/apidocs
