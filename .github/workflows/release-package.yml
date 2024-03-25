@@ -57,7 +57,7 @@ jobs:
             Release ${{ steps.mvn_release.output.tag }}
 
       - name: Prepare Version
-        run: mvn -B versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
+        run: mvn -B versions:set -DnewVersion=${{ steps.mvn_release.output.tag }} -DgenerateBackupPoms=false
 
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
