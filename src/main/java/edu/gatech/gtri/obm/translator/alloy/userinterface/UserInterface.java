@@ -207,7 +207,7 @@ public class UserInterface {
   }
 
   /**
-   * Initialize the contents of the frame.
+   * Initialize the contents of the frame .
    *
    * @throws FileNotFoundException the file not found exception
    */
