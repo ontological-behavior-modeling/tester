@@ -57,7 +57,13 @@ jobs:
             Release ${{ steps.mvn_release.output.tag }}
 
       - name: Prepare Version
-        run: mvn -B versions:set -DnewVersion=${{ steps.mvn_version.output.tag }} -DgenerateBackupPoms=false
+        run: |
+          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
+          echo "::set-output name=version::$VERSION"
+        id: get_version
+
+      - name: Set Current Release Version
+        run: mvn -B versions:set -DnewVersion=${{ steps.get_version.output.version }} -DgenerateBackupPoms=false
 
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
