@@ -63,7 +63,7 @@ import org.eclipse.uml2.uml.internal.impl.ClassImpl;
 /** The Class UserInterface. */
 @Getter
 @Setter
-/** Creates an interface to select an XMI file and class(es) within that file to translate. */
+/** Creates an interface to select an xmi file and class(es) within that file to translate. */
 public class UserInterface {
 
   /** The Overall JFrame. */
