@@ -194,9 +194,7 @@ public class UserInterface {
   }
 
   /**
-   * Create the User Interface application.
-   *
-   * <p><img src="doc-files/UserInterface.svg"/>
+   * Create the User Interface application.<p><img src="doc-files/UserInterface.svg"/>
    */
   public UserInterface() {
     try {
