@@ -8,10 +8,12 @@ on:
 permissions:
   contents: write
   packages: write
-  
+
+
 jobs:
-  build:
+  on-success:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:        
       - name: Set up JDK
         uses: actions/setup-java@v4
