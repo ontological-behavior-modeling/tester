@@ -5,7 +5,7 @@ name: Style Check
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited]
 
 jobs:
   build:
