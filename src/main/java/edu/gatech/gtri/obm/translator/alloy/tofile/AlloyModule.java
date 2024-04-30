@@ -1,11 +1,10 @@
 package edu.gatech.gtri.obm.translator.alloy.tofile;
 
-import edu.mit.csail.sdg.ast.Command;
+
+import java.util.ArrayList;
+import java.util.List;
 import edu.mit.csail.sdg.ast.Expr;
 import edu.mit.csail.sdg.ast.Sig;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 // TODO: Auto-generated Javadoc
 /** The Class AlloyModule. */
@@ -20,24 +19,18 @@ public class AlloyModule {
   /** The signatures. */
   private final List<Sig> signatures;
 
-  /** The commands. */
-  private final Command[] commands;
-
   /**
    * Instantiates a new alloy module.
-   *
-   * <p><img src="doc-files/AlloyModule.svg"/>
    *
    * @param moduleName the module name
    * @param signatures the signatures
    * @param facts the facts
    * @param commands the commands
    */
-  public AlloyModule(String moduleName, List<Sig> signatures, Expr facts, Command[] commands) {
+  public AlloyModule(String moduleName, List<Sig> signatures, Expr facts) {
     this.moduleName = moduleName;
     this.facts = facts;
     this.signatures = signatures;
-    this.commands = commands;
   }
 
   /**
@@ -67,12 +60,4 @@ public class AlloyModule {
     return new ArrayList<>(signatures);
   }
 
-  /**
-   * Gets the commands.
-   *
-   * @return the commands
-   */
-  public Command[] getCommands() {
-    return Arrays.copyOf(commands, commands.length);
-  }
 }

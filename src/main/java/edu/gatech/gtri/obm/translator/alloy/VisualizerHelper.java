@@ -71,8 +71,6 @@ public class VisualizerHelper {
   /**
    * Update updated.
    *
-   * <p><img src="doc-files/VisualizerHelper_updateUpdated.svg"/>
-   *
    * @param flag the flag
    */
   public static void updateUpdated(boolean flag) {
@@ -81,8 +79,6 @@ public class VisualizerHelper {
 
   /**
    * Checks for updated.
-   *
-   * <p><img src="doc-files/VisualizerHelper_updateUpdated.svg"/>
    *
    * @return true, if successful
    */
@@ -95,8 +91,6 @@ public class VisualizerHelper {
 
   /**
    * Generate visualizer with next capability.
-   *
-   * <p><img src="doc-files/VisualizerHelper_generateVisualizerWithNextCapability.svg"/>
    *
    * @param sigs the sigs
    * @param command the command
@@ -155,11 +149,7 @@ public class VisualizerHelper {
     }
   }
 
-  /**
-   * Update vis.
-   *
-   * <p><img src="doc-files/VisualizerHelper_updateVis.svg"/>
-   */
+  /** Update vis. */
   public static void updateVis() {
     A4Solution ans = previousAns.next();
     ++solutionCounter;
@@ -422,8 +412,6 @@ public class VisualizerHelper {
   /**
    * Generate visualizer X.
    *
-   * <p><img src="doc-files/VisualizerHelper_generateVisualizerX.svg"/>
-   *
    * @param sigs the sigs
    * @param cmd the cmd
    */
@@ -525,8 +513,6 @@ public class VisualizerHelper {
 
   /**
    * Generate visualizer.
-   *
-   * <p><img src="doc-files/VisualizerHelper_generateVisualizer2.svg"/>
    *
    * @param sigs the sigs
    * @param cmd the cmd
@@ -823,8 +809,6 @@ public class VisualizerHelper {
 
   /**
    * Generate visualizer.
-   *
-   * <p><img src="doc-files/VisualizerHelper_generateVisualizer1.svg"/>
    *
    * @param world the world
    * @throws Err the err
