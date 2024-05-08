@@ -39,7 +39,7 @@ public class Alloy {
   /** The ignored exprs. */
   protected static Set<Expr> ignoredExprs;
 
-  /** The ignored funcs. */
+  /** The ignored some funcs. */
   protected static Set<Func> ignoredFuncs;
 
   /** The happens before. */
