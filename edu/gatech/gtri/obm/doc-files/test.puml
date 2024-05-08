@@ -2,5 +2,6 @@
 start
 :Add New;
 :Add Old;
+:Add Something;
 end
 @enduml
