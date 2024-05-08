@@ -6,6 +6,8 @@ name: Style Check
 on:
   pull_request:
     types: [opened, edited, synchronize]
+    branches: 
+     - 'main'
 
 jobs:
   build:
@@ -29,8 +31,8 @@ jobs:
     - name: Check Spotless
       run: mvn spotless:check
 
-    - name: Perform Maven Release
+    - name: Prepare Maven Release
       run: |
-        mvn release:perform -B
+        mvn release:clean release:prepare -B
       env:
         GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
