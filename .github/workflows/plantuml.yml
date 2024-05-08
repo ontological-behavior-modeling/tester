@@ -9,10 +9,9 @@
 name: Generate PlantUML Images
 
 on:
-  pull_request:
-    types: [opened, edited, synchronize]
+  push:
     branches: 
-     - 'main'
+     - 'develop'
     paths:
      - '**.puml'
 
