@@ -24,21 +24,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Configure Git
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "Github Actions"
-        # git config --global url.https://${{ secrets.GITHUB_TOKEN }}@github.com/.insteadOf https://github.com/ # Use this line in private repo
-
-        
-    - name: Copy settings.xml
-      run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
-
     - name: Check Spotless
       run: mvn spotless:check
-
-    - name: Prepare Maven Release
-      run: |
-        mvn release:clean release:prepare -B
-      env:
-        GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
