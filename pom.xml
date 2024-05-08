@@ -4,7 +4,7 @@
 
   <groupId>edu.gatech.gtri.obm</groupId>
   <artifactId>tester</artifactId>
-  <version>0.0.101-SNAPSHOT</version>
+  <version>0.0.102-SNAPSHOT</version>
 
 
   <scm>
