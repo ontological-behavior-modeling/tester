@@ -36,7 +36,7 @@ public class Alloy {
   /** The ignored sigs. */
   protected static Set<Sig> ignoredSigs;
 
-  /** The ignored some more extra nothing something exprs. */
+  /** The ignored exprs. */
   protected static Set<Expr> ignoredExprs;
 
   /** The ignored funcs. */
