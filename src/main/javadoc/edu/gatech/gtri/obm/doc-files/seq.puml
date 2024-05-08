@@ -1,5 +1,5 @@
 @startuml
-participant UserInterface [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/userinterface/UserInterface.html]]
+participant UserInterface
 participant OBMXMI2Alloy [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/fromxmi/OBMXMI2Alloy.html]]
 participant ToAlloy [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/fromxmi/ToAlloy.html]]
 participant Alloy [[https://ontological-behavior-modeling.github.io/tester/edu/gatech/gtri/obm/translator/alloy/Alloy.html]]
