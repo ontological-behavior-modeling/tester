@@ -54,13 +54,13 @@ jobs:
         run: |
           mvn release:clean release:prepare -B
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
       - name: Perform Maven Release
         run: |
           mvn release:perform -B
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
       - name: Read Current Maven Version
         id: mvn_version
