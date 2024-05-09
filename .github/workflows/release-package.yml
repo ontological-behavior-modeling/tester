@@ -4,14 +4,10 @@ on:
   pull_request:
     types:
       - closed
-      
-permissions:
-  contents: write
-  packages: write
-
 
 jobs:
   on-success:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:        
       - name: Set up JDK
