@@ -54,7 +54,7 @@ jobs:
         run: |
           mvn release:clean release:prepare -B
         env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Perform Maven Release
         run: |
