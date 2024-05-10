@@ -6,7 +6,7 @@ on:
       - closed
 
 jobs:
-  on-success:
+  build:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:        
@@ -20,12 +20,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: develop
+
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.OBM_RELEASE_TOKEN }}
         
       - name: Configure Git
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "Github Actions"
-          git config --global url.https://${{ secrets.GITHUB_TOKEN }}@github.com/.insteadOf https://github.com/
+          git config --global url.https://${{ steps.app-token.outputs.token }}@github.com/.insteadOf https://github.com/
 
       - name: Copy settings.xml
         run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
@@ -39,12 +45,12 @@ jobs:
       - name: Generate Javadocs
         run: mvn javadoc:javadoc
         env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Deploy Javadocs to Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
+           github_token: ${{ steps.app-token.outputs.token }}
            publish_dir: ./target/site/apidocs
 
       - name: Prepare Version
@@ -54,13 +60,13 @@ jobs:
         run: |
           mvn release:clean release:prepare -B
         env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Perform Maven Release
         run: |
           mvn release:perform -B
         env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Read Current Maven Version
         id: mvn_version
