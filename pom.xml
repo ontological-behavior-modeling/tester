@@ -9,7 +9,7 @@
   <scm>
     <connection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</connection>
     <developerConnection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</developerConnection>
-    <tag>v0.1.11</tag>
+    <tag>v0.1.12</tag>
     <url>https://github.com/ontological-behavior-modeling/tester</url>
   </scm>
 
