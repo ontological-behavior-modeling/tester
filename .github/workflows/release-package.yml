@@ -57,12 +57,6 @@ jobs:
 
       - name: Prepare Version
         run: mvn versions:revert
-        
-      - name: Prepare Maven Release
-        run: |
-          mvn release:clean release:prepare -B
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Perform Maven Release
         run: |
