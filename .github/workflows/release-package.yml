@@ -66,7 +66,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          files: target/tester-0.1.15-jar-with-dependencies.jar
-          tag_name: v0.1.15
+          files: tester-0.1.16-jar-with-dependencies.jar
+          tag_name: v0.1.16
           body: |
             Release ${{ steps.mvn_release.output.tag }}
