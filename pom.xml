@@ -4,7 +4,7 @@
 
   <groupId>edu.gatech.gtri.obm</groupId>
   <artifactId>tester</artifactId>
-  <version>0.1.9</version>
+  <version>0.1.10-SNAPSHOT</version>
 
   <scm>
     <connection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</connection>
