@@ -58,15 +58,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
-      - name: Read Current Maven Version
-        id: mvn_version
-        run: echo "tag=$(git describe --abbrev=0 --tags)" >> $GITHUB_OUTPUT
-
       - name: Create new Github Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          files: tester-0.1.16-jar-with-dependencies.jar
+          files: ./target/tester-0.1.16-jar-with-dependencies.jar
           tag_name: v0.1.16
           body: |
-            Release ${{ steps.mvn_release.output.tag }}
+            Release
