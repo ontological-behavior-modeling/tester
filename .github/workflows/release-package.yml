@@ -62,7 +62,7 @@ jobs:
         run: |
           mvn release:perform -B
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
       - name: Read Current Maven Version
         id: mvn_version
