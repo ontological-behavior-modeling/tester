@@ -68,7 +68,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          files: target/tester-0.1.18-jar-with-dependencies.jar
-          tag_name: v0.1.18
+          files: target/tester-0.1.20-jar-with-dependencies.jar
+          tag_name: v0.1.20
           body: |
             Release
