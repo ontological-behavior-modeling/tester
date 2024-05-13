@@ -67,3 +67,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: target/*-with-dependencies.jar
+          tag_name: v0.1.14
+          body: |
+            Release ${{ steps.mvn_release.output.tag }}
