@@ -33,13 +33,10 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "Github Actions"
-          git config --global url.https://${{ steps.app-token.outputs.token }}@github.com/.insteadOf https://github.com/
+          git config --global url.https://${{ secrets.GITHUB_TOKEN }}@github.com/.insteadOf https://github.com/
 
       - name: Copy settings.xml
         run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
-
-      - name: Prepare Version
-        run: mvn versions:set -DremoveSnapshot
 
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
@@ -52,11 +49,8 @@ jobs:
       - name: Deploy Javadocs to Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
-           github_token: ${{ steps.app-token.outputs.token }}
+           github_token: ${{ secrets.GITHUB_TOKEN }}
            publish_dir: ./target/site/apidocs
-
-      - name: Prepare Version
-        run: mvn versions:revert
 
       - name: Perform Maven Release
         run: |
@@ -67,12 +61,3 @@ jobs:
       - name: Read Current Maven Version
         id: mvn_version
         run: echo "tag=$(git describe --abbrev=0 --tags)" >> $GITHUB_OUTPUT
-        
-      - name: Create new Github Release
-        id: create_release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: target/*-with-dependencies.jar
-          tag_name: ${{ steps.mvn_version.outputs.tag }}
-          body: |
-            Release ${{ steps.mvn_release.output.tag }}
