@@ -58,11 +58,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
+      - name: Package
+        run: |
+          mvn clean package
+        env:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
       - name: Create new Github Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./target/tester-0.1.16-jar-with-dependencies.jar
-          tag_name: v0.1.16
+          files: target/tester-0.1.18-jar-with-dependencies.jar
+          tag_name: v0.1.18
           body: |
             Release
