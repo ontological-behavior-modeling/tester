@@ -4,7 +4,7 @@
 
   <groupId>edu.gatech.gtri.obm</groupId>
   <artifactId>tester</artifactId>
-  <version>0.1.22-SNAPSHOT</version>
+  <version>0.1.21</version>
 
   <scm>
     <connection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</connection>
@@ -191,9 +191,9 @@
         </configuration>
       </plugin>
       <plugin>
-         <groupId>org.apache.maven.plugins</groupId>
-         <artifactId>maven-help-plugin</artifactId>
-         <version>3.2.0</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>3.2.0</version>
       </plugin>
       <plugin>
         <!-- see for documentation and configuration information: https://github.com/Ekryd/sortpom -->
