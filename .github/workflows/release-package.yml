@@ -65,12 +65,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
+
+
+      - name: Upload Jar to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/*-with-dependencies.jar
+          tag: ${{ env.RELEASE_VERSION }}
+
       - name: Create new Github Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            *.jar
-          tag_name: ${{ env.RELEASE_VERSION}}
+          tag_name: ${{ env.RELEASE_VERSION }}
           body: |
             Release
