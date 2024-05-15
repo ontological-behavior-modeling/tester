@@ -62,11 +62,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
-      - name: Create new Github Release
+      - name: Release on GitHub
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          files: target/*-with-dependencies.jar
+          files: *.jar
           tag_name: ${{ env.RELEASE_VERSION}}
           body: |
             Release
