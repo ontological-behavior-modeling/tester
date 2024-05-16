@@ -9,7 +9,7 @@
   <scm>
     <connection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</connection>
     <developerConnection>scm:git:https://github.com/ontological-behavior-modeling/tester.git</developerConnection>
-    <tag>v0.1.25</tag>
+    <tag>v0.1.26</tag>
     <url>https://github.com/ontological-behavior-modeling/tester</url>
   </scm>
 
@@ -261,14 +261,6 @@
             <version>2.1.1</version>
           </docletArtifact>
         </configuration>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
