@@ -44,14 +44,6 @@ jobs:
 
       - name: List Files
         run: ls
-      
-      - name: Upload Jar to Release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/*.jar
-          tag: ${{ env.RELEASE_VERSION }}
-          file_glob: true
 
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
@@ -60,6 +52,9 @@ jobs:
         run: mvn javadoc:javadoc
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
+      - name: List Files
+        run: ls
 
       - name: Deploy Javadocs to Branch
         uses: peaceiris/actions-gh-pages@v3
@@ -70,12 +65,26 @@ jobs:
       - name: Revert Version back for Release
         run: mvn versions:revert
 
+      - name: Install
+        run: mvn clean install
+
+      - name: List Files
+        run: ls
+
       - name: Perform Maven Release
         run: |
           mvn release:perform -B
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
+      - name: Upload Jar to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/*.jar
+          tag: ${{ env.RELEASE_VERSION }}
+          file_glob: true
+    
       - name: Create new Github Release
         id: create_release
         uses: softprops/action-gh-release@v2
