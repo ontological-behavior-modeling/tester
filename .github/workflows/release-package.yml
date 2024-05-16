@@ -34,6 +34,12 @@ jobs:
 
       - name: Copy settings.xml
         run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
+
+      - name: Perform Maven Release
+        run: |
+          mvn release:perform -B
+        env:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
       
       - name: Get Current Release Version
         run: |
@@ -41,9 +47,6 @@ jobs:
       
       - name: Prepare Version for Javadocs
         run: mvn versions:set -DnewVersion=${{ env.RELEASE_VERSION}}
-
-      - name: List Files
-        run: ls
 
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
@@ -53,42 +56,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
 
-      - name: List Files
-        run: ls
-
       - name: Deploy Javadocs to Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
            publish_dir: ./target/site/apidocs
 
-      - name: Revert Version back for Release
-        run: mvn versions:revert
-
       - name: Install
         run: mvn clean install
 
-      - name: List Files
-        run: ls
-
-      - name: Perform Maven Release
-        run: |
-          mvn release:perform -B
-        env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
-
-      - name: Upload Jar to Release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/*.jar
-          tag: ${{ env.RELEASE_VERSION }}
-          file_glob: true
+      - name: Revert Version back for Release
+        run: mvn versions:revert
     
       - name: Create new Github Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.RELEASE_VERSION }}
+          files: target/*-with-dependencies.jar
           body: |
             Release
