@@ -62,6 +62,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./target/*-with-dependencies.jar
           tag: ${{ env.RELEASE_VERSION }}
+          file_glob: true
 
       - name: Revert Version back for Release
         run: mvn versions:revert
