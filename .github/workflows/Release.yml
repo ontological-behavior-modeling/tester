@@ -1,4 +1,4 @@
-name: Release New Version
+name: Release GitHub Version
 
 on:
   pull_request:
@@ -32,12 +32,6 @@ jobs:
 
       - name: Copy settings.xml
         run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
-
-      - name: Perform Maven Release
-        run: |
-          mvn release:perform -DskipTests
-        env:
-          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
       
       - name: Get Current Release Version
         run: |
