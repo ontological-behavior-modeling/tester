@@ -2,8 +2,8 @@
 *.bak
 /target/
 .classpath
-*.releaseBackup
-*.properties
+pom.xml.releaseBackup
+release.properties
 
 error.log
 src/test/resources/alloy_heredoc*.als
