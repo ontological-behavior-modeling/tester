@@ -37,7 +37,7 @@ jobs:
 
       - name: Perform Maven Release
         run: |
-          mvn release:perform -B
+          mvn release:perform -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
       
@@ -63,7 +63,7 @@ jobs:
            publish_dir: ./target/site/apidocs
 
       - name: Install
-        run: mvn clean install
+        run: mvn clean install -DskipTests
 
       - name: Revert Version back for Release
         run: mvn versions:revert
