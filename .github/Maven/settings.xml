@@ -6,13 +6,13 @@
   <servers>
     <server>
       <id>omgutil</id>
-      <username>jnapolitano7</username>
-      <password>${secrets.JN_TOKEN}</password>
+      <username>${env.GITHUB_ACTOR}</username>
+      <password>${env.GITHUB_TOKEN}</password>
     </server>
     <server>
       <id>github</id>
-      <username>${vars.RELEASE_APP_ID}</username>
-      <password>${secrets.OBM_RELEASE_TOKEN}</password>
+      <username>${env.GITHUB_ACTOR}</username>
+      <password>${env.GITHUB_TOKEN}</password>
     </server>
   </servers>
 </settings>
