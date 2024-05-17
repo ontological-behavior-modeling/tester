@@ -1,0 +1,73 @@
+name: Release New Version
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:        
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+        
+      - name: Configure Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "Github Actions"
+          git config --global url.https://${{ secrets.GITHUB_TOKEN }}@github.com/.insteadOf https://github.com/
+
+      - name: Copy settings.xml
+        run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
+      
+      - name: Get Current Release Version
+        run: |
+          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.scm.tag -q -DforceStdout)" >> $GITHUB_ENV
+      
+      - name: Prepare Version for Javadocs
+        run: mvn versions:set -DnewVersion=${{ env.RELEASE_VERSION}}
+
+      - name: Setup Graphviz for UML in Javadocs
+        uses: ts-graphviz/setup-graphviz@v2
+
+      - name: Generate Javadocs
+        run: mvn javadoc:javadoc
+        env:
+          GITHUB_TOKEN: ${{ secrets.JN_TOKEN }}
+
+      - name: Deploy Javadocs to Branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./target/site/apidocs
+
+      - name: Install
+        run: mvn clean install -DskipTests
+
+      - name: Revert Version back for Release
+        run: mvn versions:revert
+
+      - name: Clean Release Properties
+        run: mvn release:clean
+    
+      - name: Create new Github Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          files: target/*-with-dependencies.jar
+          body: |
+            Release
