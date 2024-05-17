@@ -65,6 +65,9 @@ jobs:
 
       - name: Revert Version back for Release
         run: mvn versions:revert
+
+      - name: Clean Release Properties
+        run: mvn release:clean
     
       - name: Create new Github Release
         id: create_release
