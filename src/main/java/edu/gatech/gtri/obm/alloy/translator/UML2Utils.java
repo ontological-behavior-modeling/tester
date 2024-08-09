@@ -19,17 +19,18 @@ import org.eclipse.uml2.uml.Stereotype;
 
 /**
  * Utility class for UML2 to extract informations
- * 
- * @author Miyako Wilson, AE(ASDL) - Georgia Tech
  *
+ * @author Miyako Wilson, AE(ASDL) - Georgia Tech
  */
 public class UML2Utils {
 
   /**
-   * Return the rules(connectableElements) of connector end of the connector. The first in the array is for the given connector end. If the connector did not have two ends, the method return null.
-   * 
+   * Return the rules(connectableElements) of connector end of the connector. The first in the array
+   * is for the given connector end. If the connector did not have two ends, the method return null.
+   *
    * @param cn A connector having rules/connectableElements
-   * @param ce A connector end having the rule/connectableElement as the first element of the return list.
+   * @param ce A connector end having the rule/connectableElement as the first element of the return
+   *     list.
    * @return List of ConnectableElement. Its size should be two, otherwiser return null
    */
   protected static List<ConnectableElement> getEndRolesForCEFirst(Connector cn, ConnectorEnd ce) {
@@ -45,8 +46,9 @@ public class UML2Utils {
   }
 
   /**
-   * Convert A set of Property to a map having the property name as a key and the property's type name as a value.
-   * 
+   * Convert A set of Property to a map having the property name as a key and the property's type
+   * name as a value.
+   *
    * @param ps - a set of property
    * @return A map
    */
@@ -60,7 +62,7 @@ public class UML2Utils {
 
   /**
    * Find a set of NamedElement that is leaf in hierarchy from the given NamedElements
-   * 
+   *
    * @param allNEs - all NamedElements
    * @return a set of NamedElement that is leaf in hierarchy
    */
@@ -78,12 +80,13 @@ public class UML2Utils {
     return leafClasses;
   }
 
-
-
   /**
-   * Get class in hierarchy (list) but not include "BehaviorOccurence" or "Occurrence". The top of hierarchy has an index of 0. The given class is the leaf/bottom of hierarchy class and has the largest
-   * index. For example, for 4.2.1 FoodService Control Flow - BuffetService.als, [0] = Food Service, [1] = SingleFoodService, and [2] = BuffetService when the given class is BuffetService.
-   * 
+   * Get class in hierarchy (list) but not include "BehaviorOccurence" or "Occurrence". The top of
+   * hierarchy has an index of 0. The given class is the leaf/bottom of hierarchy class and has the
+   * largest index. For example, for 4.2.1 FoodService Control Flow - BuffetService.als, [0] = Food
+   * Service, [1] = SingleFoodService, and [2] = BuffetService when the given class is
+   * BuffetService.
+   *
    * @param aClass - Class that is the bottom/leaf of the hierarchy
    * @return A list of class in hierarchy
    */
@@ -98,7 +101,7 @@ public class UML2Utils {
 
   /**
    * return a parent of aClass. Assume only one parent (Alloy allows only one parent to be defined).
-   * 
+   *
    * @param aClass
    * @return
    */
@@ -108,27 +111,31 @@ public class UML2Utils {
       if (parents.size() != 1) {
         // Only one parent is allowed in Alloy
         String parentName = parents.get(0).getName();
-        System.err.println("Only one parent is allowed. One parent \"" + parentName
-            + "\" is included as sig \"" + aClass.getName() + "\"'s parent");
+        System.err.println(
+            "Only one parent is allowed. One parent \""
+                + parentName
+                + "\" is included as sig \""
+                + aClass.getName()
+                + "\"'s parent");
       }
       // parentName == null , "BehaviorOccurrence", "Occurrence" or "Anything"
-      if (!AlloyUtils.validParent(((Class) parents.get(0)).getName()))
-        return null;
+      if (!AlloyUtils.validParent(((Class) parents.get(0)).getName())) return null;
       return (Class) parents.get(0);
-    } else
-      return null;
+    } else return null;
   }
 
   /**
-   * Find a stereotype of element of the given streotypeName and return map of its tagName(string) and values(Properties)
+   * Find a stereotype of element of the given streotypeName and return map of its tagName(string)
+   * and values(Properties)
    *
    * @param element - element whose stereotype properties to be found
    * @param streotypeName - stereotype name in string
    * @param tagNames -stereotype property names
-   * @return Map (key = tag/property name string, value = properties) or null if the element does not have stereotype applied.
+   * @return Map (key = tag/property name string, value = properties) or null if the element does
+   *     not have stereotype applied.
    */
-  protected static Map<String, List<Property>> getStreotypePropertyValues(Element element,
-      String streotypeName, String[] tagNames, List<String> messages) {
+  protected static Map<String, List<Property>> getStreotypePropertyValues(
+      Element element, String streotypeName, String[] tagNames, List<String> messages) {
 
     Map<String, List<Property>> propertysByTagNames = new HashMap<>();
     Stereotype st = null;
@@ -144,8 +151,10 @@ public class UML2Utils {
               results.add((Property) property);
             } else {
               messages.add(
-                  propertyName + " is not an instance of Property but "
-                      + property.getClass().getSimpleName() + ". so ignored.");
+                  propertyName
+                      + " is not an instance of Property but "
+                      + property.getClass().getSimpleName()
+                      + ". so ignored.");
             }
           }
           propertysByTagNames.put(propertyName, results);
@@ -155,5 +164,4 @@ public class UML2Utils {
     }
     return null;
   }
-
 }

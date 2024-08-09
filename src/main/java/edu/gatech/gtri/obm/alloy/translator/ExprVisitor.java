@@ -1,13 +1,5 @@
 package edu.gatech.gtri.obm.alloy.translator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Predicate;
 import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.ast.Decl;
 import edu.mit.csail.sdg.ast.Expr;
@@ -22,15 +14,20 @@ import edu.mit.csail.sdg.ast.ExprVar;
 import edu.mit.csail.sdg.ast.Sig;
 import edu.mit.csail.sdg.ast.Sig.Field;
 import edu.mit.csail.sdg.ast.VisitQuery;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Visitor transform the Alloy object to a file
- * 
- * @author Miyako Wilson, AE(ASDL) - Georgia Tech
- * 
- * @author Andrew H Shinjo, Graduate Student - Georgia Tech
  *
- * 
+ * @author Miyako Wilson, AE(ASDL) - Georgia Tech
+ * @author Andrew H Shinjo, Graduate Student - Georgia Tech
  */
 public class ExprVisitor extends VisitQuery<String> {
 
@@ -40,15 +37,14 @@ public class ExprVisitor extends VisitQuery<String> {
   private boolean isImplicitFact = false;
   private boolean isSigFact = false;
 
-  /**
-   * a set of fields to make fields in disj (ie., disj p1, p2: set AtomicBehavior)
-   */
+  /** a set of fields to make fields in disj (ie., disj p1, p2: set AtomicBehavior) */
   private final Set<Sig.Field> parameterFields;
 
   /**
    * A constructor
-   * 
-   * @param _parameterFields - A set of Fields that with Parameter stereotype. Helps to determine disj fields.
+   *
+   * @param _parameterFields - A set of Fields that with Parameter stereotype. Helps to determine
+   *     disj fields.
    */
   protected ExprVisitor(Set<Sig.Field> _parameterFields) {
     this.parameterFields = _parameterFields;
@@ -77,8 +73,12 @@ public class ExprVisitor extends VisitQuery<String> {
       op = "not in";
     }
 
-    return sb.append(x.left.accept(this)).append(' ').append(op).append(' ')
-        .append(x.right.accept(this)).toString();
+    return sb.append(x.left.accept(this))
+        .append(' ')
+        .append(op)
+        .append(' ')
+        .append(x.right.accept(this))
+        .toString();
   }
 
   @Override
@@ -162,8 +162,14 @@ public class ExprVisitor extends VisitQuery<String> {
     }
 
     StringBuilder sb = new StringBuilder();
-    return sb.append(op).append(' ').append(names).append(": ")
-        .append(AlloyUtils.removeSlash(sigType)).append(" | ").append(sub).toString();
+    return sb.append(op)
+        .append(' ')
+        .append(names)
+        .append(": ")
+        .append(AlloyUtils.removeSlash(sigType))
+        .append(" | ")
+        .append(sub)
+        .toString();
   }
 
   @Override
@@ -256,36 +262,46 @@ public class ExprVisitor extends VisitQuery<String> {
         List<String> sortedType = new ArrayList<>(fieldByType.keySet());
         Collections.sort(sortedType);
 
-        // sort fields by types. If one of shared type field is in parremterFields, then make them as disj fields.
+        // sort fields by types. If one of shared type field is in parremterFields, then make them
+        // as disj fields.
         for (String type : sortedType) {
           List<Sig.Field> fs = fieldByType.get(type);
           if (fs.size() == 1) {
-            fields = (fields.length() == 0 ? sbb.append(' ') : sbb.append(", "))
-                .append(AlloyUtils.removeSlash(fs.get(0).label)).append(": ").append(type)
-                .toString();
+            fields =
+                (fields.length() == 0 ? sbb.append(' ') : sbb.append(", "))
+                    .append(AlloyUtils.removeSlash(fs.get(0).label))
+                    .append(": ")
+                    .append(type)
+                    .toString();
           } else { // have to be > 1
 
             boolean isdisj = true;
             String[] labels = new String[fs.size()];
             for (int i = 0; i < fs.size(); i++) {
-              if (this.parameterFields.contains(fs.get(i)))
-                isdisj = false;
+              if (this.parameterFields.contains(fs.get(i))) isdisj = false;
               labels[i] = AlloyUtils.removeSlash(fs.get(i).label);
             }
             if (isdisj)
-              fields = (fields.length() == 0 ? sbb.append(' ')
-                  : sbb.append(", ")).append("disj ")
-                      .append(String.join(", ", labels)).append(": ").append(type).toString();
+              fields =
+                  (fields.length() == 0 ? sbb.append(' ') : sbb.append(", "))
+                      .append("disj ")
+                      .append(String.join(", ", labels))
+                      .append(": ")
+                      .append(type)
+                      .toString();
             else
-              fields = (fields.length() == 0 ? sbb.append(' ') : sbb.append(", "))
-                  .append(String.join(", ", labels)).append(": ").append(type).toString();
+              fields =
+                  (fields.length() == 0 ? sbb.append(' ') : sbb.append(", "))
+                      .append(String.join(", ", labels))
+                      .append(": ")
+                      .append(type)
+                      .toString();
           }
         }
 
         sb.append(fields);
         sb.append("}\n");
-      } else
-        sb.append("}\n");
+      } else sb.append("}\n");
 
       fieldAfterSig = false;
 
@@ -319,9 +335,7 @@ public class ExprVisitor extends VisitQuery<String> {
     }
 
     return AlloyUtils.removeSlash(x.label);
-
   }
-
 
   @Override
   public String visit(Field x) throws Err {
@@ -331,8 +345,12 @@ public class ExprVisitor extends VisitQuery<String> {
     if (fieldAfterSig) {
 
       StringBuilder sb = new StringBuilder();
-      String output = sb.append(' ').append(AlloyUtils.removeSlash(x.label)).append(": ")
-          .append(x.decl().expr.accept(this)).toString();
+      String output =
+          sb.append(' ')
+              .append(AlloyUtils.removeSlash(x.label))
+              .append(": ")
+              .append(x.decl().expr.accept(this))
+              .toString();
       return output;
     }
 
@@ -342,7 +360,7 @@ public class ExprVisitor extends VisitQuery<String> {
   // Utility function
   /**
    * Add the given field to the given map as the value if the field's type is the key.
-   * 
+   *
    * @param x - A field to be added to the map's value
    * @param map - a map key = signature type value = list of fields having the key
    * @return the map after adding a field x
@@ -354,8 +372,7 @@ public class ExprVisitor extends VisitQuery<String> {
     if (fieldAfterSig) {
       String type = x.decl().expr.accept(this);
       List<Field> fs = null;
-      if (map.containsKey(type))
-        fs = map.get(type);
+      if (map.containsKey(type)) fs = map.get(type);
       else {
         fs = new ArrayList<>();
         map.put(type, fs);
@@ -367,7 +384,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Create a string name separated by , from the given decl's names.
-   * 
+   *
    * @param decl - A decl to create a names
    * @return
    */
