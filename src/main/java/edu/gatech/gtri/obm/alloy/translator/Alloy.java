@@ -69,6 +69,8 @@ public class Alloy {
   /**
    * Create a new Alloy assuming the required alloy library files (*.als) are locating at the given
    * working directory.
+   * 
+   * <p><img src="doc-files/Alloy.svg"/>
    *
    * @param working_dir - The absolute filename
    */
