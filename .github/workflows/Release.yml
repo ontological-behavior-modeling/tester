@@ -1,9 +1,6 @@
 name: Release GitHub Version
 
-on:
-  pull_request:
-    types:
-      - closed
+on: workflow_dispatch
 
 permissions:
   contents: write
