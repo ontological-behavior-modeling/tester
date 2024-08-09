@@ -1,6 +1,15 @@
 package obmtest;
 
-import edu.gatech.gtri.obm.translator.alloy.AlloyUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import edu.gatech.gtri.obm.alloy.translator.AlloyUtils;
 import edu.mit.csail.sdg.ast.Command;
 import edu.mit.csail.sdg.ast.CommandScope;
 import edu.mit.csail.sdg.ast.Decl;
@@ -18,32 +27,47 @@ import edu.mit.csail.sdg.ast.ExprVar;
 import edu.mit.csail.sdg.ast.Func;
 import edu.mit.csail.sdg.ast.Sig;
 import edu.mit.csail.sdg.ast.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+/**
+ * Comparator for two alloy objects.
+ * 
+ * @author Shinjo Andrew H, GIRI Intern, Georgia Tech
+ * @author Wilson Miyako, ASDL, Georgia Tech
+ *
+ */
 
 public class ExpressionComparator {
 
+  /** used to prevent comparison to run forever */
   private final Set<List<Expr>> visitedExpressions;
 
   public ExpressionComparator() {
     visitedExpressions = new HashSet<>();
   }
 
+  /**
+   * Compare two Signatures (name, a parent, fields)
+   * 
+   * @param s1 - a Signature to be compared
+   * @param s2 - a Signature to be compared
+   * @return true if the same, otherwise return false
+   */
   public boolean compareTwoExpressionsSigs(Sig s1, Sig s2) {
     visitedExpressions.clear();
     return compareExpr(s1, s2);
   }
 
+  /**
+   * Compare two facts
+   * 
+   * @param e1 - an expression containing one or more fact expressions
+   * @param e2 - an expression containing one or more fact expressions
+   * @return
+   */
   public boolean compareTwoExpressionsFacts(Expr e1, Expr e2) {
     visitedExpressions.clear();
 
+    // compare facts size
     int size1 = ((Collection<?>) ((ExprList) e1).args).size();
     int size2 = ((Collection<?>) ((ExprList) e2).args).size();
 
@@ -53,6 +77,9 @@ public class ExpressionComparator {
     }
     // e1.args.size() and ee1.size() are different. ee1 can contain like [(all x | no o/inputs . x),
     // (all x | no o/inputs . x)] the two expr of the same
+    // Expressions as string are the same but what x represents(Signature) are different. For example,
+    // fact {all x: AtomicBehavior | no inputs.x} vs.
+    // fact {all x: MultipleControlFlow | no inputs.x}
     List<List<Expr>> ee1 = sortExprList((ExprList) e1);
     List<List<Expr>> ee2 = sortExprList((ExprList) e2);
 
@@ -64,27 +91,20 @@ public class ExpressionComparator {
 
     for (int i = 0; i < ee1.size(); i++) {
       if (ee1.get(i).size() != ee2.get(i).size()) {
-        System.err.println(
-            "The size of sorted grouped fact is different. "
-                + ee1.get(i)
-                + "("
-                + ee1.get(i).size()
-                + ") vs. "
-                + ee2.get(i)
-                + "("
-                + ee2.get(i).size()
-                + ")");
+        System.err.println("The size of sorted grouped fact is different. " + ee1.get(i) + "("
+            + ee1.get(i).size() + ") vs. " + ee2.get(i) + "(" + ee2.get(i).size() + ")");
         return false;
       }
 
+      // make sure each expression in ee1.get(i) and ee2.get(i) are the same - expression is string and which signature the expression is for.
       Set<Integer> expr2usedJIndex = new HashSet<>();
       for (Expr expr1 : ee1.get(i)) {
         boolean expr1found = false;
-
         for (int j = 0; j < ee2.get(i).size(); j++) {
           if (!expr2usedJIndex.contains(j)) {
             Expr expr2 = ee2.get(i).get(j);
-            if (!compareExpr(expr1, expr2)) continue;
+            if (!compareExpr(expr1, expr2))
+              continue;
             else {
               expr1found = true;
               expr2usedJIndex.add(j);
@@ -92,17 +112,19 @@ public class ExpressionComparator {
             }
           }
         }
-        if (!expr1found) return false;
+        if (!expr1found)
+          return false;
       }
     }
     return true;
   }
 
+
   public boolean compareCommand(Command c1, Command c2) {
 
-    if (c1 == null && c2 == null) {
+    if (c1 == null && c2 == null)
       return true;
-    }
+
     if (c1 == null || c2 == null) {
       System.err.println("compareCommand: c1 == null || c2 == null");
       return false;
@@ -110,14 +132,9 @@ public class ExpressionComparator {
 
     // ConstList<Sig> additionalExactScopes
     if (c1.additionalExactScopes.size() != c2.additionalExactScopes.size()) {
-      System.err.println(
-          "compareCommand: "
-              + "c1.additionalExactScopes.size() != "
-              + "c2.additionalExactScopes.size() ("
-              + c1.additionalExactScopes.size()
-              + " vs. "
-              + c2.additionalExactScopes.size()
-              + ")");
+      System.err.println("compareCommand: " + "c1.additionalExactScopes.size() != "
+          + "c2.additionalExactScopes.size() (" + c1.additionalExactScopes.size() + " vs. "
+          + c2.additionalExactScopes.size() + ")");
       return false;
     }
 
@@ -132,19 +149,15 @@ public class ExpressionComparator {
 
     // int bitwidth
     if (c1.bitwidth != c2.bitwidth) {
-      System.err.println(
-          "compareCommand: c1.bitwidth != c2.bitwidth ("
-              + c1.bitwidth
-              + " vs. "
-              + c2.bitwidth
-              + ")");
+      System.err.println("compareCommand: c1.bitwidth != c2.bitwidth (" + c1.bitwidth + " vs. "
+          + c2.bitwidth + ")");
       return false;
     }
 
     // boolean check
     if (c1.check != c2.check) {
-      System.err.println(
-          "compareCommand: c1.check != c2.check (" + c1.check + " vs. " + c2.check + ")");
+      System.err
+          .println("compareCommand: c1.check != c2.check (" + c1.check + " vs. " + c2.check + ")");
       return false;
     }
 
@@ -157,13 +170,8 @@ public class ExpressionComparator {
 
     // Expr formula
     if (!compareExpr(c1.formula, c2.formula)) {
-      System.err.println(
-          "compareCommand: "
-              + "!compareExpr(c1.formula, c2.formula) ("
-              + c1.formula
-              + " vs. "
-              + c2.formula
-              + ")");
+      System.err.println("compareCommand: " + "!compareExpr(c1.formula, c2.formula) (" + c1.formula
+          + " vs. " + c2.formula + ")");
       return false;
     }
 
@@ -182,12 +190,8 @@ public class ExpressionComparator {
     }
     // int maxstring
     if (c1.maxstring != c2.maxstring) {
-      System.err.println(
-          "compareCommand: c1.maxstring != c2.maxstring ( "
-              + c1.maxstring
-              + " vs. "
-              + c2.maxstring
-              + ")");
+      System.err.println("compareCommand: c1.maxstring != c2.maxstring ( " + c1.maxstring + " vs. "
+          + c2.maxstring + ")");
       return false;
     }
     // int overall
@@ -198,26 +202,16 @@ public class ExpressionComparator {
     }
     // Command parent
     if (!compareCommand(c1.parent, c2.parent)) {
-      System.err.println(
-          "compareCommand: "
-              + "!compareCommand(c1.parent, c2.parent) ("
-              + c1.parent
-              + " vs. "
-              + c2.parent
-              + ")");
+      System.err.println("compareCommand: " + "!compareCommand(c1.parent, c2.parent) (" + c1.parent
+          + " vs. " + c2.parent + ")");
       return false;
     }
     // Pos pos (ignore)
 
     // ConstList<CommandScope> scope
     if (c1.scope.size() != c2.scope.size()) {
-      System.err.println(
-          "compareCommand: "
-              + "c1.scope.size() != c2.scope.size() ("
-              + c1.scope.size()
-              + " vs. "
-              + c2.scope.size()
-              + ")");
+      System.err.println("compareCommand: " + "c1.scope.size() != c2.scope.size() ("
+          + c1.scope.size() + " vs. " + c2.scope.size() + ")");
       return false;
     }
 
@@ -247,36 +241,21 @@ public class ExpressionComparator {
 
     // int endingScope
     if (cs1.endingScope != cs2.endingScope) {
-      System.err.println(
-          "compareCommandScope: "
-              + "cs1.endingScope != cs2.endingScope ("
-              + cs1.endingScope
-              + " vs. "
-              + cs2.endingScope
-              + ")");
+      System.err.println("compareCommandScope: " + "cs1.endingScope != cs2.endingScope ("
+          + cs1.endingScope + " vs. " + cs2.endingScope + ")");
       return false;
     }
     // int increment
     if (cs1.endingScope != cs2.endingScope) {
-      System.err.println(
-          "compareCommandScope: "
-              + "cs1.increment != cs2.increment ("
-              + cs1.increment
-              + " vs. "
-              + cs2.increment
-              + ")");
+      System.err.println("compareCommandScope: " + "cs1.increment != cs2.increment ("
+          + cs1.increment + " vs. " + cs2.increment + ")");
       return false;
     }
 
     // boolean isExact
     if (cs1.isExact != cs2.isExact) {
-      System.err.println(
-          "compareCommandScope: "
-              + "cs1.isExact != cs2.isExact ("
-              + cs1.isExact
-              + " vs. "
-              + cs2.isExact
-              + ")");
+      System.err.println("compareCommandScope: " + "cs1.isExact != cs2.isExact (" + cs1.isExact
+          + " vs. " + cs2.isExact + ")");
       return false;
     }
     // Pos pos (ignored)
@@ -289,13 +268,8 @@ public class ExpressionComparator {
 
     // int startingScope
     if (cs1.startingScope != cs2.startingScope) {
-      System.err.println(
-          "compareCommandScope: "
-              + "cs1.startingScope != cs2.startingScope ("
-              + cs1.startingScope
-              + " vs. "
-              + cs2.startingScope
-              + ")");
+      System.err.println("compareCommandScope: " + "cs1.startingScope != cs2.startingScope ("
+          + cs1.startingScope + " vs. " + cs2.startingScope + ")");
       return false;
     }
     return true;
@@ -345,31 +319,19 @@ public class ExpressionComparator {
     }
 
     if (d1.isPrivate == null && d2.isPrivate != null) {
-      System.err.println(
-          "compareDecls: d1.isPrivate == null && d2.isPrivate != null ("
-              + d1.isPrivate
-              + " vs. "
-              + d2.isPrivate
-              + ")");
+      System.err.println("compareDecls: d1.isPrivate == null && d2.isPrivate != null ("
+          + d1.isPrivate + " vs. " + d2.isPrivate + ")");
       return false;
     }
     if (d1.isPrivate != null && d2.isPrivate == null) {
-      System.err.println(
-          "compareDecls: d1.isPrivate != null && d2.isPrivate == null"
-              + d1.isPrivate
-              + " vs. "
-              + d2.isPrivate
-              + ")");
+      System.err.println("compareDecls: d1.isPrivate != null && d2.isPrivate == null" + d1.isPrivate
+          + " vs. " + d2.isPrivate + ")");
       return false;
     }
 
     if (d1.names.size() != d2.names.size()) {
-      System.err.println(
-          "compareDecls: d1.names.size() != d2.names.size() ("
-              + d1.names.size()
-              + " vs. "
-              + d2.names.size()
-              + ")");
+      System.err.println("compareDecls: d1.names.size() != d2.names.size() (" + d1.names.size()
+          + " vs. " + d2.names.size() + ")");
       return false;
     }
 
@@ -424,13 +386,13 @@ public class ExpressionComparator {
     }
 
     if (expr1 == null && expr2 != null) {
-      System.err.println(
-          "compareExpr: expr1 == null && expr2 != null (" + expr1 + " vs. " + expr2 + ")");
+      System.err
+          .println("compareExpr: expr1 == null && expr2 != null (" + expr1 + " vs. " + expr2 + ")");
       return false;
     }
     if (expr1 != null && expr2 == null) {
-      System.err.println(
-          "compareExpr: expr1 != null && expr2 == null" + expr1 + " vs. " + expr2 + ")");
+      System.err
+          .println("compareExpr: expr1 != null && expr2 == null" + expr1 + " vs. " + expr2 + ")");
       return false;
     }
 
@@ -438,12 +400,8 @@ public class ExpressionComparator {
     expr2 = expr2.deNOP();
 
     if (!expr1.getClass().equals(expr2.getClass())) {
-      System.err.println(
-          "expr1.getClass() != expr2.getClass() ("
-              + expr1.getClass()
-              + " vs. "
-              + expr2.getClass()
-              + ")");
+      System.err.println("expr1.getClass() != expr2.getClass() (" + expr1.getClass() + " vs. "
+          + expr2.getClass() + ")");
       return false;
     }
 
@@ -458,116 +416,70 @@ public class ExpressionComparator {
     } else if (expr1.getClass().equals(ExprBinary.class)) {
       if (!compareExprBinary((ExprBinary) expr1, (ExprBinary) expr2)) {
 
-        System.err.println(
-            "compareExpr: !compareExprBinary((ExprBinary) expr1, (ExprBinary) expr2) ("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+        System.err
+            .println("compareExpr: !compareExprBinary((ExprBinary) expr1, (ExprBinary) expr2) ("
+                + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(ExprCall.class)) {
       if (!compareExprCall((ExprCall) expr1, (ExprCall) expr2)) {
-        System.err.println(
-            "compareExpr: "
-                + "!compareExprCall((ExprCall) expr1, (ExprCall) expr2) ("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+        System.err
+            .println("compareExpr: " + "!compareExprCall((ExprCall) expr1, (ExprCall) expr2) ("
+                + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(ExprConstant.class)) {
       if (!compareExprConstant((ExprConstant) expr1, (ExprConstant) expr2)) {
         System.err.println(
             "compareExpr: !compareExprConstant((ExprConstant) expr1, (ExprConstant) expr2) ("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+                + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(ExprITE.class)) {
       if (!compareExprITE((ExprITE) expr1, (ExprITE) expr2)) {
-        System.err.println(
-            "compareExpr: !compareExprITE((ExprITE) expr1, (ExprITE) expr2) ("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+        System.err.println("compareExpr: !compareExprITE((ExprITE) expr1, (ExprITE) expr2) ("
+            + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(ExprLet.class)) {
       System.err.println("ExprLet: not implemented");
     } else if (expr1.getClass().equals(ExprList.class)) {
       if (!compareExprList((ExprList) expr1, (ExprList) expr2)) {
-        System.err.println(
-            "compareExpr: "
-                + "!compareExprList((ExprList) expr1, (ExprList) expr2) ("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+        System.err
+            .println("compareExpr: " + "!compareExprList((ExprList) expr1, (ExprList) expr2) ("
+                + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(ExprQt.class)) {
       if (!compareExprQt((ExprQt) expr1, (ExprQt) expr2)) {
-        System.err.println(
-            "compareExpr: "
-                + "!compareExprQt((ExprQt) expr1, (ExprQt) expr2) ("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+        System.err.println("compareExpr: " + "!compareExprQt((ExprQt) expr1, (ExprQt) expr2) ("
+            + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(ExprUnary.class)) {
       if (!compareExprUnary((ExprUnary) expr1, (ExprUnary) expr2)) {
-        System.err.println(
-            "compareExpr: !compareExprUnary("
-                + "(ExprUnary) expr1, (ExprUnary) expr2) "
-                + expr1
-                + " vs. "
-                + expr2
-                + "("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+        System.err
+            .println("compareExpr: !compareExprUnary(" + "(ExprUnary) expr1, (ExprUnary) expr2) "
+                + expr1 + " vs. " + expr2 + "(" + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(ExprVar.class)) {
       if (!compareExprVar((ExprVar) expr1, (ExprVar) expr2)) {
-        System.err.println(
-            "compareExpr: !compareExprVar("
-                + "(ExprVar) expr1, (ExprVar) expr2) ("
-                + expr1
-                + " vs. "
-                + expr2
-                + ")");
+        System.err.println("compareExpr: !compareExprVar(" + "(ExprVar) expr1, (ExprVar) expr2) ("
+            + expr1 + " vs. " + expr2 + ")");
         return false;
       }
     } else if (expr1.getClass().equals(Sig.Field.class)) {
       if (!compareSigField((Sig.Field) expr1, (Sig.Field) expr2)) {
-        System.err.println(
-            "compareExpr: !compareSigField("
-                + "(Sig.Field) expr1, (Sig.Field) expr2) ("
-                + expr1
-                + " vs."
-                + expr2
-                + ")");
+        System.err.println("compareExpr: !compareSigField("
+            + "(Sig.Field) expr1, (Sig.Field) expr2) (" + expr1 + " vs." + expr2 + ")");
         System.err.println();
         return false;
       }
     } else if (expr1.getClass().equals(Sig.class) || expr1.getClass().equals(Sig.PrimSig.class)) {
       if (!compareSig((Sig) expr1, (Sig) expr2)) {
-        System.err.println(
-            "compareExpr: !compareSig("
-                + "(Sig) expr1, (Sig) expr2) ("
-                + expr1
-                + " vs."
-                + expr2
-                + ")");
+        System.err.println("compareExpr: !compareSig(" + "(Sig) expr1, (Sig) expr2) (" + expr1
+            + " vs." + expr2 + ")");
         System.err.println();
         return false;
       }
@@ -595,27 +507,19 @@ public class ExpressionComparator {
       return false;
     }
     if (!compareExpr(expr1.left, expr2.left)) {
-      System.err.println(
-          "ExprBinary: !compareExpr(expr1.left, expr2.left) ("
-              + expr1.left
-              + " vs. "
-              + expr2.left
-              + ")");
+      System.err.println("ExprBinary: !compareExpr(expr1.left, expr2.left) (" + expr1.left + " vs. "
+          + expr2.left + ")");
       return false;
     }
 
     if (expr1.op != expr2.op) {
-      System.err.println(
-          "ExprBinary: expr1.op != expr2.op (" + expr1.op + " vs. " + expr2.op + ")");
+      System.err
+          .println("ExprBinary: expr1.op != expr2.op (" + expr1.op + " vs. " + expr2.op + ")");
       return false;
     }
     if (!compareExpr(expr1.right, expr2.right)) {
-      System.err.println(
-          "ExprBinary: !compareExpr(expr1.right, expr2.right) ("
-              + expr1.right
-              + " vs. "
-              + expr2.right
-              + ")");
+      System.err.println("ExprBinary: !compareExpr(expr1.right, expr2.right) (" + expr1.right
+          + " vs. " + expr2.right + ")");
       return false;
     }
     return true;
@@ -640,12 +544,8 @@ public class ExpressionComparator {
     }
 
     if (expr1.args.size() != expr2.args.size()) {
-      System.err.println(
-          "compareExprCall: expr1.args.size() != expr2.args.size() ( "
-              + expr1.args.size()
-              + " vs. "
-              + expr2.args.size()
-              + ")");
+      System.err.println("compareExprCall: expr1.args.size() != expr2.args.size() ( "
+          + expr1.args.size() + " vs. " + expr2.args.size() + ")");
       return false;
     }
 
@@ -662,8 +562,8 @@ public class ExpressionComparator {
           }
       }
       if (!found) {
-        System.err.println(
-            "compareExprCall: expr.args (" + next1 + ") not found in " + expr2.args + ".");
+        System.err
+            .println("compareExprCall: expr.args (" + next1 + ") not found in " + expr2.args + ".");
         return false;
       }
     }
@@ -679,11 +579,12 @@ public class ExpressionComparator {
           }
       }
       if (!found) {
-        System.err.println(
-            "compareExprCall: expr.args (" + next2 + ") not found in " + expr1.args + ".");
+        System.err
+            .println("compareExprCall: expr.args (" + next2 + ") not found in " + expr1.args + ".");
         return false;
       }
     }
+
 
     if (expr1.weight != expr2.weight) {
       System.err.println(
@@ -692,12 +593,8 @@ public class ExpressionComparator {
     }
 
     if (!compareFunctions(expr1.fun, expr2.fun)) {
-      System.err.println(
-          "compareExprCall: !compareFunctions(expr1.fun, expr2.fun) ("
-              + expr1.fun
-              + " vs. "
-              + expr2.fun
-              + ")");
+      System.err.println("compareExprCall: !compareFunctions(expr1.fun, expr2.fun) (" + expr1.fun
+          + " vs. " + expr2.fun + ")");
       return false;
     }
     return true;
@@ -722,8 +619,8 @@ public class ExpressionComparator {
     }
 
     if (expr1.op != expr2.op) {
-      System.err.println(
-          "ExprConstant: expr1.op != expr2.op (" + expr1.op + " vs. " + expr2.op + ")");
+      System.err
+          .println("ExprConstant: expr1.op != expr2.op (" + expr1.op + " vs. " + expr2.op + ")");
       return false;
     }
 
@@ -734,12 +631,8 @@ public class ExpressionComparator {
     }
 
     if (!expr1.string.equals(expr2.string)) {
-      System.err.println(
-          "ExprConstant: expr1.string != expr2.string ("
-              + expr1.string
-              + " vs. "
-              + expr2.string
-              + ")");
+      System.err.println("ExprConstant: expr1.string != expr2.string (" + expr1.string + " vs. "
+          + expr2.string + ")");
       return false;
     }
     return true;
@@ -757,92 +650,23 @@ public class ExpressionComparator {
       return false;
     }
     if (!compareExpr(expr1.cond, expr2.cond)) {
-      System.err.println(
-          "compareExprITE: !compareExpr(expr1.cond, expr2.cond) ("
-              + expr1.cond
-              + " vs. "
-              + expr2.cond
-              + ")");
+      System.err.println("compareExprITE: !compareExpr(expr1.cond, expr2.cond) (" + expr1.cond
+          + " vs. " + expr2.cond + ")");
       return false;
     }
     if (!compareExpr(expr1.left, expr2.left)) {
-      System.err.println(
-          "compareExprITE: !compareExpr(expr1.left, expr2.left) ("
-              + expr1.left
-              + " vs. "
-              + expr2.left
-              + ")");
+      System.err.println("compareExprITE: !compareExpr(expr1.left, expr2.left) (" + expr1.left
+          + " vs. " + expr2.left + ")");
       return false;
     }
     if (!compareExpr(expr1.right, expr2.right)) {
-      System.err.println(
-          "compareExprITE: !compareExpr(expr1.right, expr2.right) ("
-              + expr1.right
-              + " vs. "
-              + expr2.right
-              + ")");
+      System.err.println("compareExprITE: !compareExpr(expr1.right, expr2.right) (" + expr1.right
+          + " vs. " + expr2.right + ")");
       return false;
     }
     return true;
   }
 
-  private boolean compareExprListStart(ExprList expr1, ExprList expr2) {
-    if (expr1 == null && expr2 == null) {
-      System.err.println("compareExprList: " + "expr1 == null && expr2 == null");
-      return true;
-    }
-    if (expr1 != null && expr2 == null) {
-      System.err.println(
-          "compareExprList: " + "expr1 != null && expr2 == null (" + expr1 + " vs. " + expr2 + ")");
-      return false;
-    }
-    if (expr1 == null && expr2 != null) {
-      System.err.println(
-          "compareExprList: " + "expr1 == null && expr2 != null (" + expr1 + " vs. " + expr2 + ")");
-      return false;
-    }
-
-    if (expr1.op != expr2.op) {
-      System.err.println(
-          "compareExprList: expr1.op != expr2.op (" + expr1.op + " vs. " + expr2.op + ")");
-      return false;
-    }
-
-    if (expr1.args.size() != expr2.args.size()) {
-      System.err.println(
-          "compareExprList: "
-              + "expr1.args.size() != expr2.args.size() ("
-              + expr1.args.size()
-              + " vs. "
-              + expr2.args.size()
-              + ")");
-      return false;
-    }
-    // for each expr1.arg
-    for (int i = 0; i < expr1.args.size(); i++) {
-      boolean found = false;
-      for (int j = 0; j < expr2.args.size(); j++) {
-        // first compare as string. Both could be the same as string like (all x | no x .o/inputs)
-        // but one may be contained in sig A and the other may be contained in sig ParameterBehavior
-        visitedExpressions.clear();
-        if (compareAsString(expr1.args.get(i), expr2.args.get(j))) {
-          if (!compareExpr(expr1.args.get(i), expr2.args.get(j))) {
-            // expr1.args.get(i) == expr2.args.get(j) but not belong to same sig ParameterBehavior
-            // vs. A then should continue the search
-            found = false;
-          } else {
-            found = true;
-            break;
-          }
-        }
-      } // end of j loop
-      if (!found) {
-        System.err.println(expr1.args.get(i) + " not found in " + expr2.args);
-        return false;
-      }
-    }
-    return true;
-  }
 
   private boolean compareExprList(ExprList expr1, ExprList expr2) {
     if (expr1 == null && expr2 == null) {
@@ -860,19 +684,14 @@ public class ExpressionComparator {
     }
 
     if (expr1.op != expr2.op) {
-      System.err.println(
-          "compareExprList: expr1.op != expr2.op (" + expr1.op + " vs. " + expr2.op + ")");
+      System.err
+          .println("compareExprList: expr1.op != expr2.op (" + expr1.op + " vs. " + expr2.op + ")");
       return false;
     }
 
     if (expr1.args.size() != expr2.args.size()) {
-      System.err.println(
-          "compareExprList: "
-              + "expr1.args.size() != expr2.args.size() ("
-              + expr1.args.size()
-              + " vs. "
-              + expr2.args.size()
-              + ")");
+      System.err.println("compareExprList: " + "expr1.args.size() != expr2.args.size() ("
+          + expr1.args.size() + " vs. " + expr2.args.size() + ")");
       return false;
     }
     // for each expr1.arg
@@ -884,12 +703,8 @@ public class ExpressionComparator {
         // visitedExpressions.clear();
         if (compareAsString(expr1.args.get(i), expr2.args.get(j))) {
           if (!compareExpr(expr1.args.get(i), expr2.args.get(j))) {
-            System.err.println(
-                "compareExprList: expr1.args != expr2.args ("
-                    + expr1.args.get(i)
-                    + " vs. "
-                    + expr2.args.get(j)
-                    + ")");
+            System.err.println("compareExprList: expr1.args != expr2.args (" + expr1.args.get(i)
+                + " vs. " + expr2.args.get(j) + ")");
             found = false;
           } else {
             found = true;
@@ -971,6 +786,8 @@ public class ExpressionComparator {
       }
     }
 
+
+
     if (!compareExpr(expr1.sub, expr2.sub)) {
       System.err.println(
           "compareExprQt: !compareExpr(expr1.sub, expr2.sub) " + expr1.sub + " vs. " + expr2.sub);
@@ -999,11 +816,8 @@ public class ExpressionComparator {
       return false;
     }
     if (!compareExpr(expr1.sub, expr2.sub)) {
-      System.err.println(
-          "compareExprUnary: !compareExpr(expr1.sub, expr2.sub) "
-              + expr1.sub
-              + " vs. "
-              + expr2.sub);
+      System.err.println("compareExprUnary: !compareExpr(expr1.sub, expr2.sub) " + expr1.sub
+          + " vs. " + expr2.sub);
       return false;
     }
     return true;
@@ -1024,12 +838,8 @@ public class ExpressionComparator {
     // expr.label is like "this" or "x" for comparing fact like "(all x | # x .
     // (this/MultipleControlFlow <: p1) = 2)"
     if (!expr1.label.equals(expr2.label)) {
-      System.err.println(
-          "compareExprVar: expr1.label != expr2.label ("
-              + expr1.label
-              + " vs. "
-              + expr2.label
-              + ")");
+      System.err.println("compareExprVar: expr1.label != expr2.label (" + expr1.label + " vs. "
+          + expr2.label + ")");
       return false;
     }
     if (!compareType(expr1.type(), expr2.type())) {
@@ -1053,13 +863,8 @@ public class ExpressionComparator {
     }
 
     if (func1.decls.size() != func2.decls.size()) {
-      System.err.println(
-          "compareFunction: "
-              + "func1.decls.size() != func2.decls.size() ("
-              + func1.decls.size()
-              + " vs. "
-              + func2.decls.size()
-              + ")");
+      System.err.println("compareFunction: " + "func1.decls.size() != func2.decls.size() ("
+          + func1.decls.size() + " vs. " + func2.decls.size() + ")");
       return false;
     }
     // check all func1.decls in func2.decls
@@ -1068,17 +873,14 @@ public class ExpressionComparator {
         visitedExpressions.clear();
         if (compareAsString(func1.decls.get(i), func2.decls.get(j))) {
           if (!compareDecl(func1.decls.get(i), func2.decls.get(j))) {
-            System.err.println(
-                "compareFunction: !compareDecl (func.decls). "
-                    + func1.decls.get(i)
-                    + " and "
-                    + func2.decls.get(j)
-                    + "has a same string but different as Decl");
+            System.err.println("compareFunction: !compareDecl (func.decls). " + func1.decls.get(i)
+                + " and " + func2.decls.get(j) + "has a same string but different as Decl");
             return false;
           }
         }
       }
     }
+
 
     if (func1.isPred != func2.isPred) {
       System.err.println(
@@ -1087,40 +889,30 @@ public class ExpressionComparator {
     }
     if (func1.isPrivate == null && func2.isPrivate != null) {
 
-      System.err.println(
-          "compareFunctions: " + "func1.isPrivate == null && func2.isPrivate != null");
+      System.err
+          .println("compareFunctions: " + "func1.isPrivate == null && func2.isPrivate != null");
       return false;
     }
     if (func1.isPrivate != null && func2.isPrivate == null) {
-      System.err.println(
-          "compareFunctions: " + "func1.isPrivate != null && func2.isPrivate == null");
+      System.err
+          .println("compareFunctions: " + "func1.isPrivate != null && func2.isPrivate == null");
       return false;
     }
     if (!AlloyUtils.removeSlash(func1.label).equals(AlloyUtils.removeSlash(func2.label))) {
-      System.err.println(
-          "compareFunctions: label is different. ("
-              + AlloyUtils.removeSlash(func1.label)
-              + " vs. "
-              + AlloyUtils.removeSlash(func2.label)
-              + ")");
+      System.err
+          .println("compareFunctions: label is different. (" + AlloyUtils.removeSlash(func1.label)
+              + " vs. " + AlloyUtils.removeSlash(func2.label) + ")");
       System.err.println();
       return false;
     }
     if (!compareExpr(func1.returnDecl, func2.returnDecl)) {
-      System.err.println(
-          "compareFunctions: "
-              + "!compareExpr(func1.returnDecl, func2.returnDecl) "
-              + func1.returnDecl
-              + " vs. "
-              + func2.returnDecl);
+      System.err.println("compareFunctions: " + "!compareExpr(func1.returnDecl, func2.returnDecl) "
+          + func1.returnDecl + " vs. " + func2.returnDecl);
       return false;
     }
     if (!compareExpr(func1.getBody(), func2.getBody())) {
-      System.err.println(
-          "!compareExpr(func1.getBody(), func2.getBody()) "
-              + func1.getBody()
-              + " vs. "
-              + func2.getBody());
+      System.err.println("!compareExpr(func1.getBody(), func2.getBody()) " + func1.getBody()
+          + " vs. " + func2.getBody());
       return false;
     }
     return true;
@@ -1132,16 +924,9 @@ public class ExpressionComparator {
     }
 
     if (primSig1.children().size() != primSig2.children().size()) {
-      System.err.println(
-          "comparePrimSig: primSig1("
-              + primSig1
-              + ").children().size()("
-              + primSig1.children().size()
-              + ") != primSig2("
-              + primSig2
-              + ").children().size() ("
-              + +primSig2.children().size()
-              + ")");
+      System.err.println("comparePrimSig: primSig1(" + primSig1 + ").children().size()("
+          + primSig1.children().size() + ") != primSig2(" + primSig2 + ").children().size() ("
+          + +primSig2.children().size() + ")");
       return false;
     }
     return true;
@@ -1154,8 +939,8 @@ public class ExpressionComparator {
       return true;
     }
     if (sig1 == null && sig2 != null) {
-      System.err.println(
-          "compareSig: sig1 == null && sig2 != null (" + sig1 + " vs. " + sig2 + ")");
+      System.err
+          .println("compareSig: sig1 == null && sig2 != null (" + sig1 + " vs. " + sig2 + ")");
       return false;
     }
     if (sig1 != null && sig2 == null) {
@@ -1163,32 +948,26 @@ public class ExpressionComparator {
       return false;
     }
 
-    if (sig1 instanceof Sig.PrimSig
-        && sig2 instanceof Sig.PrimSig
+    if (sig1 instanceof Sig.PrimSig && sig2 instanceof Sig.PrimSig
         && !comparePrimSig((Sig.PrimSig) sig1, (Sig.PrimSig) sig2)) {
       return false;
     }
 
     if (sig1.attributes.size() != sig2.attributes.size()) {
-      System.err.println(
-          "compareSig: sig1.attributes.size() != sig2.attributes.size() ("
-              + sig1.attributes.size()
-              + " vs. "
-              + sig2.attributes.size()
-              + ")");
+      System.err.println("compareSig: sig1.attributes.size() != sig2.attributes.size() ("
+          + sig1.attributes.size() + " vs. " + sig2.attributes.size() + ")");
       return false;
     }
 
     // sig.attributes are [0] where, [1]...[6] null, [7]..[9] subsig
     // order of sig1.attributes and sig2.attributes are the same
     for (int i = 0; i < sig1.attributes.size(); i++) {
-      if (sig1.attributes.get(i) == null && sig2.attributes.get(i) == null) continue;
+      if (sig1.attributes.get(i) == null && sig2.attributes.get(i) == null)
+        continue;
       else if (!sig1.attributes.get(i).toString().equals(sig2.attributes.get(i).toString())) {
-        System.err.println(
-            "compareSig: !compareAttr(sig1.attributes.get(i), sig2.attributes.get(i))"
-                + sig1.attributes.get(i)
-                + " vs. "
-                + sig2.attributes.get(i));
+        System.err
+            .println("compareSig: !compareAttr(sig1.attributes.get(i), sig2.attributes.get(i))"
+                + sig1.attributes.get(i) + " vs. " + sig2.attributes.get(i));
         return false;
       }
     }
@@ -1276,41 +1055,27 @@ public class ExpressionComparator {
       return false;
     }
     if (!AlloyUtils.removeSlash(sig1.label).equals(AlloyUtils.removeSlash(sig2.label))) {
-      System.err.println(
-          "compareSig: !sig1.label.equals(sig2.label) "
-              + AlloyUtils.removeSlash(sig1.label)
-              + " vs. "
-              + AlloyUtils.removeSlash(sig2.label));
+      System.err.println("compareSig: !sig1.label.equals(sig2.label) "
+          + AlloyUtils.removeSlash(sig1.label) + " vs. " + AlloyUtils.removeSlash(sig2.label));
       return false;
     }
     if (sig1.getDepth() != sig2.getDepth()) {
-      System.err.println(
-          "compareSig: sig1.getDepth() != sig2.getDepth() "
-              + sig1.getDepth()
-              + " vs. "
-              + sig2.getDepth());
+      System.err.println("compareSig: sig1.getDepth() != sig2.getDepth() " + sig1.getDepth()
+          + " vs. " + sig2.getDepth());
       return false;
     }
 
     if (sig1.getFacts().size() != sig2.getFacts().size()) {
-      System.err.println(
-          "compareSig: sig1.getFacts().size() != sig2.getFacts().size() ("
-              + sig1.getFacts().size()
-              + " vs. "
-              + sig2.getFacts().size()
-              + ")");
+      System.err.println("compareSig: sig1.getFacts().size() != sig2.getFacts().size() ("
+          + sig1.getFacts().size() + " vs. " + sig2.getFacts().size() + ")");
       return false;
     }
 
     // check all sig1.facts are in sig2.facts - not necessary check separately
     boolean found;
     if (sig1.getFieldDecls().size() != sig2.getFieldDecls().size()) {
-      System.err.println(
-          "compareSig: sig1.getFieldDecls().size() != sig2.getFieldDecls().size() ("
-              + sig1.getFieldDecls().size()
-              + " vs. "
-              + sig2.getFieldDecls().size()
-              + ")");
+      System.err.println("compareSig: sig1.getFieldDecls().size() != sig2.getFieldDecls().size() ("
+          + sig1.getFieldDecls().size() + " vs. " + sig2.getFieldDecls().size() + ")");
       return false;
     }
 
@@ -1324,19 +1089,16 @@ public class ExpressionComparator {
         }
       }
       if (!found) {
-        System.err.println(
-            "compareSig: fieldDecls " + decl1 + " not found in " + sig2.getFieldDecls());
+        System.err
+            .println("compareSig: fieldDecls " + decl1 + " not found in " + sig2.getFieldDecls());
         return false;
       }
     }
 
+
     if (sig1.getFields().size() != sig2.getFields().size()) {
-      System.err.println(
-          "compareSig: sig1.getFields().size() != sig2.getFields().size() ("
-              + sig1.getFields().size()
-              + " vs. "
-              + sig2.getFields().size()
-              + ")");
+      System.err.println("compareSig: sig1.getFields().size() != sig2.getFields().size() ("
+          + sig1.getFields().size() + " vs. " + sig2.getFields().size() + ")");
       return false;
     }
     // check all sig1.fields are in sig2.fields
@@ -1362,21 +1124,14 @@ public class ExpressionComparator {
     // getSubnodes() not implemented
 
     if (sig1.isTopLevel() != sig2.isTopLevel()) {
-      System.err.println(
-          "compareSig: sig1.isTopLevel() != sig2.isTopLevel() ("
-              + sig1.isTopLevel()
-              + " vs. "
-              + sig2.isTopLevel()
-              + ")");
+      System.err.println("compareSig: sig1.isTopLevel() != sig2.isTopLevel() (" + sig1.isTopLevel()
+          + " vs. " + sig2.isTopLevel() + ")");
       return false;
     }
     if (!AlloyUtils.removeSlash(sig1.toString()).equals(AlloyUtils.removeSlash(sig2.toString()))) {
-      System.err.println(
-          "compareSig: !sig1.toString().equals(sig2.toString()) ("
-              + AlloyUtils.removeSlash(sig1.toString())
-              + " vs. "
-              + AlloyUtils.removeSlash(sig2.toString())
-              + ")");
+      System.err.println("compareSig: !sig1.toString().equals(sig2.toString()) ("
+          + AlloyUtils.removeSlash(sig1.toString()) + " vs. "
+          + AlloyUtils.removeSlash(sig2.toString()) + ")");
       return false;
     }
     return true; // CompareSig
@@ -1398,22 +1153,15 @@ public class ExpressionComparator {
     }
 
     if (!AlloyUtils.removeSlash(sig1Field.label).equals(AlloyUtils.removeSlash(sig2Field.label))) {
-      System.err.println(
-          "Sig.Field: sig1.label != sig2.label ("
-              + AlloyUtils.removeSlash(sig1Field.label)
-              + " vs. "
-              + AlloyUtils.removeSlash(sig2Field.label)
-              + ")");
+      System.err
+          .println("Sig.Field: sig1.label != sig2.label (" + AlloyUtils.removeSlash(sig1Field.label)
+              + " vs. " + AlloyUtils.removeSlash(sig2Field.label) + ")");
       return false;
     }
 
     if (sig1Field.defined != sig2Field.defined) {
-      System.err.println(
-          "Sig.Field: sig1.defined != sig2.defined ("
-              + sig1Field.defined
-              + " vs. "
-              + sig2Field.defined
-              + ")");
+      System.err.println("Sig.Field: sig1.defined != sig2.defined (" + sig1Field.defined + " vs. "
+          + sig2Field.defined + ")");
       return false;
     }
 
@@ -1426,12 +1174,8 @@ public class ExpressionComparator {
 
     if ((sig1Field.isPrivate == null && sig2Field.isPrivate != null)
         || sig1Field.isPrivate != null && sig2Field.isPrivate == null) {
-      System.err.println(
-          "Sig.Field: isPrivate different ("
-              + sig1Field.isPrivate
-              + " vs. "
-              + sig2Field.isPrivate
-              + ")");
+      System.err.println("Sig.Field: isPrivate different (" + sig1Field.isPrivate + " vs. "
+          + sig2Field.isPrivate + ")");
       return false;
     }
     return true;
@@ -1477,12 +1221,10 @@ public class ExpressionComparator {
   }
 
   // util methods
-
   /**
-   * sort ExprList of Expr in alphabetical order using expr.toString() method return is List of
-   * List<Expr> because some fact's have the same toString() even its belong to different sigs (ie.,
+   * sort ExprList of Expr in alphabetical order using expr.toString() method return is List of List<Expr> because some fact's have the same toString() even its belong to different Signatures (ie.,
    * inputs.x)
-   *
+   * 
    * @param e1 ExprList
    * @return List<List<Expr>> List of List <Expr.toString()>
    */
@@ -1507,24 +1249,11 @@ public class ExpressionComparator {
     Collections.sort(keys);
 
     List<List<Expr>> sortedList = new ArrayList<List<Expr>>();
-    for (String key : keys) sortedList.add(sortedMap.get(key));
+    for (String key : keys)
+      sortedList.add(sortedMap.get(key));
 
     return sortedList;
   }
 
-  /**
-   * compare two List of List<Expr>'s size
-   *
-   * @param l1
-   * @param l2
-   * @return true if outer list and each inner list size are the same.
-   */
-  private static boolean compareTwoList(List<List<Expr>> l1, List<List<Expr>> l2) {
-
-    if (l1.size() != l2.size()) return false;
-    for (int i = 0; i < l1.size(); i++) {
-      if (l1.get(i).size() != l2.get(i).size()) return false;
-    }
-    return true;
-  }
 }
+

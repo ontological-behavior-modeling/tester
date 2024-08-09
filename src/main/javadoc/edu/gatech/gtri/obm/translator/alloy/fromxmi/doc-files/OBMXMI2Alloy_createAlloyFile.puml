@@ -1,20 +1,23 @@
 @startuml
 start
-title createAlloyFile
-if (file !exists and !readable?) then (yes)
- :Error;
- :return false;
- stop
-else (no)
- if (loadOBMandCreateAlloy?) then (yes)
-  :Create Alloy File;
-  :Print Filename;
-  :Return true;
-  stop
- else(no)
-  :Error;
-  :Return false;
-  stop
- endif
-endif
+	:Construct ToAlloy;
+	:Create errorMessages ArrayList;
+	:Create messages ArrayList;
+	:Set parameterFields to null;
+	fork
+	if(CreateAlloy != null)
+		:ToAlloy createAlloyFile;
+		if(Alloy File created successfully)
+			:Add message File is created;
+		else(no)
+			:Add message Failed to create file;
+		endif
+	endif
+	:Return success;
+	stop
+	fork again
+		:Catch IOException;
+		:Add error message;
+		:Return false;
+	stop
 @enduml

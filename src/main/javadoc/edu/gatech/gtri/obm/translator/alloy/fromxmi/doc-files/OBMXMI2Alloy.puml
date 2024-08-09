@@ -1,5 +1,5 @@
 @startuml
 start
-:Construct ToAlloy Class;
+:Construct Alloy Class;
 stop
 @enduml
