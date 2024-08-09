@@ -1,6 +1,6 @@
-package edu.gatech.gtri.obm.translator.alloy.userinterface;
+package edu.gatech.gtri.obm.alloy.translator.userinterface;
 
-import edu.gatech.gtri.obm.translator.alloy.fromxmi.OBMXMI2Alloy;
+import edu.gatech.gtri.obm.alloy.translator.OBMXMI2Alloy;
 import edu.umd.omgutil.EMFUtil;
 import edu.umd.omgutil.UMLModelErrorException;
 import java.awt.BorderLayout;
@@ -339,37 +339,32 @@ public class UserInterface {
               }
               Popup p = new Popup("Generating File");
               int i = 1;
-              OBMXMI2Alloy obm = null;
-              try {
-                obm = new OBMXMI2Alloy(path);
-              } catch (FileNotFoundException | UMLModelErrorException e1) {
-                e1.printStackTrace();
-                p.getDialog().setTitle("Error" + e1);
-              }
+              OBMXMI2Alloy obm = new OBMXMI2Alloy(path);
               List<String> mainClass = list.getSelectedValuesList();
               int fileNum = mainClass.size();
               String fileList = "File(s) Created";
+              try {
+                obm.loadXmiFile(xmiFile);
+              } catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+              } catch (UMLModelErrorException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+              }
               for (String c : mainClass) {
                 p.getDialog().setTitle("Generating File " + i + "/" + fileNum);
                 p.getDialog().setVisible(true);
                 File alsFile = null;
                 if (!chckbxName.isSelected()) {
-                  try {
-                    alsFile = saveALS(c);
-                    if (alsFile == null) {
-                      JOptionPane.showMessageDialog(
-                          frmObmAlloyTranslator,
-                          "No File Name Selected. Alloy file generation cancelled");
-                    } else {
-                      if (!obm.createAlloyFile(xmiFile, c, alsFile))
-                        JOptionPane.showMessageDialog(frmObmAlloyTranslator, obm.getErrorMessage());
-                    }
-                  } catch (FileNotFoundException
-                      | UMLModelErrorException
-                      | NullPointerException e1) {
+                  alsFile = saveALS(c);
+                  if (alsFile == null) {
                     JOptionPane.showMessageDialog(
                         frmObmAlloyTranslator,
-                        "Selected XMI file does not exist.\nTranslation Canceled.");
+                        "No File Name Selected. Alloy file generation cancelled");
+                  } else {
+                    if (!obm.createAlloyFile(c, alsFile))
+                      JOptionPane.showMessageDialog(frmObmAlloyTranslator, obm.getErrorMessages());
                   }
                 } else {
                   location = location.substring(0, slash + 1);
@@ -379,14 +374,8 @@ public class UserInterface {
                   Date date = new Date();
                   String dt = dateFormat.format(date);
                   alsFile = new File(location + name + "_" + dt + ".als");
-                  try {
-                    if (!obm.createAlloyFile(xmiFile, c, alsFile))
-                      JOptionPane.showMessageDialog(frmObmAlloyTranslator, obm.getErrorMessage());
-                  } catch (FileNotFoundException | UMLModelErrorException e1) {
-                    JOptionPane.showMessageDialog(
-                        frmObmAlloyTranslator,
-                        "Selected XMI file does not exist.\nTranslation Canceled.");
-                  }
+                  if (!obm.createAlloyFile(c, alsFile))
+                    JOptionPane.showMessageDialog(frmObmAlloyTranslator, obm.getErrorMessages());
                 }
                 p.getDialog().setVisible(false);
                 fileList = fileList + "\n" + alsFile.getAbsolutePath();

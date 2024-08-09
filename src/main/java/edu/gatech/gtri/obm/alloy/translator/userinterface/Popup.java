@@ -1,4 +1,4 @@
-package edu.gatech.gtri.obm.translator.alloy.userinterface;
+package edu.gatech.gtri.obm.alloy.translator.userinterface;
 
 import java.awt.Dimension;
 import java.util.Date;
@@ -64,5 +64,13 @@ public class Popup {
         },
         new Date(),
         1000);
+  }
+
+  public JDialog getDialog() {
+    return dialog;
+  }
+
+  public Timer getT() {
+    return t;
   }
 }
