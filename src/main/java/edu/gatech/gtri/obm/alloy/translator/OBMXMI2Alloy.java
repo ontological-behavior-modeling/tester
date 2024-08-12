@@ -64,7 +64,7 @@ public final class OBMXMI2Alloy {
 
   /**
    * A constructor to set the given alloyLibPath as an instance variable.
-   * 
+   *
    * <p><img src="doc-files/OBMXMI2Alloy.svg"/>
    *
    * @param alloyLibPath - An absolute path name string for the required library folder containing
@@ -76,7 +76,7 @@ public final class OBMXMI2Alloy {
 
   /**
    * loading xmiFile to preparing for translation
-   * 
+   *
    * <p><img src="doc-files/OBMXMI2Alloy_loadXmiFile.svg"/>
    *
    * @param xmiFile - xmiFile containing classes you like to translate to an alloy file.
@@ -116,7 +116,7 @@ public final class OBMXMI2Alloy {
   /**
    * Create an alloy output file of the qualifideName class/behavior model in the xml file. If this
    * method return false, you may use getErrorMessages() to know why cause failure.
-   * 
+   *
    * <p><img src="doc-files/OBMXMI2Alloy_createAlloyFile.svg"/>
    *
    * @param qualifiedName of a UML:Class for translation (ie.,
