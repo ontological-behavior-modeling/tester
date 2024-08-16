@@ -117,7 +117,7 @@ public final class OBMXMI2Alloy {
    * Create an alloy output file of the qualifideName class/behavior model in the xml file. If this
    * method return false, you may use getErrorMessages() to know why cause failure.
    *
-   * <p><img src="doc-files/OBMXMI2Alloy_createAlloyFile.svg"/>
+   * <p><img src="doc-files/OBMXMI2Alloy_createAlloyFile.svg">
    *
    * @param qualifiedName of a UML:Class for translation (ie.,
    *     Model::FoodService::OFSingleFoodService)
