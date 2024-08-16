@@ -33,6 +33,9 @@ jobs:
       - name: Get Current Release Version
         run: |
           echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.scm.tag -q -DforceStdout)" >> $GITHUB_ENV
+
+      - name: Clean Maven Code
+        run: mvn clean
       
       - name: Prepare Version for Javadocs
         run: mvn versions:set -DnewVersion=${{ env.RELEASE_VERSION}}
