@@ -63,8 +63,8 @@ public final class OBMXMI2Alloy {
   List<String> messages;
 
   /**
-   * A constructor to set the given alloyLibPath as an instance variable. Image Below 1
-   * Image below <br>
+   * A constructor to set the given alloyLibPath as an instance variableImage Below 1 Image below
+   * <br>
    * <img src="doc-files/OBMXMI2Alloy.svg"/>
    *
    * @param alloyLibPath - An absolute path name string for the required library folder containing
@@ -77,7 +77,7 @@ public final class OBMXMI2Alloy {
   /**
    * loading xmiFile to preparing for translation. Updated
    *
-   * <p><img src="doc-files/OBMXMI2Alloy_loadXmiFile.svg"/></p>
+   * <p><img src="doc-files/OBMXMI2Alloy_loadXmiFile.svg"/>
    *
    * @param xmiFile - xmiFile containing classes you like to translate to an alloy file.
    * @return true if successful, otherwise return false
