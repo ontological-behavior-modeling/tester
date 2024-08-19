@@ -29,13 +29,15 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.eclipse.uml2.uml.internal.impl.OpaqueExpressionImpl;
 
+// TODO: Auto-generated Javadoc
 /**
- * A utility class for Alloy Fields,
+ * A utility class for Alloy Fields,.
  *
  * @author Miyako Wilson, AE(ASDL) - Georgia Tech
  */
 public class AlloyUtils {
 
+  /** The Constant invalidParentNames. */
   static final List<String> invalidParentNames;
 
   static {
@@ -47,8 +49,8 @@ public class AlloyUtils {
 
   /**
    * Create a field and return
-   *
-   * <p>sig ownerSig { label: set sigType }
+   * 
+   * <p>sig ownerSig { label: set sigType }.
    *
    * @param fieldLabel the field name
    * @param ownerSig the Sig the field belong to
@@ -72,8 +74,8 @@ public class AlloyUtils {
 
   /**
    * Create the tricky fields (disj) and return
-   *
-   * <p>sig ownerSig { disj field0, field1: set sigType}
+   * 
+   * <p>sig ownerSig { disj field0, field1: set sigType}.
    *
    * @param fieldNames the filed names
    * @param ownerSig the Sig that the fields belong to
@@ -88,6 +90,8 @@ public class AlloyUtils {
 
   /**
    * Import alloy module.
+   * 
+   * <p><img src="doc-files/AlloyUtils_importAlloyModulef.svg"/>
    *
    * @param f the f
    * @return the comp module
@@ -98,6 +102,8 @@ public class AlloyUtils {
 
   /**
    * Import alloy module.
+   * 
+   * <p><img src="doc-files/AlloyUtils_importAlloyModules.svg"/>
    *
    * @param absoluteFileName the absolute file name
    * @return the comp module
@@ -108,6 +114,8 @@ public class AlloyUtils {
 
   /**
    * Removes the slash.
+   * 
+   * <p><img src="doc-files/AlloyUtils_removeSlash.svg"/>
    *
    * @param sig the sig
    * @return the string
@@ -121,6 +129,15 @@ public class AlloyUtils {
     return sig;
   }
 
+  /**
+   * Self or ancestor.
+   * 
+   * <p><img src="doc-files/AlloyUtils_selfOrAncestor.svg"/>
+   *
+   * @param sig the sig
+   * @param lookingFor the looking for
+   * @return true, if successful
+   */
   public static boolean selfOrAncestor(PrimSig sig, Sig lookingFor) {
     if (sig == lookingFor) return true;
     else if (sig.parent != null) {
@@ -140,6 +157,12 @@ public class AlloyUtils {
     else return true;
   }
 
+  /**
+   * Checks for own or inherited fields.
+   *
+   * @param sig the sig
+   * @return true, if successful
+   */
   public static boolean hasOwnOrInheritedFields(PrimSig sig) {
     if (sig.getFields().size() > 0) return true;
     while (sig.parent != null) {
@@ -172,6 +195,13 @@ public class AlloyUtils {
     return null;
   }
 
+  /**
+   * Gets the field from parent sig.
+   *
+   * @param fieldNameLookingFor the field name looking for
+   * @param sig the sig
+   * @return the field from parent sig
+   */
   public static Sig.Field getFieldFromParentSig(String fieldNameLookingFor, PrimSig sig) {
     while (sig.parent != null) { // SingleFoodService -> FoodService -> this/Occurrence -> univ ->
       // null
@@ -184,6 +214,13 @@ public class AlloyUtils {
     return null;
   }
 
+  /**
+   * Gets the sig domain field.
+   *
+   * @param fieldNameLookingFor the field name looking for
+   * @param sig the sig
+   * @return the sig domain field
+   */
   // sig.domain(sigField) or parentSig.domain(parentSigField)
   public static Expr getSigDomainField(String fieldNameLookingFor, PrimSig sig) {
     for (Sig.Field field : sig.getFields()) { // getFields does not include redefined fields
@@ -200,6 +237,13 @@ public class AlloyUtils {
     return null;
   }
 
+  /**
+   * Gets the sig own field.
+   *
+   * @param fieldNameLookingFor the field name looking for
+   * @param sig the sig
+   * @return the sig own field
+   */
   public static Expr getSigOwnField(String fieldNameLookingFor, PrimSig sig) {
     for (Sig.Field field : sig.getFields()) { // getFields does not include redefined fields
       if (field.label.equals(fieldNameLookingFor)) return sig.domain(field);
@@ -221,6 +265,13 @@ public class AlloyUtils {
     return null;
   }
 
+  /**
+   * Gets the all reachable module by name.
+   *
+   * @param module the module
+   * @param lookingForModuleName the looking for module name
+   * @return the all reachable module by name
+   */
   public static Module getAllReachableModuleByName(Module module, String lookingForModuleName) {
 
     for (Module m : module.getAllReachableModules()) {
@@ -230,10 +281,10 @@ public class AlloyUtils {
   }
 
   /**
-   * Get a function in module based on label
+   * Get a function in module based on label.
    *
-   * @param module
-   * @param lookingForFunctionLabel
+   * @param module the module
+   * @param lookingForFunctionLabel the looking for function label
    * @return function
    */
   public static Func getFunction(Module module, String lookingForFunctionLabel) {
@@ -244,7 +295,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Sort Fields based on its label alphabetically
+   * Sort Fields based on its label alphabetically.
    *
    * @param fields the set of fields to be sorted
    * @return sorted list of fields
@@ -262,7 +313,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Sort the strings alphabetically
+   * Sort the strings alphabetically.
    *
    * @param strings the set of strings to be sorted
    * @return sorted list of strings
@@ -284,6 +335,13 @@ public class AlloyUtils {
     return fields.stream().map(e -> e.label).collect(Collectors.toSet());
   }
 
+  /**
+   * To sig all facts.
+   *
+   * @param ownerSig the owner sig
+   * @param exprs the exprs
+   * @return the sets the
+   */
   public static Set<Expr> toSigAllFacts(Sig ownerSig, Set<Expr> exprs) {
     Decl decl = AlloyExprFactory.makeDecl(ownerSig);
     Set<Expr> rAll = new HashSet<>();
@@ -298,9 +356,9 @@ public class AlloyUtils {
    * and s.p2. if original is like "BuffetService <: (FoodService <: eat)" -> ((ExprBinary)
    * original).op = "<:", in this case just return s.join(original) =
    *
-   * @param s
-   * @param original
-   * @return
+   * @param s the s
+   * @param original the original
+   * @return the expr
    */
   protected static Expr addExprVarToExpr(ExprVar s, Expr original) {
     if (original instanceof ExprBinary) {
@@ -316,7 +374,7 @@ public class AlloyUtils {
   }
 
   /**
-   * Return boolean if the map not contain both the given key and the given value
+   * Return boolean if the map not contain both the given key and the given value.
    *
    * @param map key = Field, values = Set of Fields
    * @param key key(Field) to be checked
@@ -333,6 +391,7 @@ public class AlloyUtils {
    * Get two rules (ConnectorEnds) of each one of constraint using omgutils.SysMLAdapter and return
    * as set.
    *
+   * @param sysmladapter the sysmladapter
    * @param cs a set of Constraints
    * @return set of oneof constraint's two rules (ConnectorEnd)
    */

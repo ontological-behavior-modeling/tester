@@ -1,28 +1,20 @@
 @startuml
 start
-if(//ignoredExpr// contains ExprBinary) then (yes)
-:Return Empty String;
-stop
+:Set //isRootSig// to false;
+:Construct StringBuilder //sb//;
+if (Expr Operator == JOIN) then (yes)
+	:Set //left// String to left side of Expr;
+	:Set //right// String to right side of Expr;
+	if(//left// String is "this" and //right// String is Sig.Field)
+		:Return //right//;
+		stop
+	endif
+	:Return //sb// appended with //left//, Expr operator, and //right//;
 endif
-:Set isRootSig to false;
-:Create StringBuilder;
-if(ExprBinary Operation is Join) then (yes)
-:Get Left Side of ExprBinary;
-:Get Right Side of ExprBinary;
-if (Left Side is "this" &&
-Right Side is an Instance of Sig.Field)
-:Return Right Side;
-stop
+:Set //op// String to Expr operator;
+if(Expr operator == NOT_IN) then (yes)
+	://op// = "not in";
 endif
-:Return Left Side and Right Side
-Appended to StringBuilder;
-stop
-endif
-:Get ExprBinary Operation to String;
-if(ExprBinary Operation is "not in")
-:Set Operation String to "not in";
-endif
-:Return Left Side, Operation, Right Side
-Appended to StringBuilder;
+:Return //sb// appended with //left//, //op//, and //right//;
 stop
 @enduml

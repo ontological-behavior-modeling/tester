@@ -23,25 +23,35 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
+// TODO: Auto-generated Javadoc
 /**
- * Visitor transform the Alloy object to a file
+ * Visitor transform the Alloy object to a file.
  *
  * @author Miyako Wilson, AE(ASDL) - Georgia Tech
  * @author Andrew H Shinjo, Graduate Student - Georgia Tech
  */
 public class ExprVisitor extends VisitQuery<String> {
 
+  /** The is root sig. */
   protected boolean isRootSig = false;
+  
+  /** The is root expr list. */
   private boolean isRootExprList = true;
+  
+  /** The field after sig. */
   private boolean fieldAfterSig = false;
+  
+  /** The is implicit fact. */
   private boolean isImplicitFact = false;
+  
+  /** The is sig fact. */
   private boolean isSigFact = false;
 
   /** a set of fields to make fields in disj (ie., disj p1, p2: set AtomicBehavior) */
   private final Set<Sig.Field> parameterFields;
 
   /**
-   * A constructor
+   * A constructor.
    *
    * @param _parameterFields - A set of Fields that with Parameter stereotype. Helps to determine
    *     disj fields.
@@ -50,6 +60,15 @@ public class ExprVisitor extends VisitQuery<String> {
     this.parameterFields = _parameterFields;
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitExprBinary.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprBinary x) throws Err {
 
@@ -81,6 +100,15 @@ public class ExprVisitor extends VisitQuery<String> {
         .toString();
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitExprCall.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprCall x) throws Err {
 
@@ -103,6 +131,15 @@ public class ExprVisitor extends VisitQuery<String> {
     return sb.toString();
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitExprConstant.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprConstant x) throws Err {
 
@@ -111,6 +148,15 @@ public class ExprVisitor extends VisitQuery<String> {
     return x.toString();
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitExprList.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprList x) throws Err {
 
@@ -145,6 +191,13 @@ public class ExprVisitor extends VisitQuery<String> {
     return String.join(op, args);
   }
 
+  /**
+   * Visit.
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprQt x) throws Err {
 
@@ -172,6 +225,15 @@ public class ExprVisitor extends VisitQuery<String> {
         .toString();
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitExprUnary.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprUnary x) throws Err {
 
@@ -207,12 +269,30 @@ public class ExprVisitor extends VisitQuery<String> {
     return out;
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitExprVar.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprVar x) throws Err {
     isRootSig = false;
     return x.label;
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitSig.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(Sig x) throws Err {
 
@@ -337,6 +417,15 @@ public class ExprVisitor extends VisitQuery<String> {
     return AlloyUtils.removeSlash(x.label);
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitField.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(Field x) throws Err {
 
@@ -386,7 +475,7 @@ public class ExprVisitor extends VisitQuery<String> {
    * Create a string name separated by , from the given decl's names.
    *
    * @param decl - A decl to create a names
-   * @return
+   * @return the names from decl
    */
   private String getNamesFromDecl(Decl decl) {
 

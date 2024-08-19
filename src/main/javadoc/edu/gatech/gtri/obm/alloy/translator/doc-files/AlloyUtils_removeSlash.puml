@@ -1,9 +1,9 @@
 @startuml
 start
 if (Signature Contains a Slash) then (yes)
-  :Find Index of Slash;
-  :Remove Index;
+	:Find Index of Slash;
+	:Remove Index;
 endif
- :Return Signature;
+:Return Signature;
 stop
 @enduml
