@@ -19,7 +19,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          ref: develop
+          ref: main
         
       - name: Configure Git
         run: |
@@ -29,16 +29,9 @@ jobs:
 
       - name: Copy settings.xml
         run: cp ./.github/Maven/settings.xml $HOME/.m2/settings.xml
-      
-      - name: Get Current Release Version
-        run: |
-          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.scm.tag -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: Clean Maven Code
         run: mvn clean
-      
-      - name: Prepare Version for Javadocs
-        run: mvn versions:set -DnewVersion=${{ env.RELEASE_VERSION}}
 
       - name: Setup Graphviz for UML in Javadocs
         uses: ts-graphviz/setup-graphviz@v2
