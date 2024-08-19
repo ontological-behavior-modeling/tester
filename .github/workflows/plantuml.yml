@@ -11,7 +11,7 @@ name: Generate PlantUML Images
 on:
   push:
     branches: 
-     - 'develop'
+     - 'main'
     paths:
      - '**.puml'
 
