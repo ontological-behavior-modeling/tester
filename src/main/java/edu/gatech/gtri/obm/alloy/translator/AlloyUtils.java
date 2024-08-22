@@ -148,6 +148,8 @@ public class AlloyUtils {
 
   /**
    * Valid parent.
+   * 
+   *<p><img src="doc-files/AlloyUtils_validParent.svg"/>
    *
    * @param parentName the parent name
    * @return true, if successful
@@ -159,6 +161,8 @@ public class AlloyUtils {
 
   /**
    * Checks for own or inherited fields.
+   * 
+   * <p><img src="doc-files/AlloyUtils_hasOwnOrInheritedFields.svg"/>
    *
    * @param sig the sig
    * @return true, if successful
@@ -175,6 +179,8 @@ public class AlloyUtils {
   /**
    * Find Field from sig by fieldName. If not find in the sig, try to find in its parent
    * recursively.
+   * 
+   * <p><img src="doc-files/AlloyUtils_getFieldFromSigOrItsParents.svg"/>
    *
    * @param fieldNameLookingFor field's name looking for
    * @param sig PrimSig sig supposed to having the field
@@ -197,6 +203,8 @@ public class AlloyUtils {
 
   /**
    * Gets the field from parent sig.
+   * 
+   * <p><img src="doc-files/AlloyUtils_getFieldFromParentSig.svg"/>
    *
    * @param fieldNameLookingFor the field name looking for
    * @param sig the sig
@@ -216,6 +224,8 @@ public class AlloyUtils {
 
   /**
    * Gets the sig domain field.
+   * 
+   * <p><img src="doc-files/AlloyUtils_getSigDomainField.svg"/>
    *
    * @param fieldNameLookingFor the field name looking for
    * @param sig the sig
