@@ -282,7 +282,7 @@ public class AlloyUtils {
   /**
    * Gets the all reachable module by name.
    * 
-   * <p><img src="doc-files/AlloyUtils_getAllReachableModuleByNamesvg"/>
+   * <p><img src="doc-files/AlloyUtils_getAllReachableModuleByName.svg"/>
    *
    * @param module the module
    * @param lookingForModuleName the looking for module name
