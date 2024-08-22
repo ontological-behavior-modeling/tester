@@ -1,10 +1,10 @@
 @startuml
 start
 while(For All Modules in module)
-if (Current Module == Module Looking For) then (yes)
-:Return Module;
-stop
-endif
+	if (Current Module == Module Looking For) then (yes)
+		:Return Module;
+		stop
+	endif
 endwhile
 :Return null;
 stop
