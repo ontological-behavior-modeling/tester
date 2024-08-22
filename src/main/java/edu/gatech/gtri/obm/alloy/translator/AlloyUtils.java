@@ -249,6 +249,8 @@ public class AlloyUtils {
 
   /**
    * Gets the sig own field.
+   * 
+   * <p><img src="doc-files/AlloyUtils_getSigOwnField.svg"/>
    *
    * @param fieldNameLookingFor the field name looking for
    * @param sig the sig
@@ -263,6 +265,8 @@ public class AlloyUtils {
 
   /**
    * Gets a Signature lookingFor, in the Module m if it exists.
+   * 
+   * <p><img src="doc-files/AlloyUtils_getReachableSig.svg"/>
    *
    * @param m = the module
    * @param lookingFor = the name of the Signature
@@ -277,6 +281,8 @@ public class AlloyUtils {
 
   /**
    * Gets the all reachable module by name.
+   * 
+   * <p><img src="doc-files/AlloyUtils_getAllReachableModuleByNamesvg"/>
    *
    * @param module the module
    * @param lookingForModuleName the looking for module name
@@ -292,6 +298,8 @@ public class AlloyUtils {
 
   /**
    * Get a function in module based on label.
+   * 
+   * <p><img src="doc-files/AlloyUtils_getFunction.svg"/>
    *
    * @param module the module
    * @param lookingForFunctionLabel the looking for function label
@@ -306,6 +314,8 @@ public class AlloyUtils {
 
   /**
    * Sort Fields based on its label alphabetically.
+   * 
+   * <p><img src="doc-files/AlloyUtils_sortFields.svg"/>
    *
    * @param fields the set of fields to be sorted
    * @return sorted list of fields
@@ -324,6 +334,8 @@ public class AlloyUtils {
 
   /**
    * Sort the strings alphabetically.
+   * 
+   * <p><img src="doc-files/AlloyUtils_sort.svg"/>
    *
    * @param strings the set of strings to be sorted
    * @return sorted list of strings
@@ -337,6 +349,8 @@ public class AlloyUtils {
 
   /**
    * Convert Set<Fileld> to Set<String> of field.label
+   * 
+   * <p><img src="doc-files/AlloyUtils_fieldsLabels.svg"/>
    *
    * @param fields - the sig fields to be formatted as Set<String> of its label
    * @return Set<String> of fields's label
@@ -347,6 +361,8 @@ public class AlloyUtils {
 
   /**
    * To sig all facts.
+   * 
+   * <p><img src="doc-files/AlloyUtils_toSigAllFacts.svg"/>
    *
    * @param ownerSig the owner sig
    * @param exprs the exprs
