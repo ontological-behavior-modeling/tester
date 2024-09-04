@@ -1,20 +1,7 @@
 @startuml
 start
-while (For All Signature Fields)
-if(current field == fieldName?) then (yes)
-	:Return Field;
-	stop
-endif
-endwhile
-while(sig.parent != null)
-	:Get Field from sig.parent;
-	if (field != null) then (yes)
-		:Return Field;
-		stop
-	else (no)
-		:Set sig to sig.parent;
-	endif
-endwhile
-:Return null;
+:Get Field Ax Expr From
+Sig or Its Parents;
+:Return Field;
 stop
 @enduml

@@ -1,0 +1,9 @@
+@startuml
+start
+:if((//_parentSigName// == null or
+//_parentSigName// is invalid name) then (yes)
+	:Return false;
+else
+	:Return true;
+stop
+@enduml
