@@ -34,16 +34,16 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /** The is root sig. */
   protected boolean isRootSig = false;
-  
+
   /** The is root expr list. */
   private boolean isRootExprList = true;
-  
+
   /** The field after sig. */
   private boolean fieldAfterSig = false;
-  
+
   /** The is implicit fact. */
   private boolean isImplicitFact = false;
-  
+
   /** The is sig fact. */
   private boolean isSigFact = false;
 
@@ -62,7 +62,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitExprBinary.svg"/>
    *
    * @param x the x
@@ -102,7 +102,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitExprCall.svg"/>
    *
    * @param x the x
@@ -133,7 +133,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitExprConstant.svg"/>
    *
    * @param x the x
@@ -150,7 +150,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitExprList.svg"/>
    *
    * @param x the x
@@ -194,6 +194,8 @@ public class ExprVisitor extends VisitQuery<String> {
   /**
    * Visit.
    *
+   * <p><img src="doc-files/ExprVisitor_visitExprQT.svg"/>
+   *
    * @param x the x
    * @return the string
    * @throws Err the err
@@ -227,7 +229,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitExprUnary.svg"/>
    *
    * @param x the x
@@ -271,7 +273,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitExprVar.svg"/>
    *
    * @param x the x
@@ -286,7 +288,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitSig.svg"/>
    *
    * @param x the x
@@ -419,7 +421,7 @@ public class ExprVisitor extends VisitQuery<String> {
 
   /**
    * Visit.
-   * 
+   *
    * <p><img src="doc-files/ExprVisitor_visitField.svg"/>
    *
    * @param x the x

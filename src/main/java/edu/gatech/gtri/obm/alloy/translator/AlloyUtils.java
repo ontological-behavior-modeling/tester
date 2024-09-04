@@ -49,7 +49,7 @@ public class AlloyUtils {
 
   /**
    * Create a field and return
-   * 
+   *
    * <p>sig ownerSig { label: set sigType }.
    *
    * @param fieldLabel the field name
@@ -74,7 +74,7 @@ public class AlloyUtils {
 
   /**
    * Create the tricky fields (disj) and return
-   * 
+   *
    * <p>sig ownerSig { disj field0, field1: set sigType}.
    *
    * @param fieldNames the filed names
@@ -90,7 +90,7 @@ public class AlloyUtils {
 
   /**
    * Import alloy module.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_importAlloyModulef.svg"/>
    *
    * @param f the f
@@ -102,7 +102,7 @@ public class AlloyUtils {
 
   /**
    * Import alloy module.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_importAlloyModules.svg"/>
    *
    * @param absoluteFileName the absolute file name
@@ -114,7 +114,7 @@ public class AlloyUtils {
 
   /**
    * Removes the slash.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_removeSlash.svg"/>
    *
    * @param sig the sig
@@ -131,7 +131,7 @@ public class AlloyUtils {
 
   /**
    * Self or ancestor.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_selfOrAncestor.svg"/>
    *
    * @param sig the sig
@@ -148,8 +148,8 @@ public class AlloyUtils {
 
   /**
    * Valid parent.
-   * 
-   *<p><img src="doc-files/AlloyUtils_validParent.svg"/>
+   *
+   * <p><img src="doc-files/AlloyUtils_validParent.svg"/>
    *
    * @param parentName the parent name
    * @return true, if successful
@@ -161,7 +161,7 @@ public class AlloyUtils {
 
   /**
    * Checks for own or inherited fields.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_hasOwnOrInheritedFields.svg"/>
    *
    * @param sig the sig
@@ -179,7 +179,7 @@ public class AlloyUtils {
   /**
    * Find Field from sig by fieldName. If not find in the sig, try to find in its parent
    * recursively.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_getFieldFromSigOrItsParents.svg"/>
    *
    * @param fieldNameLookingFor field's name looking for
@@ -203,7 +203,7 @@ public class AlloyUtils {
 
   /**
    * Gets the field from parent sig.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_getFieldFromParentSig.svg"/>
    *
    * @param fieldNameLookingFor the field name looking for
@@ -224,7 +224,7 @@ public class AlloyUtils {
 
   /**
    * Gets the sig domain field.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_getSigDomainField.svg"/>
    *
    * @param fieldNameLookingFor the field name looking for
@@ -249,7 +249,7 @@ public class AlloyUtils {
 
   /**
    * Gets the sig own field.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_getSigOwnField.svg"/>
    *
    * @param fieldNameLookingFor the field name looking for
@@ -265,7 +265,7 @@ public class AlloyUtils {
 
   /**
    * Gets a Signature lookingFor, in the Module m if it exists.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_getReachableSig.svg"/>
    *
    * @param m = the module
@@ -281,7 +281,7 @@ public class AlloyUtils {
 
   /**
    * Gets the all reachable module by name.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_getAllReachableModuleByName.svg"/>
    *
    * @param module the module
@@ -298,7 +298,7 @@ public class AlloyUtils {
 
   /**
    * Get a function in module based on label.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_getFunction.svg"/>
    *
    * @param module the module
@@ -314,7 +314,7 @@ public class AlloyUtils {
 
   /**
    * Sort Fields based on its label alphabetically.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_sortFields.svg"/>
    *
    * @param fields the set of fields to be sorted
@@ -334,7 +334,7 @@ public class AlloyUtils {
 
   /**
    * Sort the strings alphabetically.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_sort.svg"/>
    *
    * @param strings the set of strings to be sorted
@@ -349,7 +349,7 @@ public class AlloyUtils {
 
   /**
    * Convert Set<Fileld> to Set<String> of field.label
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_fieldsLabels.svg"/>
    *
    * @param fields - the sig fields to be formatted as Set<String> of its label
@@ -361,7 +361,7 @@ public class AlloyUtils {
 
   /**
    * To sig all facts.
-   * 
+   *
    * <p><img src="doc-files/AlloyUtils_toSigAllFacts.svg"/>
    *
    * @param ownerSig the owner sig
