@@ -19,22 +19,23 @@ import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 
 /**
- * Start from a main class to its properties to their property type classes to create signature and
- * fields. Instance variables, parameterFields, leafSigs, stepPropertiesBySig, classHiearchy,
- * mainClass, and propertiesByClass are collected during the process and passed back to OBMXMI2Alloy
- * to complete the translation.
+ * Create signature and fields by tracing from main class to its properties to their property type
+ * classes and so on. This class's instance variables, parameterFields, leafSigs,
+ * stepPropertiesBySig, classHiearchy, mainClass, and propertiesByClass are collected during the
+ * process and passed back to OBMXMI2Alloy to complete the translation.
  *
  * @author Miyako Wilson, AE(ASDL) - Georgia Tech
  */
 public class ClassesHandler {
 
-  /** Stereotype qualified names */
+  /** Stereotype qualified names for step property */
   private static String STEREOTYPE_STEP = "Model::OBM::Step";
-
-  private static String STEREOTYPE_PATICIPANT = "SysML::ParticipantProperty";
+  /** Stereotype qualified names for parameter property */
   private static String STEREOTYPE_PAREMETER = "Model::OBM::Parameter";
+  /** Stereotype qualified names for paticipant property */
+  private static String STEREOTYPE_PATICIPANT = "SysML::ParticipantProperty";
 
-  /** A class connect this and Alloy class */
+  /** A class that connects XMI model and the Alloy data model */
   ToAlloy toAlloy;
   /**
    * a map where key = NamedElement(Class or org.eclipse.uml2.uml.PrimitiveType(Integer, Real etc.))
@@ -68,12 +69,25 @@ public class ClassesHandler {
    */
   List<String> errorMessages;
 
+  /**
+   * A constructor
+   *
+   * @param _mainClass (Class) - a starting class to be translated to alloy.
+   * @param _toAlloy (ToAlloy) - the helper class to connect this to alloy.
+   * @param _sysMLUtil (SysMLUtil) - the helper class from OBMUtil3
+   */
   protected ClassesHandler(Class _mainClass, ToAlloy _toAlloy, SysMLUtil _sysMLUtil) {
     this.mainClass = _mainClass;
     this.toAlloy = _toAlloy;
     this.sysMLUtil = _sysMLUtil;
   }
 
+  /**
+   * A method to perform class to alloy translation and return true if successful and false if not
+   * successful.
+   *
+   * @return (boolean) - if success return true, otherwise false.
+   */
   protected boolean process() {
 
     parameterFields = new HashSet<>(); // Set<Field>
@@ -141,13 +155,14 @@ public class ClassesHandler {
   }
 
   /**
-   * Add fields in the given signature (non redefined attributes only), Add cardinality facts (ie.,
-   * abc = 1) and return redefined properties of this signature. this.parameterFields is updated.
+   * Add fields in the given signature (non redefined attributes only), add cardinality facts (ie.,
+   * abc = 1), and return redefined properties of the given signature. The parameterFields instance
+   * variable is updated.
    *
-   * @param _propertiesByType - Map<Type, List<Property>> map of properties by type (key =
+   * @param _propertiesByType (Map<Type, List<Property>>) - The map of properties by type (key =
    *     property/field type(signature), value = properties/fields)
-   * @param _ownerSig - Signature of a class
-   * @return redefinedProperties Set<Property> of the _sigOfNamedElement
+   * @param _ownerSig (PrimSig) - Signature of a class
+   * @return redefinedProperties (Set<Property>) - redefined properties of the _sigOfNamedElement
    */
   private Set<Property> addFieldsToSig(
       Map<org.eclipse.uml2.uml.Type, List<Property>> _propertiesByType, PrimSig _ownerSig) {
@@ -217,17 +232,23 @@ public class ClassesHandler {
     return redefinedProperties;
   }
 
-  /*
-   * go through a class, its properties, a property, and its type (class) recursively to complete propertiesByClass (Map<NamedElement, Map<org.eclipse.uml2.uml.Type, List<Property>>>) and create
-   * signatures of the property types(Class or PrimitiveType).
+  /**
+   * go through a class, its properties, a property, and its type (class) recursively to complete
+   * propertiesByClass (Map<NamedElement, Map<org.eclipse.uml2.uml.Type, List<Property>>>) and
+   * create signatures of the property types(Class or PrimitiveType).
    *
-   * For example, this processClassToSig method is called from outside of this method : with umlElement = FoodService, then called recursively(internally) umlElement as Prepare -> Order -> Serve -> Eat
-   * -> Pay. The propertiesByClass is Map<NamedElement, Map<org.eclipse.uml2.uml.Type, List<Property>>> where the key NamedElement to be mapped to Sig (class or PrimitiveType like Integer and Real) and
-   * value is Map<org.eclipse.uml2.uml.Type, List<Property>. The map's key type is property/field's type and List<Property> is property/fields having the same type.
+   * <p>For example, this processClassToSig method is called from outside of this method : with
+   * umlElement = FoodService, then called recursively(internally) umlElement as Prepare -> Order ->
+   * Serve -> Eat -> Pay. The propertiesByClass is Map<NamedElement, Map<org.eclipse.uml2.uml.Type,
+   * List<Property>>> where the key NamedElement to be mapped to Sig (class or PrimitiveType like
+   * Integer and Real) and value is Map<org.eclipse.uml2.uml.Type, List<Property>. The map's key
+   * type is property/field's type and List<Property> is property/fields having the same type.
    *
-   * For example, sig SimpleSequence extends Occurrence { disj p1,p2: set AtomicBehavior } propertiesByClass's key = SimpleSequence and value = (key = AtomicBehavior, value =[p1,p2])
+   * <p>For example, sig SimpleSequence extends Occurrence { disj p1,p2: set AtomicBehavior }
+   * propertiesByClass's key = SimpleSequence and value = (key = AtomicBehavior, value =[p1,p2])
    *
-   * @param _namedElement NamedElement either org.eclipse.uml2.uml.Class or org.eclipse.uml2.uml.PrimitiveType to be analyzed to complete propertiesByClass
+   * @param _namedElement (NamedElement) - a namedElement either org.eclipse.uml2.uml.Class or
+   *     org.eclipse.uml2.uml.PrimitiveType to be analyzed to complete propertiesByClass
    */
   private void processClassToSig(NamedElement _namedElement) {
     if (_namedElement instanceof org.eclipse.uml2.uml.Class) {
@@ -281,16 +302,17 @@ public class ClassesHandler {
    * get property (including inherited ones) string names of the given namedElement if the
    * namedElement is class and the property has STEROTYPE_STEP or STREOTYPE_PATICIPANT stereotype.
    *
-   * @param _ne - A NamedElement that can be Class or PrimitiveType to get properties.
-   * @return Set<String> property names or null if the given ne is PrimitiveType(i.e., Real,
-   *     Integer)
+   * @param _namedElement (NamedElement) - A NamedElement that can be Class or PrimitiveType to get
+   *     properties.
+   * @return (Set<String>) - the property names or null if the given namedElement is
+   *     PrimitiveType(i.e., Real, Integer)
    */
-  private Set<String> collectAllStepProperties(NamedElement _ne) {
+  private Set<String> collectAllStepProperties(NamedElement _namedElement) {
 
     Set<String> stepProperties = new HashSet<>();
-    if (_ne instanceof org.eclipse.uml2.uml.Class) { // ne can be PrimitiveType
+    if (_namedElement instanceof org.eclipse.uml2.uml.Class) { // ne can be PrimitiveType
       Set<org.eclipse.uml2.uml.Property> atts =
-          sysMLUtil.getAllAttributes((org.eclipse.uml2.uml.Class) _ne);
+          sysMLUtil.getAllAttributes((org.eclipse.uml2.uml.Class) _namedElement);
       for (Property p : atts) {
         if (p.getAppliedStereotype(STEREOTYPE_STEP) != null
             || p.getAppliedStereotype(STEREOTYPE_PATICIPANT) != null) {
@@ -301,34 +323,66 @@ public class ClassesHandler {
     return stepProperties;
   }
 
+  /**
+   * Get method for parameter fields collected during the translation.
+   *
+   * @return (Set<Field>)
+   */
   protected Set<Field> getParameterFields() {
     return this.parameterFields;
   }
 
+  /**
+   * Get method for signatures collected during the translation.
+   *
+   * @return (Set<PrimSig>)
+   */
   protected Set<PrimSig> getLeafSigs() {
     return this.leafSigs;
   }
 
+  /**
+   * Get method for a map where key is signature name and value is a set of step property names.
+   *
+   * @return (Map<String, Set<String>>)
+   */
   protected Map<String, Set<String>> getStepPropertiesBySig() {
     return this.stepPropertiesBySig;
   }
 
+  /**
+   * Get method for the main class name.
+   *
+   * @return (String)
+   */
   protected String getMainSigLabel() {
     return this.mainClass.getName();
   }
 
+  /**
+   * Get method for a class hierarchy list. The main class has the largest index and its parent is
+   * one less and so forth. The oldest in the hierarchy has 0 index.
+   *
+   * @return (List<Class>)
+   */
   protected List<Class> getClassInHierarchy() {
     return this.classInHierarchy;
   }
 
-  protected Set<NamedElement> getAllClasses() {
+  /**
+   * get all namedElements (Class and PrimitiveType) included in the translation. All classes traced
+   * from the main class.
+   *
+   * @return (Set<NamedElement>)
+   */
+  protected Set<NamedElement> getAllNamedElements() {
     return this.propertiesByClass.keySet();
   }
 
   /**
-   * Get errorMessages collected while the translation.
+   * Get errorMessages collected during the translation.
    *
-   * @return errorMessage - list of error message strings
+   * @return errorMessage (List<String>)
    */
   protected List<String> getErrorMessages() {
     return this.errorMessages;

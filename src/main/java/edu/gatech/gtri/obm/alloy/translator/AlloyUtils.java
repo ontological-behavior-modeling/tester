@@ -29,296 +29,267 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.eclipse.uml2.uml.internal.impl.OpaqueExpressionImpl;
 
-// TODO: Auto-generated Javadoc
 /**
- * A utility class for Alloy Fields,.
+ * A utility class related Alloy objects
  *
  * @author Miyako Wilson, AE(ASDL) - Georgia Tech
  */
 public class AlloyUtils {
 
-  /** The Constant invalidParentNames. */
-  static final List<String> invalidParentNames;
+  /**
+   * A list of invalid parent names to be created by translation. The list parents are already
+   * created when the library is loaded.
+   */
+  static final List<String> invalidUserDefinedParentNames;
 
   static {
-    invalidParentNames = new ArrayList<>();
-    invalidParentNames.add("BehaviorOccurrence");
-    invalidParentNames.add("Occurrence"); // it is valid
-    invalidParentNames.add("Anything");
+    invalidUserDefinedParentNames = new ArrayList<>();
+    invalidUserDefinedParentNames.add("BehaviorOccurrence");
+    invalidUserDefinedParentNames.add("Occurrence");
+    invalidUserDefinedParentNames.add("Anything");
   }
 
   /**
-   * Create a field and return
+   * Create a field and return. Note: The _fieldLabel is set of relations in _ownerSig -> _sigType.
    *
-   * <p>sig ownerSig { label: set sigType }.
+   * <p>sig _ownerSig { _fieldLable: set _sigType }
    *
-   * @param fieldLabel the field name
-   * @param ownerSig the Sig the field belong to
-   * @param sigType the type of field
-   * @return a created field
+   * @param _fieldLabel (String) - the field name to be created in the given _ownerSig
+   * @param _ownerSig (Sig) - the owner of a field to be created
+   * @param _sigType (Sig) - the field type of a field to be created
+   * @return (Field) - the created field
    */
-  protected static Sig.Field addField(String fieldLabel, Sig ownerSig, Sig sigType) {
-    return ownerSig.addField(fieldLabel, sigType.setOf());
+  protected static Sig.Field addField(String _fieldLabel, Sig _ownerSig, Sig _sigType) {
+    return _ownerSig.addField(_fieldLabel, _sigType.setOf());
   }
 
   /**
-   * Create an transfer field and return.
+   * Create a transfer field and return.
    *
-   * @param fieldLabel the field name
-   * @param ownerSig the Sig that the field belong to
-   * @return a created field
+   * @param _fieldLabel (String) - the field name to be created in the given _ownerSig
+   * @param _ownerSig (Sig) - the owner of a field to be created
+   * @return (Field) - the created field
    */
-  protected static Field addTransferField(String fieldLabel, Sig ownerSig) {
-    return addField(fieldLabel, ownerSig, Alloy.transferSig);
+  protected static Field addTransferField(String _fieldLabel, Sig _ownerSig) {
+    return addField(_fieldLabel, _ownerSig, Alloy.transferSig);
   }
 
   /**
    * Create the tricky fields (disj) and return
    *
-   * <p>sig ownerSig { disj field0, field1: set sigType}.
+   * <p>sig ownerSig { disj field0, field1: set sigType}
    *
-   * @param fieldNames the filed names
-   * @param ownerSig the Sig that the fields belong to
-   * @param sigType the type of fields
-   * @return created fields
+   * <p>disj is the predicate "field0 and field1 share no elements in common".
+   *
+   * @param fieldNames (String[]) - the field names to be created
+   * @param _ownerSig (Sig) - the signature that the created fields belong to
+   * @param _sigType (Sig) - the type of fields
+   * @return (Field[]) - the created fields
    */
-  protected static Sig.Field[] addTrickyFields(
-      java.lang.String[] fieldNames, Sig ownerSig, Sig sigType) {
+  protected static Sig.Field[] addTrickyFields(String[] _fieldNames, Sig _ownerSig, Sig _sigType) {
     // 3rd parameter is isDisjoint but does not affect to write out as disj
-    return ownerSig.addTrickyField(null, null, null, null, null, fieldNames, sigType.setOf());
+    return _ownerSig.addTrickyField(null, null, null, null, null, _fieldNames, _sigType.setOf());
   }
 
   /**
-   * Import alloy module.
+   * Create a CompModule object having signatures and facts from an alloy file.
    *
    * <p><img src="doc-files/AlloyUtils_importAlloyModulef.svg"/>
    *
-   * @param f the f
-   * @return the comp module
+   * @param _alloyFile (File) - an alloy file (*.als)
+   * @return (CompModule) - the created CompModule
    */
-  public static CompModule importAlloyModule(File f) {
-    return AlloyUtils.importAlloyModule(f.getAbsolutePath());
+  public static CompModule importAlloyModule(File _alloyFile) {
+    return AlloyUtils.importAlloyModule(_alloyFile.getAbsolutePath());
   }
 
   /**
-   * Import alloy module.
+   * Create a CompModule object having signatures and facts from an alloy absolute filename
    *
    * <p><img src="doc-files/AlloyUtils_importAlloyModules.svg"/>
    *
-   * @param absoluteFileName the absolute file name
-   * @return the comp module
+   * @param _absoluteAlloyFileName (String) - an absolute filename for an alloy file (*.als)
+   * @return (CompModule) - the created CompModule
    */
-  public static CompModule importAlloyModule(String absoluteFileName) {
-    return CompUtil.parseEverything_fromFile(new A4Reporter(), null, absoluteFileName);
+  public static CompModule importAlloyModule(String _absoluteAlloyFileName) {
+    return CompUtil.parseEverything_fromFile(new A4Reporter(), null, _absoluteAlloyFileName);
   }
 
   /**
-   * Removes the slash.
-   *
-   * <p><img src="doc-files/AlloyUtils_removeSlash.svg"/>
-   *
-   * @param sig the sig
-   * @return the string
-   */
-  public static String removeSlash(String sig) {
-    if (sig.contains("/")) {
-      int index = sig.lastIndexOf('/');
-      return sig.substring(index + 1, sig.length());
-    }
-
-    return sig;
-  }
-
-  /**
-   * Self or ancestor.
+   * Check if the _lookingFor signature is the _sig signature or _sig's ancestor.
    *
    * <p><img src="doc-files/AlloyUtils_selfOrAncestor.svg"/>
    *
-   * @param sig the sig
-   * @param lookingFor the looking for
-   * @return true, if successful
+   * @param _sig (Sig) - the signature to be compared with the _lookingFor signature
+   * @param _lookingFor (Sig) - the _lookingFor signature
+   * @return (boolean) true if the _lookingFor signature is _sig or _sig's ancestor, otherwise
+   *     return false.
    */
-  public static boolean selfOrAncestor(PrimSig sig, Sig lookingFor) {
-    if (sig == lookingFor) return true;
-    else if (sig.parent != null) {
-      return selfOrAncestor(sig.parent, lookingFor);
+  public static boolean selfOrAncestor(PrimSig _sig, Sig _lookingFor) {
+    if (_sig == _lookingFor) return true;
+    else if (_sig.parent != null) {
+      return selfOrAncestor(_sig.parent, _lookingFor);
     }
     return false;
   }
 
   /**
-   * Valid parent.
+   * Check if the given _parentSigName signature is valid to be created. Make sure not have the same
+   * name as the library defined signatures.
    *
-   * <p><img src="doc-files/AlloyUtils_validParent.svg"/>
+   * <p><img src="doc-files/AlloyUtils_isValidUserDefineParent.svg"/>
    *
-   * @param parentName the parent name
-   * @return true, if successful
+   * @param _parentSigName (String) - the signature name to be validated.
+   * @return (boolean) true if the given _parentSigName is valid signature to be created, otherwise
+   *     return false.
    */
-  public static boolean validParent(String parentName) {
-    if (parentName == null || invalidParentNames.contains(parentName)) return false;
+  public static boolean isValidUserDefineParent(String _parentSigName) {
+    if (_parentSigName == null || invalidUserDefinedParentNames.contains(_parentSigName))
+      return false;
     else return true;
   }
 
   /**
-   * Checks for own or inherited fields.
+   * Check if the given <code>Sig</code> has at least one field or not.
    *
    * <p><img src="doc-files/AlloyUtils_hasOwnOrInheritedFields.svg"/>
    *
-   * @param sig the sig
-   * @return true, if successful
+   * @param _sig (PrimSig) - a signature checked
+   * @return (boolean) - true if the given signature has a field or its ancestor has a field.
    */
-  public static boolean hasOwnOrInheritedFields(PrimSig sig) {
-    if (sig.getFields().size() > 0) return true;
-    while (sig.parent != null) {
-      if (sig.parent.getFields().size() > 0) return true;
-      else sig = sig.parent;
+  public static boolean hasOwnOrInheritedFields(PrimSig _sig) {
+    if (_sig.getFields().size() > 0) return true;
+    while (_sig.parent != null) {
+      if (_sig.parent.getFields().size() > 0) return true;
+      else _sig = _sig.parent;
     }
     return false;
   }
 
   /**
-   * Find Field from sig by fieldName. If not find in the sig, try to find in its parent
-   * recursively.
+   * Return a field as <code>Expr</code> of the given name/label in the given signature. If not
+   * found return null.
    *
-   * <p><img src="doc-files/AlloyUtils_getFieldFromSigOrItsParents.svg"/>
-   *
-   * @param fieldNameLookingFor field's name looking for
-   * @param sig PrimSig sig supposed to having the field
-   * @return Field if found, otherwise return null
+   * @param _fieldNameLookingFor (String) - the field name/label looking for.
+   * @param _sig (PrimSig) - the signature checked for having the field
+   * @return (Expr) - a field if found, otherwise return null
    */
-  public static Sig.Field getFieldFromSigOrItsParents(String fieldNameLookingFor, PrimSig sig) {
-    for (Sig.Field field : sig.getFields()) {
-      if (field.label.equals(fieldNameLookingFor)) return field;
-    }
-    while (sig.parent != null) { // SingleFoodService -> FoodService -> this/Occurrence -> univ ->
-      // null
-      Field field = getFieldFromSigOrItsParents(fieldNameLookingFor, sig.parent);
-      if (field != null) return field;
-      else {
-        sig = sig.parent; // reset
-      }
+  public static Expr getFieldFromSig(String _fieldNameLookingFor, PrimSig _sig) {
+    for (Sig.Field field : _sig.getFields()) { // getFields does not include redefined fields
+      if (field.label.equals(_fieldNameLookingFor)) return field;
     }
     return null;
   }
 
   /**
-   * Gets the field from parent sig.
+   * Return a field as <code>Expr</code> of the given name/label in the given signature's ancestor.
+   * If not found return null.
    *
    * <p><img src="doc-files/AlloyUtils_getFieldFromParentSig.svg"/>
    *
-   * @param fieldNameLookingFor the field name looking for
-   * @param sig the sig
-   * @return the field from parent sig
+   * @param _fieldNameLookingFor (String) - the field name/label looking for.
+   * @param _sig (PrimSig) - the signature checked for having the field
+   * @return (Expr) - a field if found, otherwise return null
    */
-  public static Sig.Field getFieldFromParentSig(String fieldNameLookingFor, PrimSig sig) {
-    while (sig.parent != null) { // SingleFoodService -> FoodService -> this/Occurrence -> univ ->
+  public static Expr getFieldFromParentSig(String _fieldNameLookingFor, PrimSig _sig) {
+    while (_sig.parent != null) { // SingleFoodService -> FoodService -> this/Occurrence -> univ ->
       // null
-      Field field = getFieldFromSigOrItsParents(fieldNameLookingFor, sig.parent);
+      Expr field = getFieldFromSig(_fieldNameLookingFor, _sig.parent);
       if (field != null) return field;
       else {
-        sig = sig.parent; // reset
+        _sig = _sig.parent; // reset
       }
     }
     return null;
   }
 
   /**
-   * Gets the sig domain field.
+   * Return a field as <code>Expr</code> of the given name/label in the given signature or its
+   * ancestor. If not found return null.
    *
-   * <p><img src="doc-files/AlloyUtils_getSigDomainField.svg"/>
+   * <p><img src="doc-files/AlloyUtils_getFieldAsExprFromSigOrItsParents.svg"/>
    *
-   * @param fieldNameLookingFor the field name looking for
-   * @param sig the sig
-   * @return the sig domain field
+   * @param _fieldNameLookingFor (String) - the field name/label looking for.
+   * @param _sig (PrimSig) - the signature checked for having the field
+   * @return (Expr) - a field if found, otherwise return null
    */
-  // sig.domain(sigField) or parentSig.domain(parentSigField)
-  public static Expr getSigDomainField(String fieldNameLookingFor, PrimSig sig) {
-    for (Sig.Field field : sig.getFields()) { // getFields does not include redefined fields
-      if (field.label.equals(fieldNameLookingFor)) return sig.domain(field);
-    }
-    while (sig.parent != null) { // SingleFoodService -> FoodService -> this/Occurrence -> univ ->
-      // null
-      Field field = getFieldFromSigOrItsParents(fieldNameLookingFor, sig.parent);
-      if (field != null) return field;
-      else {
-        sig = sig.parent; // reset
-      }
-    }
-    return null;
+  public static Expr getFieldAsExprFromSigOrItsParents(String _fieldNameLookingFor, PrimSig _sig) {
+    Expr field = getFieldFromSig(_fieldNameLookingFor, _sig);
+    return field != null ? field : getFieldFromParentSig(_fieldNameLookingFor, _sig);
   }
 
   /**
-   * Gets the sig own field.
+   * Return a field as <code>Field</code> of the given name/label in the given signature or its
+   * ancestor. If not found return null.
    *
-   * <p><img src="doc-files/AlloyUtils_getSigOwnField.svg"/>
+   * <p><img src="doc-files/AlloyUtils_getFieldFromSigOrItsParents.svg"/>
    *
-   * @param fieldNameLookingFor the field name looking for
-   * @param sig the sig
-   * @return the sig own field
+   * @param _fieldNameLookingFor (String) - the field name/label looking for.
+   * @param _sig (PrimSig) - the signature checked for having the field
+   * @return (Field) - a field if found, otherwise return null
    */
-  public static Expr getSigOwnField(String fieldNameLookingFor, PrimSig sig) {
-    for (Sig.Field field : sig.getFields()) { // getFields does not include redefined fields
-      if (field.label.equals(fieldNameLookingFor)) return sig.domain(field);
-    }
-    return null;
+  public static Field getFieldFromSigOrItsParents(String _fieldNameLookingFor, PrimSig _sig) {
+    return (Field) getFieldAsExprFromSigOrItsParents(_fieldNameLookingFor, _sig);
   }
 
   /**
-   * Gets a Signature lookingFor, in the Module m if it exists.
+   * Return a <code>Sig</code> in the given <code>Module</code> by name/label if exists, otherwise
+   * return null.
    *
    * <p><img src="doc-files/AlloyUtils_getReachableSig.svg"/>
    *
-   * @param m = the module
-   * @param lookingFor = the name of the Signature
-   * @return the Signature or null if it doesn't exist
+   * @param _sigNameLookingFor (String) - the signature name/label looking for.
+   * @param _module (Module) - the module the given signature might be in.
+   * @return the found <code>Sig</code> or null if it doesn't exist.
    */
-  public static Sig getReachableSig(Module m, String lookingFor) {
-    for (Sig s : m.getAllReachableSigs()) {
-      if (s.label.equals(lookingFor)) return s;
+  public static Sig getReachableSig(String _sigNameLookingFor, Module _module) {
+    for (Sig s : _module.getAllReachableSigs()) {
+      if (s.label.equals(_sigNameLookingFor)) return s;
     }
     return null;
   }
 
   /**
-   * Gets the all reachable module by name.
+   * Return a <code>Module</code> reachable from the given <code>Module</code> if exists, otherwise
+   * return null.
    *
    * <p><img src="doc-files/AlloyUtils_getAllReachableModuleByName.svg"/>
    *
-   * @param module the module
-   * @param lookingForModuleName the looking for module name
-   * @return the all reachable module by name
+   * @param _moduleNameLookingFor (String) - the module name looking for.
+   * @param _module (Module) - the base module to search all reachable modules from.
+   * @return (Module) - the found <code>Module</code> or null if does't exist.
    */
-  public static Module getAllReachableModuleByName(Module module, String lookingForModuleName) {
-
-    for (Module m : module.getAllReachableModules()) {
-      if (m.getModelName().equals(lookingForModuleName)) return m;
+  public static Module getAllReachableModuleByName(String _moduleNameLookingFor, Module _module) {
+    for (Module m : _module.getAllReachableModules()) {
+      if (m.getModelName().equals(_moduleNameLookingFor)) return m;
     }
     return null;
   }
 
   /**
-   * Get a function in module based on label.
+   * Return a <code>Func</code> available from the given <code>Module</code> if exists, otherwise
+   * return null.
    *
    * <p><img src="doc-files/AlloyUtils_getFunction.svg"/>
    *
-   * @param module the module
-   * @param lookingForFunctionLabel the looking for function label
-   * @return function
+   * @param _functionLabelLookingFor (String) - the function label looking for.
+   * @param _module (Module) - the module to search the function.
+   * @return (Func) = the found <code>Func</code> or null if does't exist.
    */
-  public static Func getFunction(Module module, String lookingForFunctionLabel) {
-    for (Func f : module.getAllFunc()) {
-      if (f.label.equals(lookingForFunctionLabel)) return f;
+  public static Func getFunction(String _functionLabelLookingFor, Module _module) {
+    for (Func f : _module.getAllFunc()) {
+      if (f.label.equals(_functionLabelLookingFor)) return f;
     }
     return null;
   }
 
   /**
-   * Sort Fields based on its label alphabetically.
+   * Sort the given fields alphabetically based on their labels and return
    *
    * <p><img src="doc-files/AlloyUtils_sortFields.svg"/>
    *
-   * @param fields the set of fields to be sorted
-   * @return sorted list of fields
+   * @param fields (Set<Field>)- the fields to be sorted.
+   * @return (List<Field>) - sorted fields.
    */
   public static List<Field> sortFields(Set<Field> fields) {
     List<Field> sortedFields = new ArrayList<>(fields);
@@ -333,12 +304,12 @@ public class AlloyUtils {
   }
 
   /**
-   * Sort the strings alphabetically.
+   * Sort the given strings alphabetically and return.
    *
    * <p><img src="doc-files/AlloyUtils_sort.svg"/>
    *
-   * @param strings the set of strings to be sorted
-   * @return sorted list of strings
+   * @param strings (Set<String>) - the set of strings to be sorted
+   * @return (List<String>) - the sorted strings.
    */
   public static List<String> sort(Set<String> strings) {
     List<String> sortedStrings = new ArrayList<>();
@@ -348,92 +319,123 @@ public class AlloyUtils {
   }
 
   /**
-   * Convert Set<Fileld> to Set<String> of field.label
+   * Return the set of field names/labels for the given fields.
    *
    * <p><img src="doc-files/AlloyUtils_fieldsLabels.svg"/>
    *
-   * @param fields - the sig fields to be formatted as Set<String> of its label
-   * @return Set<String> of fields's label
+   * @param fields (Set<Field>) - the fields to be converted to names/labels.
+   * @return (Set<String>) - the names/labels of the given fields
    */
   public static Set<String> fieldsLabels(Set<Field> fields) {
     return fields.stream().map(e -> e.label).collect(Collectors.toSet());
   }
 
   /**
-   * To sig all facts.
+   * Modify each given expression by adding the given signature declaration and return.
+   *
+   * <pre>
+   * For example,
+   * an expression <code>"bijectionFiltered[outputs, x.a, x.a.vout]"</code> is modified to
+   * <code>"{all x: ParameterBehavior | bijectionFiltered[outputs, x.a, x.a.vout]}<code>.
+   * </pre>
    *
    * <p><img src="doc-files/AlloyUtils_toSigAllFacts.svg"/>
    *
-   * @param ownerSig the owner sig
-   * @param exprs the exprs
-   * @return the sets the
+   * @param _ownerSig (Sig) - the signature for expressions
+   * @param _exprs (Set<Expr>) - the expressions to be modified
+   * @return (Set<Expr>) - the modified expressions
    */
-  public static Set<Expr> toSigAllFacts(Sig ownerSig, Set<Expr> exprs) {
-    Decl decl = AlloyExprFactory.makeDecl(ownerSig);
+  public static Set<Expr> toSigAllFacts(Sig _ownerSig, Set<Expr> _exprs) {
+    Decl decl = AlloyExprFactory.makeDecl(_ownerSig);
     Set<Expr> rAll = new HashSet<>();
-    for (Expr expr : exprs) {
+    for (Expr expr : _exprs) {
       rAll.add(expr.forAll(decl));
     }
     return rAll;
   }
 
   /**
-   * support when Expr original is ExprBinary(ie., p1 + p2) to add ExprVar s in both so returns s.p1
-   * and s.p2. if original is like "BuffetService <: (FoodService <: eat)" -> ((ExprBinary)
-   * original).op = "<:", in this case just return s.join(original) =
+   * Modify the given <code>Expr</code> using the given <code>ExprVar</code>. Only support the given
+   * <code>Expr</code> to be <code>Expr</code> or <code>ExprBinary</code>.
    *
-   * @param s the s
-   * @param original the original
-   * @return the expr
+   * <p>For example, if the given <code>Expr</code> is <code>ExprBinary</code> of <b> p1 + p2</b>,
+   * then join with the given <code> ExprVar</code> <b>s</b> and plus the two binary left and right
+   * expression as <b>s.p1 + s.p2</b>.
+   *
+   * <p>If the given <code>Expr</code> is <code>Expr</code>, then just join the <code>ExprVar</code>
+   * with <code>Expr</code> (i.e., p1 to s.p1)
+   *
+   * @param _original (Expr) - the original expression to be modified.
+   * @param _s (ExprVar) - a expression variable to be used to modify.
+   * @return (Expr) - the modified expression
    */
-  protected static Expr addExprVarToExpr(ExprVar s, Expr original) {
-    if (original instanceof ExprBinary) {
-      Expr left = addExprVarToExpr(s, ((ExprBinary) original).left);
-      Expr right = addExprVarToExpr(s, ((ExprBinary) original).right);
-      if (((ExprBinary) original).op == ExprBinary.Op.PLUS) return left.plus(right);
-      else return s.join(original); // x . BuffetService <: (FoodService <: eat) where original =
+  protected static Expr addExprVarToExpr(Expr _original, ExprVar _s) {
+    if (_original instanceof ExprBinary) {
+      Expr left = addExprVarToExpr(((ExprBinary) _original).left, _s);
+      Expr right = addExprVarToExpr(((ExprBinary) _original).right, _s);
+      if (((ExprBinary) _original).op == ExprBinary.Op.PLUS) return left.plus(right);
+      else return _s.join(_original); // x . BuffetService <: (FoodService <: eat) where original =
       // "BuffetService <: (FoodService <: eat)" with ((ExprBinary)
       // original).op = "<:"
     } else {
-      return s.join(original); // x.BuffetService
+      return _s.join(_original); // x.BuffetService
     }
   }
 
   /**
-   * Return boolean if the map not contain both the given key and the given value.
+   * Return boolean true if the given map NOT contain both the given key and the value, otherwise
+   * return false.
    *
-   * @param map key = Field, values = Set of Fields
-   * @param key key(Field) to be checked
-   * @param value value(Field) to be checked
-   * @return true if both the given key and the given value is not in the map, otherwise return
-   *     false
+   * @param _map (Map<Field, Set<Field>) - the map to be checked.
+   * @param _key (Field) - the field to be checked to be as the map's key.
+   * @param _value (Field) - the field to be checked to be in the map's value.
+   * @return (boolean) - true if both the given key and the given value is not in the map, otherwise
+   *     return false.
    */
   protected static boolean notContainBothKeyAndValue(
-      Map<Field, Set<Field>> map, Field key, Field value) {
-    return map.containsKey(key) ? (map.get(key).contains(value) ? false : true) : true;
+      Map<Field, Set<Field>> _map, Field _key, Field _value) {
+    return _map.containsKey(_key) ? (_map.get(_key).contains(_value) ? false : true) : true;
   }
 
   /**
-   * Get two rules (ConnectorEnds) of each one of constraint using omgutils.SysMLAdapter and return
-   * as set.
+   * The "Oneof" <code>Constraint</code> applies to two or more <code>ConnectorEnd(Element)<code>s.
+   * This method finds the <code>ConnectorEnd/Element</code> list for each given <code>Constraint</code> and then return as a <code>Set</code>.
    *
-   * @param sysmladapter the sysmladapter
-   * @param cs a set of Constraints
-   * @return set of oneof constraint's two rules (ConnectorEnd)
+   * @param _constraints (Set<Constraint>) - a set of constraints may have the "OneOf" constraint.
+   * @param __sysmladapter (SysMLAdapter) - the omgutil's helper class for finding the necessary information for this method.
+   * @return (Set<EList<Element>>) - a set of the list of <code>ConnectorEnds/Elements</code>.
    */
   protected static Set<EList<Element>> getOneOfRules(
-      SysMLAdapter sysmladapter, Set<Constraint> cs) {
+      Set<Constraint> _constraints, SysMLAdapter _sysmladapter) {
     Set<EList<Element>> oneOfSet = new HashSet<>();
-    for (Constraint c : cs) {
+    for (Constraint c : _constraints) {
       ValueSpecification vs = c.getSpecification();
       if (vs instanceof OpaqueExpressionImpl) {
-        edu.umd.omgutil.uml.OpaqueExpression omgE = (OpaqueExpression) sysmladapter.mapObject(vs);
+        edu.umd.omgutil.uml.OpaqueExpression omgE = (OpaqueExpression) _sysmladapter.mapObject(vs);
         if (omgE.getBodies().contains("OneOf")) {
-          EList<Element> es = c.getConstrainedElements(); // list of connectorEnds
+          EList<Element> es = c.getConstrainedElements(); // Element = ConnectorEnd
           oneOfSet.add(es);
         }
       }
     }
     return oneOfSet;
+  }
+
+  /**
+   * String utility - removes before "/" string if the given string contained "/" and return. This
+   * is used when string is like "this/Occurrence" to remove "this/" portion and return
+   * "Occurrence".
+   *
+   * <p><img src="doc-files/AlloyUtils_removeSlash.svg"/>
+   *
+   * @param _string (String) - a string to be checked
+   * @return (String) - the returning string
+   */
+  public static String removeSlash(String _string) {
+    if (_string.contains("/")) {
+      int index = _string.lastIndexOf('/');
+      return _string.substring(index + 1, _string.length());
+    }
+    return _string;
   }
 }
