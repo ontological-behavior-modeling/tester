@@ -170,6 +170,8 @@ public class AlloyUtils {
    * Return a field as <code>Expr</code> of the given name/label in the given signature. If not
    * found return null.
    *
+   * <p><img src="doc-files/AlloyUtils_getFieldFromSig.svg"/>
+   *
    * @param _fieldNameLookingFor (String) - the field name/label looking for.
    * @param _sig (PrimSig) - the signature checked for having the field
    * @return (Expr) - a field if found, otherwise return null
