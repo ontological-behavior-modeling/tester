@@ -51,13 +51,7 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * Visit.
-   * 
-   * <p><img src="doc-files/ExprVisitor_visitExprBinary.svg"/>
-   *
-   * @param x the x
-   * @return the string
-   * @throws Err the err
+   * {@inheritDoc}
    */
   @Override
   public String visit(ExprBinary x) throws Err {
