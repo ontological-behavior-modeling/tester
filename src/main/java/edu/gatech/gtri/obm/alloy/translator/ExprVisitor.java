@@ -50,6 +50,15 @@ public class ExprVisitor extends VisitQuery<String> {
     this.parameterFields = _parameterFields;
   }
 
+  /**
+   * Visit.
+   * 
+   * <p><img src="doc-files/ExprVisitor_visitExprBinary.svg"/>
+   *
+   * @param x the x
+   * @return the string
+   * @throws Err the err
+   */
   @Override
   public String visit(ExprBinary x) throws Err {
 
