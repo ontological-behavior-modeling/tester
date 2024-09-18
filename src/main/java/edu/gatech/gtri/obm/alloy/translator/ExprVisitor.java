@@ -23,25 +23,35 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
+// TODO: Auto-generated Javadoc
 /**
- * Visitor to transform the Alloy object(signatures and facts) to a file
+ * Visitor to transform the Alloy object(signatures and facts) to a file.
  *
  * @author Miyako Wilson, AE(ASDL) - Georgia Tech
  * @author Andrew H Shinjo, Graduate Student - Georgia Tech
  */
 public class ExprVisitor extends VisitQuery<String> {
 
+  /** The is root sig. */
   protected boolean isRootSig = false;
+
+  /** The is root expr list. */
   private boolean isRootExprList = true;
+
+  /** The field after sig. */
   private boolean fieldAfterSig = false;
+
+  /** The is implicit fact. */
   private boolean isImplicitFact = false;
+
+  /** The is sig fact. */
   private boolean isSigFact = false;
 
   /** a set of fields to make fields in disj (ie., disj p1, p2: set AtomicBehavior) */
   private final Set<Sig.Field> parameterFields;
 
   /**
-   * A constructor
+   * A constructor.
    *
    * @param _parameterFields - A set of Fields that with Parameter stereotype. Helps to determine
    *     disj fields.
@@ -51,7 +61,10 @@ public class ExprVisitor extends VisitQuery<String> {
   }
 
   /**
-   * {@inheritDoc}
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.ExprBinary)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitExprBinary.svg"/>
    */
   @Override
   public String visit(ExprBinary x) throws Err {
@@ -84,6 +97,12 @@ public class ExprVisitor extends VisitQuery<String> {
         .toString();
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.ExprCall)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitExprCall.svg"/>
+   */
   @Override
   public String visit(ExprCall x) throws Err {
 
@@ -106,6 +125,12 @@ public class ExprVisitor extends VisitQuery<String> {
     return sb.toString();
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.ExprConstant)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitExprConstant.svg"/>
+   */
   @Override
   public String visit(ExprConstant x) throws Err {
 
@@ -114,6 +139,12 @@ public class ExprVisitor extends VisitQuery<String> {
     return x.toString();
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.ExprList)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitExprList.svg"/>
+   */
   @Override
   public String visit(ExprList x) throws Err {
 
@@ -148,6 +179,12 @@ public class ExprVisitor extends VisitQuery<String> {
     return String.join(op, args);
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.ExprQt)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitExprQt.svg"/>
+   */
   @Override
   public String visit(ExprQt x) throws Err {
 
@@ -175,6 +212,12 @@ public class ExprVisitor extends VisitQuery<String> {
         .toString();
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.ExprUnary)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitExprUnary.svg"/>
+   */
   @Override
   public String visit(ExprUnary x) throws Err {
 
@@ -210,12 +253,24 @@ public class ExprVisitor extends VisitQuery<String> {
     return out;
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.ExprVar)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitExprVar.svg"/>
+   */
   @Override
   public String visit(ExprVar x) throws Err {
     isRootSig = false;
     return x.label;
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.Sig)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitSig.svg"/>
+   */
   @Override
   public String visit(Sig x) throws Err {
 
@@ -340,6 +395,12 @@ public class ExprVisitor extends VisitQuery<String> {
     return AlloyUtils.removeSlash(x.label);
   }
 
+  /**
+   * @see <a
+   *     href="https://alloytools.org/documentation/alloy-api/edu/mit/csail/sdg/alloy4compiler/ast/VisitQuery.html#visit(edu.mit.csail.sdg.alloy4compiler.ast.Sig.Field)">Alloy
+   *     Analyzer</a>
+   *     <p><img src="doc-files/ExprVisitor_visitField.svg"/>
+   */
   @Override
   public String visit(Field x) throws Err {
 
@@ -364,9 +425,8 @@ public class ExprVisitor extends VisitQuery<String> {
   /**
    * Add the given field to the given map as the value if the field's type is the key.
    *
-   * @param _field(Field) - A field to be added to the map's value
-   * @param map(Map<String, List<Field>>) - a map key = signature type value = list of fields having
-   *     the key
+   * @param _field the field
+   * @param map the map
    * @return (Map<String, List<Field>) - the map after adding the field
    */
   protected Map<String, List<Field>> sortFields(Field _field, Map<String, List<Field>> map) {
@@ -390,7 +450,7 @@ public class ExprVisitor extends VisitQuery<String> {
    * Create a string name separated by , from the given decl's names.
    *
    * @param decl - A decl to create a names
-   * @return
+   * @return the names from decl
    */
   private String getNamesFromDecl(Decl decl) {
 
