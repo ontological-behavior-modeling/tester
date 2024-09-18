@@ -9,8 +9,11 @@ import javax.swing.JDialog;
 import lombok.Getter;
 import lombok.Setter;
 
-// TODO: Auto-generated Javadoc
-/** The Class Popup. */
+/**
+ * The class creating the popup dialog box for the graphical user interface
+ *
+ * @author Joseph Napolitano, Research Engineer - Georgia Tech Research Institute
+ */
 @Getter
 @Setter
 public class Popup {

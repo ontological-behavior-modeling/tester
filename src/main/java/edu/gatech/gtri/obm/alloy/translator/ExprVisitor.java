@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
-// TODO: Auto-generated Javadoc
 /**
  * Visitor to transform the Alloy object(signatures and facts) to a file.
  *

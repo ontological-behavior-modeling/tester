@@ -59,8 +59,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.internal.impl.ClassImpl;
 
-// TODO: Auto-generated Javadoc
-/** The Class UserInterface. */
+/**
+ * The class creating the graphical user interface for selecting elements to translate.
+ *
+ * @author Joseph Napolitano, Research Engineer - Georgia Tech Research Institute
+ */
 @Getter
 @Setter
 /** Creates an interface to select an XMI file and class(es) within that file to translate. */
