@@ -1,8 +1,9 @@
 @startuml
 start
-:if((//_parentSigName// == null or
+if((//_parentSigName// == null or
 //_parentSigName// is invalid name) then (yes)
 	:Return false;
+	stop
 else
 	:Return true;
 stop
